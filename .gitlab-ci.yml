@@ -60,6 +60,7 @@ build_jobac58u:
     - make -j1
     # build pass
     - cd /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild
+    - rm -R bin
     - mkdir bin
     # copy bin
     ## config
