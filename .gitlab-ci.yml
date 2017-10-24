@@ -1,11 +1,7 @@
 # gitlab-runner home
 # todo:with lede updatetime to build
-stages:
-  - 7800build
-  - ac58ubuild
-  
-build_job7800:
-  stage: 7800build
+build_job:
+  stage: build
   tags: 
   - shell
   script:
@@ -15,11 +11,11 @@ build_job7800:
     #- git clone https://github.com/coolsnowwolf/lede.git
     - cd /home/gitlab-runner/lede
     # update code
-    #- git pull
-    #- ./scripts/feeds update -a
-    #- ./scripts/feeds install -a 
+    - git pull
+    - ./scripts/feeds update -a
+    - ./scripts/feeds install -a 
     # config copy
-    - cp /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/.7800config /home/gitlab-runner/lede/.config
+    - cp /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/.config /home/gitlab-runner/lede/.config
     #- make menuconfig(error)/make defconfig
     #- export FORCE_UNSAFE_CONFIGURE=1 && make -j4 V=s
     - make -j1
@@ -32,46 +28,11 @@ build_job7800:
     ## R7800
     - cp /home/gitlab-runner/lede/bin/targets/ipq806x/generic/lede-ipq806x-R7800-squashfs-factory.img /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin/`date   +%Y%m%d`-$CI_JOB_ID-lede-ipq806x-R7800-squashfs-factory.img
     - cp /home/gitlab-runner/lede/bin/targets/ipq806x/generic/lede-ipq806x-R7800-squashfs-sysupgrade.tar /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin/`date   +%Y%m%d`-$CI_JOB_ID-lede-ipq806x-R7800-squashfs-sysupgrade.tar
-  artifacts:
-    #name: "`date   +%Y-%m-%d`$CI_COMMIT_REF_NAME"
-    name: "`date   +%Y%m%d`-$CI_JOB_ID-lede-router-R7800"
-    expire_in: 2 weeks
-    paths:
-      - /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin
-
-build_jobac58u:
-  stage: ac58ubuild
-  tags: 
-  - shell
-  script:
-    # clean build
-    #- cd /home/gitlab-runner/
-    #- rm -R lede
-    #- git clone https://github.com/coolsnowwolf/lede.git
-    - cd /home/gitlab-runner/lede
-    # update code
-    #- git pull
-    #- ./scripts/feeds update -a
-    #- ./scripts/feeds install -a 
-    # config copy
-    - cp /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/.ac58uconfig /home/gitlab-runner/lede/.config
-    #- make menuconfig(error)/make defconfig
-    #- export FORCE_UNSAFE_CONFIGURE=1 && make -j4 V=s
-    - make -j1
-    # build pass
-    - cd /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild
-    - rm -R bin
-    - mkdir bin
-    # copy bin
-    ## config
-    - cp /home/gitlab-runner/lede/.config /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin/.config
     ## RT-AC58U
     - cp /home/gitlab-runner/lede/bin/targets/ipq806x/generic/lede-ipq806x-RT-AC58U-squashfs-flash-factory.trx /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin/`date   +%Y%m%d`-$CI_JOB_ID-lede-ipq806x-RT-AC58U-squashfs-flash-factory.trx
     - cp /home/gitlab-runner/lede/bin/targets/ipq806x/generic/lede-ipq806x-RT-AC58U-squashfs-sysupgrade.tar /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin/`date   +%Y%m%d`-$CI_JOB_ID-lede-ipq806x-RT-AC58U-squashfs-sysupgrade.tar
   artifacts:
-    #name: "`date   +%Y-%m-%d`$CI_COMMIT_REF_NAME"
-    name: "`date   +%Y%m%d`-$CI_JOB_ID-lede-router-ac58u"
+    name: "`date   +%Y%m%d`-$CI_JOB_ID-lede-router"
     expire_in: 2 weeks
     paths:
       - /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin
-      
