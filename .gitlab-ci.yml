@@ -6,15 +6,12 @@ build_job:
   - shell
   script:
     # clean build
-    #- cd /home/gitlab-runner/
-    #- rm -R lede
-    #- git clone https://github.com/coolsnowwolf/lede.git
+    - cd /home/gitlab-runner/
+    - rm -R lede
+    - git clone https://github.com/coolsnowwolf/lede.git
     - cd /home/gitlab-runner/lede
     # update code
     - git pull
-    # fix patch ph
-    - mv /home/gitlab-runner/lede/target/linux/ipq806x/patches-4.9/0069-arm-boot-add-dts-files.patch /home/gitlab-runner/lede/target/linux/ipq806x/patches-4.9/0069-arm-boot-add-dts-files.patch.backup
-    - cp /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/0069-arm-boot-add-dts-files.patch /home/gitlab-runner/lede/target/linux/ipq806x/patches-4.9/0069-arm-boot-add-dts-files.patch
     - ./scripts/feeds update -a
     - ./scripts/feeds install -a 
     # config copy
@@ -22,7 +19,7 @@ build_job:
     #- make menuconfig(error)/make defconfig(compare with git)
     - make defconfig
     #- export FORCE_UNSAFE_CONFIGURE=1 && make -j4 V=s
-    - make -j4 V=s
+    - make -j1
     # build pass
     - cd /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild
     - mkdir bin
