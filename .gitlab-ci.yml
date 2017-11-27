@@ -7,7 +7,7 @@ build_job:
   script:
     # clean build
     - cd /home/gitlab-runner/
-    #- rm -R lede
+    - rm -R lede
     - git clone https://github.com/coolsnowwolf/lede.git
     - cd /home/gitlab-runner/lede
     # update code
