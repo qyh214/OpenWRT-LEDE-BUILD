@@ -6,9 +6,9 @@ build_job:
   - shell
   script:
     # clean build
-    - cd /home/gitlab-runner/
-    - rm -R lede
-    - git clone https://github.com/coolsnowwolf/lede.git
+    #- cd /home/gitlab-runner/
+    #- rm -R lede
+    #- git clone https://github.com/coolsnowwolf/lede.git
     - cd /home/gitlab-runner/lede
     # update code
     - git pull
@@ -19,7 +19,7 @@ build_job:
     #- make menuconfig(error)/make defconfig(compare with git)
     - make defconfig
     #- export FORCE_UNSAFE_CONFIGURE=1 && make -j4 V=s
-    - make -j4 V=s
+    - make -j4
     # build pass
     - cd /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild
     - mkdir bin
