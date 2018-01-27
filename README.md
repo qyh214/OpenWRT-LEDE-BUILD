@@ -4,7 +4,7 @@
 ### 编译状态
 [![pipeline status](http://dev.qyh.name:800/shihuang/routerbuild/badges/master/pipeline.svg)](http://dev.qyh.name:800/shihuang/routerbuild/commits/master)
 
-仅编译网件R7800、华硕RT-AC58U的路由器固件，不接受个性化定制。
+仅编译网件r7800、华硕rt-ac58u、rt-acrh17的路由器固件，不接受个性化定制。
 
 自动在每周周二0点（CST）进行编译打包。服务器上的构建文件保留2周（自该文件编译成功日起）。
 
