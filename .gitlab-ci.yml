@@ -26,9 +26,9 @@ build_job:
     # copy bin
     ## config
     - cp /home/gitlab-runner/lede/.config /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin/.config
-    ## r7800
-    - cp /home/gitlab-runner/lede/bin/targets/ipq806x/generic/openwrt-ipq806x-r7800-squashfs-factory.img /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin/`date   +%Y%m%d`-$CI_JOB_ID-openwrt-ipq806x-r7800-squashfs-factory.img
-    - cp /home/gitlab-runner/lede/bin/targets/ipq806x/generic/openwrt-ipq806x-R7800-squashfs-sysupgrade.bin /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin/`date   +%Y%m%d`-$CI_JOB_ID-openwrt-ipq806x-R7800-squashfs-sysupgrade.bin
+    ## netgear_r7800
+    - cp /home/gitlab-runner/lede/bin/targets/ipq806x/generic/openwrt-ipq806x-netgear_r7800-squashfs-factory.img /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin/`date   +%Y%m%d`-$CI_JOB_ID-openwrt-ipq806x-netgear_r7800-squashfs-factory.img
+    - cp /home/gitlab-runner/lede/bin/targets/ipq806x/generic/openwrt-ipq806x-netgear_r7800-squashfs-sysupgrade.bin /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin/`date   +%Y%m%d`-$CI_JOB_ID-openwrt-ipq806x-netgear_r7800-squashfs-sysupgrade.bin
     ## asus_rt-ac58u
     - cp /home/gitlab-runner/lede/bin/targets/ipq806x/generic/openwrt-ipq806x-asus_rt-ac58u-squashfs-flash-factory.trx /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin/`date   +%Y%m%d`-$CI_JOB_ID-openwrt-ipq806x-asus_rt-ac58u-squashfs-flash-factory.trx
     - cp /home/gitlab-runner/lede/bin/targets/ipq806x/generic/openwrt-ipq806x-asus_rt-ac58u-squashfs-sysupgrade.tar /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin/`date   +%Y%m%d`-$CI_JOB_ID-openwrt-ipq806x-asus_rt-ac58u-squashfs-sysupgrade.tar
