@@ -1,7 +1,11 @@
 # gitlab-runner home
-# todo:with lede updatetime to build
-build_job:
-  stage: build
+stages:
+  - basebuild
+  - ipq40xxbuild
+  - ipq806xbuild
+
+build_basebuild:
+  stage: basebuild
   tags: 
   - shell
   script:
@@ -13,30 +17,61 @@ build_job:
     # update code
     - git pull
     - ./scripts/feeds update -a
-    - ./scripts/feeds install -a 
+    - ./scripts/feeds install -a
+    - cd /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild
+    - mkdir bin    
+
+build_jobipq40xx:
+  stage: ipq40xxbuild
+  tags: 
+  - shell
+  script:
     # config copy
-    - cp /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/.config /home/gitlab-runner/lede/.config
+    - cp /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/ipq40xx.config /home/gitlab-runner/lede/.config
     #- make menuconfig(error)/make defconfig(compare with git)
     - make defconfig
     #- export FORCE_UNSAFE_CONFIGURE=1 && make -j4 V=s
     - make -j1
     # build pass
-    - cd /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild
-    - mkdir bin
+    #- cd /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild
+    #- mkdir bin
+    # copy bin
+    ## config
+    - cp /home/gitlab-runner/lede/.config /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin/.config
+    ## asus_rt-ac58u
+    - cp /home/gitlab-runner/lede/bin/targets/ipq40xx/generic/openwrt-ipq40xx-asus_rt-ac58u-squashfs-flash-factory.trx /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin/`date   +%Y%m%d`-$CI_JOB_ID-openwrt-ipq40xx-asus_rt-ac58u-squashfs-flash-factory.trx
+    - cp /home/gitlab-runner/lede/bin/targets/ipq40xx/generic/openwrt-ipq40xx-asus_rt-ac58u-squashfs-sysupgrade.tar /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin/`date   +%Y%m%d`-$CI_JOB_ID-openwrt-ipq40xx-asus_rt-ac58u-squashfs-sysupgrade.tar
+    ## asus_rt-acrh17
+    - cp /home/gitlab-runner/lede/bin/targets/ipq40xx/generic/openwrt-ipq40xx-asus_rt-acrh17-squashfs-flash-factory.trx /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin/`date   +%Y%m%d`-$CI_JOB_ID-openwrt-ipq40xx-asus_rt-acrh17-squashfs-flash-factory.trx
+    - cp /home/gitlab-runner/lede/bin/targets/ipq40xx/generic/openwrt-ipq40xx-asus_rt-acrh17-squashfs-sysupgrade.tar /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin/`date   +%Y%m%d`-$CI_JOB_ID-openwrt-ipq40xxx-asus_rt-acrh17-squashfs-sysupgrade.tar
+  artifacts:
+    name: "`date   +%Y%m%d`-$CI_JOB_ID-openwrt-router-ipq40xx"
+    expire_in: 2 weeks
+    paths:
+      - /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin
+
+build_jobipq806x:
+  stage: ipq806xbuild
+  tags: 
+  - shell
+  script:
+    # config copy
+    - cp /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/ipq806x.config /home/gitlab-runner/lede/.config
+    #- make menuconfig(error)/make defconfig(compare with git)
+    - make defconfig
+    #- export FORCE_UNSAFE_CONFIGURE=1 && make -j4 V=s
+    - make -j1
+    # build pass
+    #- cd /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild
+    #- mkdir bin
     # copy bin
     ## config
     - cp /home/gitlab-runner/lede/.config /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin/.config
     ## netgear_r7800
     - cp /home/gitlab-runner/lede/bin/targets/ipq806x/generic/openwrt-ipq806x-netgear_r7800-squashfs-factory.img /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin/`date   +%Y%m%d`-$CI_JOB_ID-openwrt-ipq806x-netgear_r7800-squashfs-factory.img
     - cp /home/gitlab-runner/lede/bin/targets/ipq806x/generic/openwrt-ipq806x-netgear_r7800-squashfs-sysupgrade.bin /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin/`date   +%Y%m%d`-$CI_JOB_ID-openwrt-ipq806x-netgear_r7800-squashfs-sysupgrade.bin
-    ## asus_rt-ac58u
-    - cp /home/gitlab-runner/lede/bin/targets/ipq806x/generic/openwrt-ipq806x-asus_rt-ac58u-squashfs-flash-factory.trx /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin/`date   +%Y%m%d`-$CI_JOB_ID-openwrt-ipq806x-asus_rt-ac58u-squashfs-flash-factory.trx
-    - cp /home/gitlab-runner/lede/bin/targets/ipq806x/generic/openwrt-ipq806x-asus_rt-ac58u-squashfs-sysupgrade.tar /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin/`date   +%Y%m%d`-$CI_JOB_ID-openwrt-ipq806x-asus_rt-ac58u-squashfs-sysupgrade.tar
-    ## asus_rt-acrh17
-    - cp /home/gitlab-runner/lede/bin/targets/ipq806x/generic/openwrt-ipq806x-asus_rt-acrh17-squashfs-flash-factory.trx /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin/`date   +%Y%m%d`-$CI_JOB_ID-openwrt-ipq806x-asus_rt-acrh17-squashfs-flash-factory.trx
-    - cp /home/gitlab-runner/lede/bin/targets/ipq806x/generic/openwrt-ipq806x-asus_rt-acrh17-squashfs-sysupgrade.tar /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin/`date   +%Y%m%d`-$CI_JOB_ID-openwrt-ipq806x-asus_rt-acrh17-squashfs-sysupgrade.tar
   artifacts:
-    name: "`date   +%Y%m%d`-$CI_JOB_ID-openwrt-router"
+    name: "`date   +%Y%m%d`-$CI_JOB_ID-openwrt-router-ipq806x"
     expire_in: 2 weeks
     paths:
       - /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin
