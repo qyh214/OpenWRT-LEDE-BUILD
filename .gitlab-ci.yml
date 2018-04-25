@@ -9,9 +9,9 @@ build_jobipq40xx:
   - shell
   script:
     # clean build
-    #- cd /home/gitlab-runner/
-    #- rm -R lede
-    #- git clone https://github.com/coolsnowwolf/lede.git
+    - cd /home/gitlab-runner/
+    - rm -R lede
+    - git clone https://github.com/coolsnowwolf/lede.git
     - cd /home/gitlab-runner/lede
     # update code
     - git pull
