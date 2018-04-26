@@ -1,4 +1,17 @@
-# gitlab-runner home
+# CI type:shell
+# https://github.com/coolsnowwolf/lede
+# base
+# ubuntu 16.04 x64 
+# sudo apt-get update 
+# sudo apt-get install build-essential asciidoc binutils 
+# bzip2 gawk gettext git libncurses5-dev libz-dev patch 
+# unzip zlib1g-dev lib32gcc1 libc6-dev-i386 subversion 
+# flex uglifyjs git-core gcc-multilib p7zip p7zip-full 
+# msmtp libssl-dev texinfo libglib2.0-dev
+#
+# git clone url
+# /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild
+
 stages:
   - basebuild
   - ipq40xxbuild
@@ -10,15 +23,15 @@ build_jobbase:
   - shell
   script:
     # clean build
-    #- cd /home/gitlab-runner/
-    #- rm -R lede
-    #- git clone https://github.com/coolsnowwolf/lede.git
+    - cd /home/gitlab-runner/
+    - rm -R lede
+    - git clone https://github.com/coolsnowwolf/lede.git
     # update code
     - cd /home/gitlab-runner/lede
     - git pull
     - ./scripts/feeds update -a
     - ./scripts/feeds install -a
-    # create bin(test)
+    # create bin in git clone url(test)
     - cd /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild
     - mkdir bin
     
@@ -79,7 +92,7 @@ build_jobipq806x:
     #- make menuconfig(error)/make defconfig(compare with git)
     - make defconfig
     #- export FORCE_UNSAFE_CONFIGURE=1 && make -j4 V=s
-    - make -j1
+    - make -j1 V=s
     # build pass
     #- cd /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild
     #- mkdir bin
