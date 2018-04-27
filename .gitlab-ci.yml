@@ -23,9 +23,9 @@ build_jobbase:
   - shell
   script:
     # clean build
-    #- cd /home/gitlab-runner/
-    #- rm -R lede
-    #- git clone https://github.com/coolsnowwolf/lede.git
+    - cd /home/gitlab-runner/
+    - rm -R lede
+    - git clone https://github.com/coolsnowwolf/lede.git
     # update code
     - cd /home/gitlab-runner/lede
     - git pull
