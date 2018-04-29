@@ -1,4 +1,4 @@
-## 路由器固件[lede](https://github.com/coolsnowwolf/lede)自动编译
+## 路由器固件[lede](https://github.com/coolsnowwolf/lede)(openwrt)自动编译
 固件来源：[github](https://github.com/coolsnowwolf/lede)
 
 ### 编译状态
@@ -6,9 +6,27 @@
 
 仅编译网件r7800、华硕rt-ac58u、rt-acrh17的路由器固件，不接受个性化定制。
 
-自动在每周周二0点（CST）进行编译打包。服务器上的构建文件保留2周（自该文件编译成功日起）。
+自动在每周周二0点（CST）进行编译打包。服务器上的构建文件保留2周（自该文件编译成功日起，有需要的请做好备份）。
+
+### 建议
+当内核大版本更新时（例如从R7.6升级到R7.7），建议不保留配置文件更新，并且可能需要重置配置文件重新制作配置文件，CI可能都是错误的，需要等待一些时间。
+
+小版本更新（git的sha更新，以及R7.6升级到R7.6.1）一般可保留配置文件更新。
+
+### 提交bug
+路由器固件的问题请在[github](https://github.com/coolsnowwolf/lede)的issue处提交。
+
+因为CI、配置文件陈旧导致的问题请在这里的issue处提交。
 
 ### 下载
+
+#### 最新固件下载：
+
+请访问以下网址：
+
+ipq40xx（华硕rt-ac58u、rt-acrh17）：[点此访问](http://dev.qyh.name:800/shihuang/routerbuild/-/jobs/artifacts/master/download?job=job_ipq40xx)
+
+ipq806x（网件r7800）：[点此访问](http://dev.qyh.name:800/shihuang/routerbuild/-/jobs/artifacts/master/download?job=job_ipq806x)
 
 百度网盘：[点此访问](https://pan.baidu.com/s/1qXLGhVA)  密码:tunc
 
