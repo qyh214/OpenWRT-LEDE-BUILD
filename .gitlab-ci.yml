@@ -59,11 +59,11 @@ build_jobipq40xx:
     ## config
     - cp /home/gitlab-runner/lede/.config /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin/.config
     ## asus_rt-ac58u
-    - cp /home/gitlab-runner/lede/bin/targets/ipq40xx/generic/openwrt-ipq40xx-asus_rt-ac58u-squashfs-flash-factory.trx /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin/`date   +%Y%m%d`-$CI_JOB_ID-openwrt-ipq40xx-asus_rt-ac58u-squashfs-flash-factory.trx
-    - cp /home/gitlab-runner/lede/bin/targets/ipq40xx/generic/openwrt-ipq40xx-asus_rt-ac58u-squashfs-sysupgrade.tar /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin/`date   +%Y%m%d`-$CI_JOB_ID-openwrt-ipq40xx-asus_rt-ac58u-squashfs-sysupgrade.tar
+    - cp /home/gitlab-runner/lede/bin/targets/ipq40xx/generic/openwrt-ipq40xx-asus_rt-ac58u-initramfs-factory.trx /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin/`date   +%Y%m%d`-$CI_JOB_ID-openwrt-ipq40xx-asus_rt-ac58u-initramfs-factory.trx
+    - cp /home/gitlab-runner/lede/bin/targets/ipq40xx/generic/openwrt-ipq40xx-asus_rt-ac58u-squashfs-sysupgrade.bin /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin/`date   +%Y%m%d`-$CI_JOB_ID-openwrt-ipq40xx-asus_rt-ac58u-squashfs-sysupgrade.bin
     ## asus_rt-acrh17
-    - cp /home/gitlab-runner/lede/bin/targets/ipq40xx/generic/openwrt-ipq40xx-asus_rt-acrh17-squashfs-flash-factory.trx /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin/`date   +%Y%m%d`-$CI_JOB_ID-openwrt-ipq40xx-asus_rt-acrh17-squashfs-flash-factory.trx
-    - cp /home/gitlab-runner/lede/bin/targets/ipq40xx/generic/openwrt-ipq40xx-asus_rt-acrh17-squashfs-sysupgrade.tar /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin/`date   +%Y%m%d`-$CI_JOB_ID-openwrt-ipq40xxx-asus_rt-acrh17-squashfs-sysupgrade.tar
+    - cp /home/gitlab-runner/lede/bin/targets/ipq40xx/generic/openwrt-ipq40xx-asus_rt-acrh17-initramfs-factory.trx /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin/`date   +%Y%m%d`-$CI_JOB_ID-openwrt-ipq40xx-asus_rt-acrh17-initramfs-factory.trx
+    - cp /home/gitlab-runner/lede/bin/targets/ipq40xx/generic/openwrt-ipq40xx-asus_rt-acrh17-squashfs-sysupgrade.bin /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin/`date   +%Y%m%d`-$CI_JOB_ID-openwrt-ipq40xxx-asus_rt-acrh17-squashfs-sysupgrade.bin
   artifacts:
     name: "`date   +%Y%m%d`-$CI_JOB_ID-openwrt-router-ipq40xx"
     expire_in: 2 weeks
