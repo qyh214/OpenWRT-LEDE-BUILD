@@ -13,9 +13,9 @@
 # /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild
 
 stages:
-  - basebuild
-  - ipq40xxbuild
-  #- ipq806xbuild
+  - base
+  - ipq40xx
+  #- ipq806x
   
 # Cache modules in between jobs
 cache:
@@ -23,8 +23,8 @@ cache:
   paths:
   - bin/
 
-build_jobbase:
-  stage: basebuild
+job_base:
+  stage: base
   tags: 
   - shell
   script:
@@ -40,30 +40,17 @@ build_jobbase:
     - cd /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild
     - mkdir bin
     
-build_jobipq40xx:
-  stage: ipq40xxbuild
+job_ipq40xx:
+  stage: ipq40xx
   tags: 
   - shell
   script:
-    # clean build
-    #- cd /home/gitlab-runner/
-    #- rm -R lede
-    #- git clone https://github.com/coolsnowwolf/lede.git
-    # update code
-    #- cd /home/gitlab-runner/lede
-    #- git pull
-    #- ./scripts/feeds update -a
-    #- ./scripts/feeds install -a
     # config copy
     #- cp /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/ipq40xx.config /home/gitlab-runner/lede/.config
     #- make menuconfig(error)/make defconfig(compare with git)
     #- make defconfig
     #- export FORCE_UNSAFE_CONFIGURE=1 && make -j4 V=s
     #- make -j1
-    # build pass
-    #- cd /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild
-    #- mkdir bin
-    # copy bin
     ## config
     - cp /home/gitlab-runner/lede/.config /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin/.config
     ## asus_rt-ac58u
@@ -78,30 +65,17 @@ build_jobipq40xx:
     paths:
       - /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin
 
-#build_jobipq806x:
-#  stage: ipq806xbuild
+#job_ipq806x:
+#  stage: ipq806x
 #  tags: 
 #  - shell
 #  script:
-    # clean build
-    #- cd /home/gitlab-runner/
-    #- rm -R lede
-    #- git clone https://github.com/coolsnowwolf/lede.git
-    # update code
-#    - cd /home/gitlab-runner/lede
-    #- git pull
-    #- ./scripts/feeds update -a
-    #- ./scripts/feeds install -a
     # config copy
 #    - cp /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/ipq806x.config /home/gitlab-runner/lede/.config
     #- make menuconfig(error)/make defconfig(compare with git)
 #    - make defconfig
     #- export FORCE_UNSAFE_CONFIGURE=1 && make -j4 V=s
 #    - make -j1
-    # build pass
-    #- cd /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild
-    #- mkdir bin
-    # copy bin
     ## config
 #    - cp /home/gitlab-runner/lede/.config /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin/.config
     ## netgear_r7800
