@@ -83,6 +83,6 @@ job_ipq40xx:
 #    paths:
 #      - /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin
 
-after_script:
-  - cd /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild
-  - rm -R bin
+#after_script:
+#  - cd /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild
+#  - rm -R bin
