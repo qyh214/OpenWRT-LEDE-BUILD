@@ -42,7 +42,7 @@ job_ipq40xx:
   - shell
   script:
     # config copy
-    #- cp /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/ipq40xx.config /home/gitlab-runner/lede/.config
+    - cp /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/ipq40xx.config /home/gitlab-runner/lede/.config
     #- make menuconfig(error)/make defconfig(compare with git)
     #- make defconfig
     #- export FORCE_UNSAFE_CONFIGURE=1 && make -j4 V=s
@@ -83,5 +83,6 @@ job_ipq40xx:
 #    paths:
 #      - /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin
 
-#after_script:
-
+after_script:
+  - cd /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild
+  - rm -R bin
