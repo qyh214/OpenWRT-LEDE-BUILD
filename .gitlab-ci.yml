@@ -16,10 +16,6 @@ stages:
   - base
   - ipq40xx
   - ipq806x
-  
-before_script:
-  - cd /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild
-  - mkdir bin
 
 job_base:
   stage: base
