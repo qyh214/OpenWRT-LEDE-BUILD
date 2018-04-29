@@ -17,6 +17,12 @@ stages:
   - ipq40xxbuild
   #- ipq806xbuild
   
+# Cache modules in between jobs
+cache:
+  key: ${CI_COMMIT_REF_SLUG}
+  paths:
+  - bin/
+
 build_jobbase:
   stage: basebuild
   tags: 
