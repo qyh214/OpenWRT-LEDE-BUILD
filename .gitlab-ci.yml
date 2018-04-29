@@ -17,11 +17,11 @@ stages:
   - ipq40xxbuild
   #- ipq806xbuild
   
-build_jobbase:
-  stage: basebuild
-  tags: 
-  - shell
-  script:
+#build_jobbase:
+#  stage: basebuild
+#  tags: 
+#  - shell
+#  script:
     # clean build
     #- cd /home/gitlab-runner/
     #- rm -R lede
