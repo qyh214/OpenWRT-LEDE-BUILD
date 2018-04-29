@@ -13,15 +13,15 @@
 # /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild
 
 stages:
-  #- basebuild
+  - basebuild
   - ipq40xxbuild
   #- ipq806xbuild
   
-#build_jobbase:
-#  stage: basebuild
-#  tags: 
-#  - shell
-#  script:
+build_jobbase:
+  stage: basebuild
+  tags: 
+  - shell
+  script:
     # clean build
     #- cd /home/gitlab-runner/
     #- rm -R lede
@@ -31,6 +31,8 @@ stages:
     #- git pull
     #- ./scripts/feeds update -a
     #- ./scripts/feeds install -a
+    - cd /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild
+    - mkdir bin
     
 build_jobipq40xx:
   stage: ipq40xxbuild
@@ -53,8 +55,8 @@ build_jobipq40xx:
     #- export FORCE_UNSAFE_CONFIGURE=1 && make -j4 V=s
     #- make -j1
     # build pass
-    - cd /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild
-    - mkdir bin
+    #- cd /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild
+    #- mkdir bin
     # copy bin
     ## config
     - cp /home/gitlab-runner/lede/.config /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin/.config
