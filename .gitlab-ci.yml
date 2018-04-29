@@ -52,11 +52,16 @@ job_ipq40xx:
     ## asus_rt-acrh17
     - cp /home/gitlab-runner/lede/bin/targets/ipq40xx/generic/openwrt-ipq40xx-asus_rt-acrh17-initramfs-factory.trx /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin/`date   +%Y%m%d`-$CI_JOB_ID-openwrt-ipq40xx-asus_rt-acrh17-initramfs-factory.trx
     - cp /home/gitlab-runner/lede/bin/targets/ipq40xx/generic/openwrt-ipq40xx-asus_rt-acrh17-squashfs-sysupgrade.bin /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin/`date   +%Y%m%d`-$CI_JOB_ID-openwrt-ipq40xx-asus_rt-acrh17-squashfs-sysupgrade.bin
+    - cd /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin
+    - rm .gitignore
   artifacts:
     name: "`date   +%Y%m%d`-$CI_JOB_ID-openwrt-router-ipq40xx"
     expire_in: 2 weeks
     paths:
       - /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin
+  after_script:
+    - cd /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild
+    - rm -R bin
 
 job_ipq806x:
   stage: ipq806x
@@ -75,8 +80,13 @@ job_ipq806x:
     ## netgear_r7800
     - cp /home/gitlab-runner/lede/bin/targets/ipq806x/generic/openwrt-ipq806x-netgear_r7800-squashfs-factory.img /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin/`date   +%Y%m%d`-$CI_JOB_ID-openwrt-ipq806x-netgear_r7800-squashfs-factory.img
     - cp /home/gitlab-runner/lede/bin/targets/ipq806x/generic/openwrt-ipq806x-netgear_r7800-squashfs-sysupgrade.bin /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin/`date   +%Y%m%d`-$CI_JOB_ID-openwrt-ipq806x-netgear_r7800-squashfs-sysupgrade.bin
+    - cd /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin
+    - rm .gitignore
   artifacts:
     name: "`date   +%Y%m%d`-$CI_JOB_ID-openwrt-router-ipq806x"
     expire_in: 2 weeks
     paths:
       - /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin
+  after_script:
+    - cd /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild
+    - rm -R bin      
