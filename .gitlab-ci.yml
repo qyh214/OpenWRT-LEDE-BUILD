@@ -13,7 +13,7 @@
 # /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild
 
 stages:
-  - basebuild
+  #- basebuild
   - ipq40xxbuild
   #- ipq806xbuild
   
@@ -31,9 +31,6 @@ build_jobbase:
     #- git pull
     #- ./scripts/feeds update -a
     #- ./scripts/feeds install -a
-    # create bin in git clone url(test)
-    #- cd /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild
-    #- mkdir bin
     
 build_jobipq40xx:
   stage: ipq40xxbuild
