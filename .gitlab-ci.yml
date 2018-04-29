@@ -82,7 +82,3 @@ job_ipq40xx:
 #    expire_in: 2 weeks
 #    paths:
 #      - /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin
-
-#after_script:
-#  - cd /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild
-#  - rm -R bin
