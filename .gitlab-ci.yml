@@ -31,11 +31,10 @@ job_base:
     #- rm -R lede
     #- git clone https://github.com/coolsnowwolf/lede.git
     # update code
-    #- cd /home/gitlab-runner/lede
+    - cd /home/gitlab-runner/lede
     #- git pull
     #- ./scripts/feeds update -a
     #- ./scripts/feeds install -a
-    -echo "aaaa"
     
 job_ipq40xx:
   stage: ipq40xx
