@@ -35,6 +35,7 @@ job_base:
     #- git pull
     #- ./scripts/feeds update -a
     #- ./scripts/feeds install -a
+    -echo "aaaa"
     
 job_ipq40xx:
   stage: ipq40xx
