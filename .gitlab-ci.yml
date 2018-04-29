@@ -15,7 +15,7 @@
 stages:
   - base
   - ipq40xx
-  #- ipq806x
+  - ipq806x
   
 before_script:
   - cd /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild
@@ -32,9 +32,9 @@ job_base:
     #- git clone https://github.com/coolsnowwolf/lede.git
     # update code
     - cd /home/gitlab-runner/lede
-    #- git pull
-    #- ./scripts/feeds update -a
-    #- ./scripts/feeds install -a
+    - git pull
+    - ./scripts/feeds update -a
+    - ./scripts/feeds install -a
     
 job_ipq40xx:
   stage: ipq40xx
@@ -44,9 +44,9 @@ job_ipq40xx:
     # config copy
     - cp /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/ipq40xx.config /home/gitlab-runner/lede/.config
     #- make menuconfig(error)/make defconfig(compare with git)
-    #- make defconfig
+    - make defconfig
     #- export FORCE_UNSAFE_CONFIGURE=1 && make -j4 V=s
-    #- make -j1
+    - make -j1
     ## config
     - cp /home/gitlab-runner/lede/.config /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin/.config
     ## asus_rt-ac58u
@@ -61,24 +61,24 @@ job_ipq40xx:
     paths:
       - /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin
 
-#job_ipq806x:
-#  stage: ipq806x
-#  tags: 
-#  - shell
-#  script:
+job_ipq806x:
+  stage: ipq806x
+  tags: 
+  - shell
+  script:
     # config copy
-#    - cp /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/ipq806x.config /home/gitlab-runner/lede/.config
+    - cp /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/ipq806x.config /home/gitlab-runner/lede/.config
     #- make menuconfig(error)/make defconfig(compare with git)
-#    - make defconfig
+    - make defconfig
     #- export FORCE_UNSAFE_CONFIGURE=1 && make -j4 V=s
-#    - make -j1
+    - make -j1
     ## config
-#    - cp /home/gitlab-runner/lede/.config /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin/.config
+    - cp /home/gitlab-runner/lede/.config /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin/.config
     ## netgear_r7800
-#    - cp /home/gitlab-runner/lede/bin/targets/ipq806x/generic/openwrt-ipq806x-netgear_r7800-squashfs-factory.img /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin/`date   +%Y%m%d`-$CI_JOB_ID-openwrt-ipq806x-netgear_r7800-squashfs-factory.img
-#    - cp /home/gitlab-runner/lede/bin/targets/ipq806x/generic/openwrt-ipq806x-netgear_r7800-squashfs-sysupgrade.bin /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin/`date   +%Y%m%d`-$CI_JOB_ID-openwrt-ipq806x-netgear_r7800-squashfs-sysupgrade.bin
-#  artifacts:
-#    name: "`date   +%Y%m%d`-$CI_JOB_ID-openwrt-router-ipq806x"
-#    expire_in: 2 weeks
-#    paths:
-#      - /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin
+    - cp /home/gitlab-runner/lede/bin/targets/ipq806x/generic/openwrt-ipq806x-netgear_r7800-squashfs-factory.img /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin/`date   +%Y%m%d`-$CI_JOB_ID-openwrt-ipq806x-netgear_r7800-squashfs-factory.img
+    - cp /home/gitlab-runner/lede/bin/targets/ipq806x/generic/openwrt-ipq806x-netgear_r7800-squashfs-sysupgrade.bin /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin/`date   +%Y%m%d`-$CI_JOB_ID-openwrt-ipq806x-netgear_r7800-squashfs-sysupgrade.bin
+  artifacts:
+    name: "`date   +%Y%m%d`-$CI_JOB_ID-openwrt-router-ipq806x"
+    expire_in: 2 weeks
+    paths:
+      - /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin
