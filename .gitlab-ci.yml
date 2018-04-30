@@ -16,6 +16,7 @@ stages:
   - base
   - ipq40xx
   - ipq806x
+  - test
 
 job_base:
   stage: base
@@ -44,6 +45,7 @@ job_ipq40xx:
     #- make defconfig
     #- export FORCE_UNSAFE_CONFIGURE=1 && make -j4 V=s
     #- make -j1
+    # build pass and save
     ## config
     - cp /home/gitlab-runner/lede/.config /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin/.config
     ## asus_rt-ac58u
@@ -55,9 +57,6 @@ job_ipq40xx:
     ## remove git file
     - cd /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin
     - rm .gitignore
-    ## test stat
-    - cd /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin
-    - stat *
   artifacts:
     name: "`date   +%Y%m%d`-$CI_JOB_ID-openwrt-router-ipq40xx"
     expire_in: 2 weeks
@@ -78,6 +77,7 @@ job_ipq806x:
     #- make defconfig
     #- export FORCE_UNSAFE_CONFIGURE=1 && make -j4 V=s
     #- make -j1
+    # build pass and save
     ## config
     - cp /home/gitlab-runner/lede/.config /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin/.config
     ## netgear_r7800
@@ -93,3 +93,23 @@ job_ipq806x:
       - /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin
   # disable artifact passing
   dependencies: []
+
+job_test:
+  stage: test
+  tags: 
+  - shell
+  script:
+    # test file status
+    ## ipq40xx
+    - cd /home/gitlab-runner/lede/bin/targets/ipq40xx/generic
+    ### asus_rt-ac58u
+    - stat openwrt-ipq40xx-asus_rt-ac58u-initramfs-factory.trx
+    - stat openwrt-ipq40xx-asus_rt-ac58u-squashfs-sysupgrade.bin
+    ### asus_rt-acrh17
+    - stat openwrt-ipq40xx-asus_rt-acrh17-initramfs-factory.trx
+    - stat openwrt-ipq40xx-asus_rt-acrh17-squashfs-sysupgrade.bin
+    ## ipq806x
+    - cd /home/gitlab-runner/lede/bin/targets/ipq806x/generic
+    ### netgear_r7800
+    - stat openwrt-ipq806x-netgear_r7800-squashfs-factory.img
+    - stat openwrt-ipq806x-netgear_r7800-squashfs-sysupgrade.bin
