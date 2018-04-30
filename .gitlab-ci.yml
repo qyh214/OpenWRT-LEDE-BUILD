@@ -28,9 +28,9 @@ job_base:
     #- git clone https://github.com/coolsnowwolf/lede.git
     # update code
     - cd /home/gitlab-runner/lede
-    - git pull
-    - ./scripts/feeds update -a
-    - ./scripts/feeds install -a
+    #- git pull
+    #- ./scripts/feeds update -a
+    #- ./scripts/feeds install -a
     
 job_ipq40xx:
   stage: ipq40xx
@@ -41,9 +41,9 @@ job_ipq40xx:
     - cp /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/ipq40xx.config /home/gitlab-runner/lede/.config
     - cd /home/gitlab-runner/lede
     #- make menuconfig(error)/make defconfig(compare with git)
-    - make defconfig
+    #- make defconfig
     #- export FORCE_UNSAFE_CONFIGURE=1 && make -j4 V=s
-    - make -j1
+    #- make -j1
     ## config
     - cp /home/gitlab-runner/lede/.config /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin/.config
     ## asus_rt-ac58u
@@ -55,6 +55,9 @@ job_ipq40xx:
     ## remove git file
     - cd /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin
     - rm .gitignore
+    ## test stat
+    - cd /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin
+    - stat *
   artifacts:
     name: "`date   +%Y%m%d`-$CI_JOB_ID-openwrt-router-ipq40xx"
     expire_in: 2 weeks
@@ -72,9 +75,9 @@ job_ipq806x:
     - cp /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/ipq806x.config /home/gitlab-runner/lede/.config
     - cd /home/gitlab-runner/lede
     #- make menuconfig(error)/make defconfig(compare with git)
-    - make defconfig
+    #- make defconfig
     #- export FORCE_UNSAFE_CONFIGURE=1 && make -j4 V=s
-    - make -j1
+    #- make -j1
     ## config
     - cp /home/gitlab-runner/lede/.config /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin/.config
     ## netgear_r7800
