@@ -31,6 +31,8 @@ job_base:
     # update code
     - cd /home/gitlab-runner/lede
     - git pull
+    # due to lean
+    - git reset --hard 00209c9
     - ./scripts/feeds update -a
     - ./scripts/feeds install -a
     
