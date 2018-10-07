@@ -30,9 +30,10 @@ job_base:
     #- git clone https://github.com/coolsnowwolf/lede.git
     # update code
     - cd /home/gitlab-runner/lede
-    - git pull
     # due to lean
-    - git reset --hard 00209c9
+    #- git reset --hard 00209c9
+    - cp -r /package /package/openwrt-packages
+    - git pull
     - ./scripts/feeds update -a
     - ./scripts/feeds install -a
     
