@@ -32,7 +32,7 @@ job_base:
     - cd /home/gitlab-runner/lede
     # due to lean
     #- git reset --hard 00209c9
-    - cd /home/gitlab-runner/lede/package
+    #- cd /home/gitlab-runner/lede/package
     - rm -r openwrt-packages
     - cp -r package openwrt-packages
     - mv openwrt-packages package
