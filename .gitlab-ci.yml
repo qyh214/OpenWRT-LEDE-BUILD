@@ -33,7 +33,7 @@ job_base:
     # due to lean
     #- git reset --hard 00209c9
     - cp -r package openwrt-packages
-    - mv -r openwrt-packages package
+    - mv -vr openwrt-packages package
     - git pull
     - ./scripts/feeds update -a
     - ./scripts/feeds install -a
