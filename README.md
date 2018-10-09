@@ -6,9 +6,7 @@
 
 仅编译网件r7800、华硕rt-ac58u、rt-acrh17的路由器固件，不接受个性化定制。
 
-由于[固件上游支持](https://github.com/coolsnowwolf/lede)关闭/删除，代码截至到shihuang/lede@00209c9bb891d3a18fea6cab55e490434fe01a1c
-
-编译的固件永久保存以供使用。
+编译的固件永久保存以供挑选使用。
 
 ### 更新建议
 建议不保留配置全新更新。
