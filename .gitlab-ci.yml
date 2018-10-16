@@ -37,6 +37,7 @@ job_base:
     #- cp -r package openwrt-packages
     #- mv openwrt-packages package
     - git pull
+    - rm -rf ./tmp
     - ./scripts/feeds update -a
     - ./scripts/feeds install -a
     
