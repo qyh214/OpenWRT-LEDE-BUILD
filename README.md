@@ -12,7 +12,7 @@
 建议不保留配置全新更新。
 
 ### 特殊代码
-如果你无法看到某个神秘功能，你需要使用SSH连接输入 `echo  0xDEADBEEF > /etc/config/google_fu_mode` 命令后，重启后才能开启隐藏界面。
+如果你无法看到某个神秘功能，你需要使用SSH连接输入 `echo  0xDEADBEEF > /etc/config/google_fu_mode` 回车命令后即可重新访问神秘功能，如果显示错误请清除配置信息后再试，设备无需重启。
 
 ### 固件下载
 
