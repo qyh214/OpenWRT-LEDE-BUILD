@@ -147,7 +147,7 @@ job_k3:
     ## config
     - cp /home/gitlab-runner/lede/.config /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin/.config
     ## phicomm_k3
-    - cp /home/gitlab-runner/lede/bin/targets/bcm53xx/generic/openwrt-bcm53xx-phicomm_k3-squashfs.trx /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin/`date   +%Y%m%d`-$CI_JOB_ID-openwrt-bcm53xx-phicomm_k3-squashfs.trx
+    - cp /home/gitlab-runner/lede/bin/targets/bcm53xx/generic/openwrt-bcm53xx-phicomm-k3-squashfs.trx /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin/`date   +%Y%m%d`-$CI_JOB_ID-openwrt-bcm53xx-phicomm-k3-squashfs.trx
     ## remove git file
     - cd /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin
     - rm .gitignore
@@ -181,6 +181,6 @@ job_test:
     ## bcm53xx
     - cd /home/gitlab-runner/lede/bin/targets/bcm53xx/generic
     ### phicomm_k3
-    - stat openwrt-bcm53xx-phicomm_k3-squashfs.trx
+    - stat openwrt-bcm53xx-phicomm-k3-squashfs.trx
   # disable artifact passing
   dependencies: []
