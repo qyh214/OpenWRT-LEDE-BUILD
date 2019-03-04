@@ -17,6 +17,7 @@ stages:
   - ac58u
   - acrh17
   - r7800
+  - k3
   - test
 
 job_base:
@@ -130,6 +131,34 @@ job_r7800:
   # disable artifact passing
   dependencies: []
 
+job_k3:
+  stage: k3
+  tags: 
+  - shell
+  script:
+    # config copy
+    - cp /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/k3.config /home/gitlab-runner/lede/.config
+    - cd /home/gitlab-runner/lede
+    #- make menuconfig(error)/make defconfig(compare with git)
+    - make defconfig
+    #- export FORCE_UNSAFE_CONFIGURE=1 && make -j4 V=s
+    - make -j1
+    # build pass and save
+    ## config
+    - cp /home/gitlab-runner/lede/.config /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin/.config
+    ## phicomm_k3
+    - cp /home/gitlab-runner/lede/bin/targets/bcm53xx/generic/openwrt-bcm53xx-phicomm_k3-squashfs.trx /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin/`date   +%Y%m%d`-$CI_JOB_ID-openwrt-bcm53xx-phicomm_k3-squashfs.trx
+    ## remove git file
+    - cd /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin
+    - rm .gitignore
+  artifacts:
+    name: "`date   +%Y%m%d`-$CI_JOB_ID-openwrt-router-k3"
+    #expire_in: 2 weeks
+    paths:
+      - /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin
+  # disable artifact passing
+  dependencies: []
+
 job_test:
   stage: test
   tags: 
@@ -149,5 +178,9 @@ job_test:
     ### netgear_r7800
     - stat openwrt-ipq806x-netgear_r7800-squashfs-factory.img
     - stat openwrt-ipq806x-netgear_r7800-squashfs-sysupgrade.bin
+    ## bcm53xx
+    - cd /home/gitlab-runner/lede/bin/targets/bcm53xx/generic
+    ### phicomm_k3
+    - stat openwrt-bcm53xx-phicomm_k3-squashfs.trx
   # disable artifact passing
   dependencies: []
