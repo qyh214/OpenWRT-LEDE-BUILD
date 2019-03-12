@@ -15,9 +15,7 @@
 如果你无法看到某个神秘功能，你需要使用SSH连接输入 `echo  0xDEADBEEF > /etc/config/google_fu_mode` 回车命令后即可重新访问神秘功能，如果显示错误请清除配置信息后再试，设备无需重启。
 
 ### 固件下载
-
 #### 最新固件下载
-
 华硕rt-ac58u：[点此下载](http://dev.qyh.name:800/shihuang/routerbuild/-/jobs/artifacts/master/download?job=job_ac58u)
 
 华硕rt-acrh17：[点此下载](http://dev.qyh.name:800/shihuang/routerbuild/-/jobs/artifacts/master/download?job=job_acrh17)
@@ -26,5 +24,22 @@
 
 斐讯k3：[点此下载](http://dev.qyh.name:800/shihuang/routerbuild/-/jobs/artifacts/master/download?job=job_k3)
 
-本地下载：[点此访问](http://dev.qyh.name:800/shihuang/routerbuild/pipelines)
+#### 本地下载
+[点此访问](http://dev.qyh.name:800/shihuang/routerbuild/pipelines)
+
 - 请注意：你需要点击右侧的`download`按钮进行下载，或者点击`passed`状态按钮，然后在右侧点击`browse`按钮选择你需要的文件进行下载。
+
+### 固件首次安装方式/刷机/救砖介绍
+斐讯K3：https://post.smzdm.com/p/607853/
+
+### 固件特殊命令
+#### R7800
+修改cpu调节器（仅限openwrt18.x）：
+
+https://forum.openwrt.org/t/r7800-performance/15780/ 
+
+```
+echo 35 > /sys/devices/system/cpu/cpufreq/ondemand/up_threshold
+echo 10 > /sys/devices/system/cpu/cpufreq/ondemand/sampling_down_factor
+```
+
