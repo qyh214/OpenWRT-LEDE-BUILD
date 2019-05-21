@@ -31,17 +31,17 @@ job_base:
     #- git clone https://github.com/coolsnowwolf/lede.git
     # update code
     - cd /home/gitlab-runner/lede
-    # due to law
-    - git reset --hard 2915c44a11ca0ee40b51ff5d9c18a0da1951e170
-    - cd /home/gitlab-runner/lede/package
-    - rm -rf ./openwrt-packages
-    - cd /home/gitlab-runner/lede/package
-    - mkdir openwrt-packages
-    - cp -r /home/gitlab-runner/lede/package/lean/luci-app-ssr-plus /home/gitlab-runner/lede/package/openwrt-packages/luci-app-ssr-plus
-    - cd /home/gitlab-runner/lede
-    - ./scripts/feeds update -a
-    - ./scripts/feeds install -a
-    - cd /home/gitlab-runner/lede
+    ## due to law to remove ssr
+    #- git reset --hard 2915c44a11ca0ee40b51ff5d9c18a0da1951e170
+    #- cd /home/gitlab-runner/lede/package
+    #- rm -rf ./openwrt-packages
+    #- cd /home/gitlab-runner/lede/package
+    #- mkdir openwrt-packages
+    #- cp -r /home/gitlab-runner/lede/package/lean/luci-app-ssr-plus /home/gitlab-runner/lede/package/openwrt-packages/luci-app-ssr-plus
+    #- cd /home/gitlab-runner/lede
+    #- ./scripts/feeds update -a
+    #- ./scripts/feeds install -a
+    #- cd /home/gitlab-runner/lede
     - git pull
     #- cd /home/gitlab-runner/lede
     #- rm -rf ./tmp
