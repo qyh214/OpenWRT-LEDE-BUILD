@@ -18,6 +18,10 @@
 #### 隐藏功能
 如果你无法看到某个神秘功能，你需要使用SSH连接输入 `echo  0xDEADBEEF > /etc/config/google_fu_mode` 回车命令后即可重新访问神秘功能，如果显示错误请清除配置信息后再试，设备无需重启。
 
+#### 电信天翼云盘
+中国电信天翼云盘提速脚本，有关token的获取可参考[这里](http://koolshare.cn/thread-159179-1-2.html)。某些地区
+可能需要设置定时脚本（1小时重启）`0  */1  *  *  * /etc/init.d/familycloud restart`。
+
 ### 固件下载
 #### 最新固件下载
 华硕rt-ac58u：[点此下载](http://dev.qyh.name:800/shihuang/routerbuild/-/jobs/artifacts/master/download?job=job_ac58u)
