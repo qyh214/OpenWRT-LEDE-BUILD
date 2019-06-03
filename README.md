@@ -4,23 +4,24 @@
 ### 编译状态
 [![pipeline status](http://dev.qyh.name:800/shihuang/routerbuild/badges/master/pipeline.svg)](http://dev.qyh.name:800/shihuang/routerbuild/commits/master)
 
-仅编译网件r7800、华硕rt-ac58u、rt-acrh17、斐讯k3的路由器固件，不接受个性化定制。
+仅编译网件r7800、华硕rt-ac58u、rt-acrh17、斐讯k3的路由器固件，原则上不接受个性化定制。
 
 编译的固件永久保存以供挑选使用。
 
 ### 更新建议
-建议不保留配置全新更新。
+重大版本或重大改动时，建议不保留配置全新更新。
 
 ### 特别功能
+
 #### 不服来跑个分？cpu跑分
-使用SSH连接路由器终端，输入`/etc/coremark.sh` 稍等片刻后，访问路由器主页，概况里将显示分数，例如网件R7800的主页主机型号末尾将会显示路由器跑分` Netgear Nighthawk X4S R7800 (CpuMark : 12654.587288 Scores) ` 。
+使用SSH连接路由器终端，输入`/etc/coremark.sh` ，回车，稍等片刻后，访问路由器主页，概况里将显示分数，例如网件R7800的主页主机型号末尾将会显示路由器跑分` Netgear Nighthawk X4S R7800 (CpuMark : 12654.587288 Scores) ` 。
 
 #### 隐藏功能
-如果你无法看到某个神秘功能，你需要使用SSH连接输入 `echo  0xDEADBEEF > /etc/config/google_fu_mode` 回车命令后即可重新访问神秘功能，如果显示错误请清除配置信息后再试，设备无需重启。
+如果你无法看到某个神秘功能，你需要使用SSH连接输入 `echo  0xDEADBEEF > /etc/config/google_fu_mode`，回车，稍等片刻后即可重新访问神秘功能，如果显示错误请清除配置信息后再试，设备无需重启。
 
 #### 电信天翼云盘
 中国电信天翼云盘提速脚本，有关token的获取可参考[这里](http://koolshare.cn/thread-159179-1-2.html)。某些地区
-可能需要设置定时脚本（1小时重启）`0  */1  *  *  * /etc/init.d/familycloud restart`。
+可能需要设置定时脚本（1小时重启）`0  */1  *  *  * /etc/init.d/familycloud restart`，某些地区可能无效或效果欠佳。
 
 ### 固件下载
 #### 最新固件下载
@@ -42,7 +43,7 @@
 
 ### 固件特殊命令
 #### R7800
-修改cpu调节器（仅限openwrt18.x）：
+修改cpu调节器（仅限openwrt18.x，自shihuang/lede@96ff77261f98b861374011ff149df02a46abd046固件已包含此更新）：
 
 https://forum.openwrt.org/t/r7800-performance/15780/ 
 
