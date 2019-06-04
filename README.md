@@ -51,7 +51,7 @@
 #### https的强制转换
 - 路由器内所有http被指向https这个功能可能导致使用某些服务出现异常，例如aria2的rpc通信。
 
-自shihuang/lede@	87e3eb15569a8a52af806baa5fa420ed9f85fb3b起，取消了强制https转换，之前升级上来的可能依然是https访问，
+自shihuang/lede@87e3eb15569a8a52af806baa5fa420ed9f85fb3b起，取消了强制https转换，之前升级上来的可能依然是https访问，
 可通过SSH连接，输入`cd /etc/config/`然后`vi uhttpd`将其中的`option redirect_https '1'`改为`option redirect_https '0'`
 （vi编辑器的进入编辑方式，按`i`回车进入插入模式，修改内容后，`esc`退出，然后输入`:wq`保存，更多可查阅vi相关使用说明）。
 
