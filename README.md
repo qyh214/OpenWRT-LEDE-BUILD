@@ -1,6 +1,14 @@
 ## 路由器固件[lede](https://github.com/coolsnowwolf/lede)(openwrt)自动编译
 固件来源：[github](https://github.com/coolsnowwolf/lede)
 
+--------------
+* [编译状态](#编译状态)
+* [更新建议](#更新建议)
+* [特别功能](#特别功能)
+* [固件下载](#固件下载)
+* [已知问题](#已知问题)
+--------------
+
 ### 编译状态
 [![pipeline status](http://dev.qyh.name:800/shihuang/routerbuild/badges/master/pipeline.svg)](http://dev.qyh.name:800/shihuang/routerbuild/commits/master)
 
@@ -21,7 +29,7 @@
 
 #### 电信天翼云盘
 中国电信天翼云盘提速脚本，有关token的获取可参考[这里](http://koolshare.cn/thread-159179-1-2.html)。某些地区
-可能需要设置定时脚本（1小时重启）`0  */1  *  *  * /etc/init.d/familycloud restart`，某些地区可能无效或效果欠佳。
+可能需要在路由器后台设置定时脚本（后台-系统-计划任务，例子是1小时重启，可能各地区不同）`0  */1  *  *  * /etc/init.d/familycloud restart`，某些地区可能无效或效果欠佳。
 
 ### 固件下载
 #### 最新固件下载
@@ -37,6 +45,22 @@
 [点此访问](http://dev.qyh.name:800/shihuang/routerbuild/pipelines)
 
 - 请注意：你需要点击右侧的`download`按钮进行下载，或者点击`passed`状态按钮，然后在右侧点击`browse`按钮选择你需要的文件进行下载。
+
+### 已知问题
+
+#### https的强制转换
+- 路由器内所有http被指向https这个功能可能导致使用某些服务出现异常，例如aria2的rpc通信。
+
+自shihuang/lede@	87e3eb15569a8a52af806baa5fa420ed9f85fb3b起，取消了强制https转换，之前升级上来的可能依然是https访问，
+可通过SSH连接，输入`cd /etc/config/`然后`vi uhttpd`将其中的`option redirect_https '1'`改为`option redirect_https '0'`
+（vi编辑器的进入编辑方式，按`i`回车进入插入模式，修改内容后，`esc`退出，然后输入`:wq`保存，更多可查阅vi相关使用说明）。
+
+你也可以通过清除配置重新刷固件重置全部数据解决此问题（通常浏览器也需要清除缓存）。
+
+#### aria2速度问题和transmission使用
+- 目前aria2和transmission仅在网件R7800提供。
+
+aria2的bt速度问题可通过添加trackerslist解决，具体可查看[这里](https://github.com/ngosang/trackerslist)。
 
 ### 固件首次安装方式/刷机/救砖介绍
 斐讯K3：https://post.smzdm.com/p/607853/
