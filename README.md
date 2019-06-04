@@ -58,7 +58,8 @@
 你也可以通过清除配置重新刷固件重置全部数据解决此问题（通常浏览器也需要清除缓存）。
 
 #### aria2速度问题和transmission使用
-- 目前aria2和transmission仅在网件R7800提供。
+- 目前aria2和transmission仅在网件R7800提供进行测试，自90bd7f0e33202ad74483f421087c91b45f87d7d5暂时移除了，
+可在计算机上使用迅雷等工具下载。
 
 aria2的bt速度问题可通过添加trackerslist解决，具体可查看[这里](https://github.com/ngosang/trackerslist)。
 
