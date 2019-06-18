@@ -27,10 +27,6 @@
 #### 隐藏功能
 如果你无法看到某个神秘功能，你需要使用SSH连接输入 `echo  0xDEADBEEF > /etc/config/google_fu_mode`，回车，稍等片刻后即可重新访问神秘功能，如果显示错误请清除配置信息后再试，设备无需重启。
 
-#### 电信天翼云盘
-中国电信天翼云盘提速脚本，有关token的获取可参考[这里](http://koolshare.cn/thread-159179-1-2.html)。某些地区
-可能需要在路由器后台设置定时脚本（后台-系统-计划任务，例子是1小时重启，可能各地区不同）`0  */1  *  *  * /etc/init.d/familycloud restart`，某些地区可能无效或效果欠佳。
-
 ### 固件下载
 #### 最新固件下载
 华硕rt-ac58u：[点此下载](http://dev.qyh.name:800/shihuang/routerbuild/-/jobs/artifacts/master/download?job=job_ac58u)
@@ -65,10 +61,12 @@ aria2的bt速度问题可通过添加trackerslist解决，具体可查看[这里
 
 ### 固件首次安装方式/刷机/救砖介绍
 斐讯K3：https://post.smzdm.com/p/607853/
+华硕acrh17：官方固件-更新固件-刷入trx格式-在openwrt里-更新固件-不保留配置-刷入更新固件即可
+网件r7800：官方固件-更新固件-刷入img格式即可
 
 ### 固件特殊命令
 #### R7800
-修改cpu调节器（仅限openwrt18.x，自shihuang/lede@96ff77261f98b861374011ff149df02a46abd046固件已包含此更新）：
+修改cpu调节器（仅限openwrt18.x，自shihuang/lede@96ff77261f98b861374011ff149df02a46abd046固件已包含此更新，无需再次操作）：
 
 https://forum.openwrt.org/t/r7800-performance/15780/ 
 
