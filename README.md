@@ -27,6 +27,10 @@
 #### 隐藏功能
 如果你无法看到某个神秘功能，你需要使用SSH连接输入 `echo  0xDEADBEEF > /etc/config/google_fu_mode`，回车，稍等片刻后即可重新访问神秘功能，如果显示错误请清除配置信息后再试，设备无需重启。
 
+#### dnspod脚本（仅限网件R7800）
+网件r7800添加额外功能dnspod.sh，来源[点击此处](https://github.com/kkkgo/dnspod-ddns-with-bashshell/)。
+需要包含`curl`的编译（否则需要从后台-软件包里安装-curl），路径network-file transfer-curl。
+
 ### 固件下载
 #### 最新固件下载
 华硕rt-ac58u：[点此下载](http://dev.qyh.name:800/shihuang/routerbuild/-/jobs/artifacts/master/download?job=job_ac58u)
@@ -60,9 +64,9 @@
 aria2的bt速度问题可通过添加trackerslist解决，具体可查看[这里](https://github.com/ngosang/trackerslist)。
 
 ### 固件首次安装方式/刷机/救砖介绍
-斐讯K3：https://post.smzdm.com/p/607853/
-华硕acrh17：官方固件-更新固件-刷入trx格式-在openwrt里-更新固件-不保留配置-刷入更新固件即可
-网件r7800：官方固件-更新固件-刷入img格式即可
+- 斐讯K3：https://post.smzdm.com/p/607853/
+- 华硕acrh17：官方固件-更新固件-刷入trx格式-在openwrt里-更新固件-不保留配置-刷入更新固件即可
+- 网件r7800：官方固件-更新固件-刷入img格式即可
 
 ### 固件特殊命令
 #### R7800
