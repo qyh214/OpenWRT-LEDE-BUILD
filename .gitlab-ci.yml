@@ -44,8 +44,8 @@ job_base:
     #- cd /home/gitlab-runner/lede
     - git pull
     #- cd /home/gitlab-runner/lede
-    - rm -rf ./tmp
-    - rm -rf ./feeds
+    #- rm -rf ./tmp
+    #- rm -rf ./feeds
     - ./scripts/feeds update -a
     - ./scripts/feeds install -a
     
