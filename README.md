@@ -31,6 +31,9 @@
 网件r7800添加额外功能dnspod.sh，来源[点击此处](https://github.com/kkkgo/dnspod-ddns-with-bashshell/)。
 需要包含`curl`的编译（否则需要从后台-软件包里安装-curl），路径network-file transfer-curl。
 
+#### 温度监控（仅限网件R7800）
+网件r7800添加额外功能温度监控，需要包含Utilities-lm-sensors和lm-sensors-detect，并修改luci页面，可刷机后ftp替换。
+
 ### 固件下载
 #### 最新固件下载
 华硕rt-ac58u：[点此下载](http://dev.qyh.name:800/shihuang/routerbuild/-/jobs/artifacts/master/download?job=job_ac58u)
