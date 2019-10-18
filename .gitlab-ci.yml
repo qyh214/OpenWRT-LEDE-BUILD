@@ -14,10 +14,10 @@
 
 stages:
   - base
-  - ac58u
-  - acrh17
+#  - ac58u
+#  - acrh17
   - r7800
-  - k3
+#  - k3
   - test
 
 job_base:
@@ -49,63 +49,63 @@ job_base:
     - ./scripts/feeds update -a
     - ./scripts/feeds install -a
     
-job_ac58u:
-  stage: ac58u
-  tags: 
-  - shell
-  script:
-    # config copy
-    - cp /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/ac58u.config /home/gitlab-runner/lede/.config
-    - cd /home/gitlab-runner/lede
-    #- make menuconfig(error)/make defconfig(compare with git)
-    - make defconfig
-    #- export FORCE_UNSAFE_CONFIGURE=1 && make -j4 V=s
-    - make -j1
-    # build pass and save
-    ## config
-    - cp /home/gitlab-runner/lede/.config /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin/.config
-    ## asus_rt-ac58u
-    - cp /home/gitlab-runner/lede/bin/targets/ipq40xx/generic/openwrt-ipq40xx-asus_rt-ac58u-initramfs-factory.trx /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin/`date   +%Y%m%d`-$CI_JOB_ID-openwrt-ipq40xx-asus_rt-ac58u-initramfs-factory.trx
-    - cp /home/gitlab-runner/lede/bin/targets/ipq40xx/generic/openwrt-ipq40xx-asus_rt-ac58u-squashfs-sysupgrade.bin /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin/`date   +%Y%m%d`-$CI_JOB_ID-openwrt-ipq40xx-asus_rt-ac58u-squashfs-sysupgrade.bin
-    ## remove git file
-    - cd /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin
-    - rm .gitignore
-  artifacts:
-    name: "`date   +%Y%m%d`-$CI_JOB_ID-openwrt-router-ac58u"
-    #expire_in: 2 weeks
-    paths:
-      - /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin
-  # disable artifact passing
-  dependencies: []
-
-job_acrh17:
-  stage: acrh17
-  tags: 
-  - shell
-  script:
-    # config copy
-    - cp /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/acrh17.config /home/gitlab-runner/lede/.config
-    - cd /home/gitlab-runner/lede
-    #- make menuconfig(error)/make defconfig(compare with git)
-    - make defconfig
-    #- export FORCE_UNSAFE_CONFIGURE=1 && make -j4 V=s
-    - make -j1
-    # build pass and save
-    ## config
-    - cp /home/gitlab-runner/lede/.config /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin/.config
-    ## asus_rt-acrh17
-    - cp /home/gitlab-runner/lede/bin/targets/ipq40xx/generic/openwrt-ipq40xx-asus_rt-acrh17-initramfs-factory.trx /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin/`date   +%Y%m%d`-$CI_JOB_ID-openwrt-ipq40xx-asus_rt-acrh17-initramfs-factory.trx
-    - cp /home/gitlab-runner/lede/bin/targets/ipq40xx/generic/openwrt-ipq40xx-asus_rt-acrh17-squashfs-sysupgrade.bin /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin/`date   +%Y%m%d`-$CI_JOB_ID-openwrt-ipq40xx-asus_rt-acrh17-squashfs-sysupgrade.bin
-    ## remove git file
-    - cd /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin
-    - rm .gitignore
-  artifacts:
-    name: "`date   +%Y%m%d`-$CI_JOB_ID-openwrt-router-acrh17"
-    #expire_in: 2 weeks
-    paths:
-      - /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin
-  # disable artifact passing
-  dependencies: []
+#job_ac58u:
+#  stage: ac58u
+#  tags: 
+#  - shell
+#  script:
+#    # config copy
+#    - cp /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/ac58u.config /home/gitlab-runner/lede/.config
+#    - cd /home/gitlab-runner/lede
+#    #- make menuconfig(error)/make defconfig(compare with git)
+#    - make defconfig
+#    #- export FORCE_UNSAFE_CONFIGURE=1 && make -j4 V=s
+#    - make -j1
+#    # build pass and save
+#    ## config
+#    - cp /home/gitlab-runner/lede/.config /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin/.config
+#    ## asus_rt-ac58u
+#    - cp /home/gitlab-runner/lede/bin/targets/ipq40xx/generic/openwrt-ipq40xx-asus_rt-ac58u-initramfs-factory.trx /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin/`date   +%Y%m%d`-$CI_JOB_ID-openwrt-ipq40xx-asus_rt-ac58u-initramfs-factory.trx
+#    - cp /home/gitlab-runner/lede/bin/targets/ipq40xx/generic/openwrt-ipq40xx-asus_rt-ac58u-squashfs-sysupgrade.bin /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin/`date   +%Y%m%d`-$CI_JOB_ID-openwrt-ipq40xx-asus_rt-ac58u-squashfs-sysupgrade.bin
+#    ## remove git file
+#    - cd /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin
+#    - rm .gitignore
+#  artifacts:
+#    name: "`date   +%Y%m%d`-$CI_JOB_ID-openwrt-router-ac58u"
+#    #expire_in: 2 weeks
+#    paths:
+#      - /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin
+#  # disable artifact passing
+#  dependencies: []
+#
+#job_acrh17:
+#  stage: acrh17
+#  tags: 
+#  - shell
+#  script:
+#    # config copy
+#    - cp /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/acrh17.config /home/gitlab-runner/lede/.config
+#    - cd /home/gitlab-runner/lede
+#    #- make menuconfig(error)/make defconfig(compare with git)
+#    - make defconfig
+#    #- export FORCE_UNSAFE_CONFIGURE=1 && make -j4 V=s
+#    - make -j1
+#    # build pass and save
+#    ## config
+#    - cp /home/gitlab-runner/lede/.config /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin/.config
+#    ## asus_rt-acrh17
+#    - cp /home/gitlab-runner/lede/bin/targets/ipq40xx/generic/openwrt-ipq40xx-asus_rt-acrh17-initramfs-factory.trx /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin/`date   +%Y%m%d`-$CI_JOB_ID-openwrt-ipq40xx-asus_rt-acrh17-initramfs-factory.trx
+#    - cp /home/gitlab-runner/lede/bin/targets/ipq40xx/generic/openwrt-ipq40xx-asus_rt-acrh17-squashfs-sysupgrade.bin /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin/`date   +%Y%m%d`-$CI_JOB_ID-openwrt-ipq40xx-asus_rt-acrh17-squashfs-sysupgrade.bin
+#    ## remove git file
+#    - cd /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin
+#    - rm .gitignore
+#  artifacts:
+#    name: "`date   +%Y%m%d`-$CI_JOB_ID-openwrt-router-acrh17"
+#    #expire_in: 2 weeks
+#    paths:
+#      - /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin
+#  # disable artifact passing
+#  dependencies: []
 
 job_r7800:
   stage: r7800
@@ -136,33 +136,33 @@ job_r7800:
   # disable artifact passing
   dependencies: []
 
-job_k3:
-  stage: k3
-  tags: 
-  - shell
-  script:
-    # config copy
-    - cp /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/k3.config /home/gitlab-runner/lede/.config
-    - cd /home/gitlab-runner/lede
-    #- make menuconfig(error)/make defconfig(compare with git)
-    - make defconfig
-    #- export FORCE_UNSAFE_CONFIGURE=1 && make -j4 V=s
-    - make -j1
-    # build pass and save
-    ## config
-    - cp /home/gitlab-runner/lede/.config /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin/.config
-    ## phicomm_k3
-    - cp /home/gitlab-runner/lede/bin/targets/bcm53xx/generic/openwrt-bcm53xx-phicomm-k3-squashfs.trx /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin/`date   +%Y%m%d`-$CI_JOB_ID-openwrt-bcm53xx-phicomm-k3-squashfs.trx
-    ## remove git file
-    - cd /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin
-    - rm .gitignore
-  artifacts:
-    name: "`date   +%Y%m%d`-$CI_JOB_ID-openwrt-router-k3"
-    #expire_in: 2 weeks
-    paths:
-      - /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin
-  # disable artifact passing
-  dependencies: []
+#job_k3:
+#  stage: k3
+#  tags: 
+#  - shell
+#  script:
+#    # config copy
+#    - cp /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/k3.config /home/gitlab-runner/lede/.config
+#    - cd /home/gitlab-runner/lede
+#    #- make menuconfig(error)/make defconfig(compare with git)
+#    - make defconfig
+#    #- export FORCE_UNSAFE_CONFIGURE=1 && make -j4 V=s
+#    - make -j1
+#    # build pass and save
+#    ## config
+#    - cp /home/gitlab-runner/lede/.config /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin/.config
+#    ## phicomm_k3
+#    - cp /home/gitlab-runner/lede/bin/targets/bcm53xx/generic/openwrt-bcm53xx-phicomm-k3-squashfs.trx /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin/`date   +%Y%m%d`-$CI_JOB_ID-openwrt-bcm53xx-phicomm-k3-squashfs.trx
+#    ## remove git file
+#    - cd /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin
+#    - rm .gitignore
+#  artifacts:
+#    name: "`date   +%Y%m%d`-$CI_JOB_ID-openwrt-router-k3"
+#    #expire_in: 2 weeks
+#    paths:
+#      - /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin
+#  # disable artifact passing
+#  dependencies: []
 
 job_test:
   stage: test
@@ -170,22 +170,22 @@ job_test:
   - shell
   script:
     # test file status
-    ## ipq40xx
-    - cd /home/gitlab-runner/lede/bin/targets/ipq40xx/generic
-    ### asus_rt-ac58u
-    - stat openwrt-ipq40xx-asus_rt-ac58u-initramfs-factory.trx
-    - stat openwrt-ipq40xx-asus_rt-ac58u-squashfs-sysupgrade.bin
-    ### asus_rt-acrh17
-    - stat openwrt-ipq40xx-asus_rt-acrh17-initramfs-factory.trx
-    - stat openwrt-ipq40xx-asus_rt-acrh17-squashfs-sysupgrade.bin
+ #   ## ipq40xx
+ #   - cd /home/gitlab-runner/lede/bin/targets/ipq40xx/generic
+ #   ### asus_rt-ac58u
+ #   - stat openwrt-ipq40xx-asus_rt-ac58u-initramfs-factory.trx
+ #   - stat openwrt-ipq40xx-asus_rt-ac58u-squashfs-sysupgrade.bin
+ #   ### asus_rt-acrh17
+ #   - stat openwrt-ipq40xx-asus_rt-acrh17-initramfs-factory.trx
+ #   - stat openwrt-ipq40xx-asus_rt-acrh17-squashfs-sysupgrade.bin
     ## ipq806x
     - cd /home/gitlab-runner/lede/bin/targets/ipq806x/generic
     ### netgear_r7800
     - stat openwrt-ipq806x-netgear_r7800-squashfs-factory.img
     - stat openwrt-ipq806x-netgear_r7800-squashfs-sysupgrade.bin
-    ## bcm53xx
-    - cd /home/gitlab-runner/lede/bin/targets/bcm53xx/generic
-    ### phicomm_k3
-    - stat openwrt-bcm53xx-phicomm-k3-squashfs.trx
+#    ## bcm53xx
+#    - cd /home/gitlab-runner/lede/bin/targets/bcm53xx/generic
+#    ### phicomm_k3
+#    - stat openwrt-bcm53xx-phicomm-k3-squashfs.trx
   # disable artifact passing
   dependencies: []
