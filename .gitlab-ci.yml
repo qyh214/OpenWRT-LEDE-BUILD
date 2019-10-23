@@ -171,13 +171,13 @@ job_test:
   script:
     # test file status
     ## ipq40xx
-   - cd /home/gitlab-runner/lede/bin/targets/ipq40xx/generic
-   ### asus_rt-ac58u
-   - stat openwrt-ipq40xx-asus_rt-ac58u-initramfs-factory.trx
-   - stat openwrt-ipq40xx-asus_rt-ac58u-squashfs-sysupgrade.bin
-   ### asus_rt-acrh17
-   - stat openwrt-ipq40xx-asus_rt-acrh17-initramfs-factory.trx
-   - stat openwrt-ipq40xx-asus_rt-acrh17-squashfs-sysupgrade.bin
+    - cd /home/gitlab-runner/lede/bin/targets/ipq40xx/generic
+    ### asus_rt-ac58u
+    - stat openwrt-ipq40xx-asus_rt-ac58u-initramfs-factory.trx
+    - stat openwrt-ipq40xx-asus_rt-ac58u-squashfs-sysupgrade.bin
+    ### asus_rt-acrh17
+    - stat openwrt-ipq40xx-asus_rt-acrh17-initramfs-factory.trx
+    - stat openwrt-ipq40xx-asus_rt-acrh17-squashfs-sysupgrade.bin
     ## ipq806x
     - cd /home/gitlab-runner/lede/bin/targets/ipq806x/generic
     ### netgear_r7800
