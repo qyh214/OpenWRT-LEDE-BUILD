@@ -26,9 +26,9 @@ job_base:
   - shell
   script:
     # clean build
-    - cd /home/gitlab-runner/
+    #- cd /home/gitlab-runner/
     #- rm -R lede
-    - git clone https://github.com/coolsnowwolf/lede.git
+    #- git clone https://github.com/coolsnowwolf/lede.git
     # update code
     - cd /home/gitlab-runner/lede
     ## due to law to remove ssr
