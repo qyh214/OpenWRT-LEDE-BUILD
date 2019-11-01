@@ -78,7 +78,6 @@ job_ac58u:
   # disable artifact passing
   dependencies: []
   #allow_failure: true
-  output_limit: 40960
 
 job_acrh17:
   stage: acrh17
