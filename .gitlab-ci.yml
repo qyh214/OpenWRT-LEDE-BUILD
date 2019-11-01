@@ -26,9 +26,9 @@ job_base:
   - shell
   script:
     # clean build
-    - cd /home/gitlab-runner/
-    - rm -R lede
-    - git clone https://github.com/coolsnowwolf/lede.git
+    #- cd /home/gitlab-runner/
+    #- rm -R lede
+    #- git clone https://github.com/coolsnowwolf/lede.git
     # update code
     - cd /home/gitlab-runner/lede
     ## due to law to remove ssr
@@ -78,6 +78,7 @@ job_ac58u:
   # disable artifact passing
   dependencies: []
   #allow_failure: true
+  output_limit: 40960
 
 job_acrh17:
   stage: acrh17
