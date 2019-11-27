@@ -60,7 +60,7 @@ job_ac58u:
     #- make menuconfig(error)/make defconfig(compare with git)
     - make defconfig
     #- export FORCE_UNSAFE_CONFIGURE=1 && make -j4 V=s
-    - make -j1 V=s
+    - make -j1
     # build pass and save
     ## config
     - cp /home/gitlab-runner/lede/.config /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin/.config
