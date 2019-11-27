@@ -27,10 +27,6 @@
 #### 隐藏功能
 如果你无法看到某个神秘功能，你需要使用SSH连接输入 `echo  0xDEADBEEF > /etc/config/google_fu_mode`，回车，稍等片刻后即可重新访问神秘功能，如果显示错误请清除配置信息后再试，设备无需重启。
 
-#### dnspod脚本（仅限网件R7800）
-网件r7800添加额外功能dnspod.sh，来源[点击此处](https://github.com/kkkgo/dnspod-ddns-with-bashshell/)。
-需要包含`curl`的编译（否则需要从后台-软件包里安装-curl），路径network-file transfer-curl。
-
 #### 温度监控（仅限网件R7800）
 网件r7800添加额外功能温度监控，需要包含Utilities-lm-sensors和lm-sensors-detect，并修改luci页面，可刷机后ftp替换。
 
