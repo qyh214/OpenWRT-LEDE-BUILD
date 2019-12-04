@@ -67,7 +67,7 @@ job_ac58u:
       - /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin
   # disable artifact passing
   dependencies: []
-  #allow_failure: true
+  allow_failure: true
 
 job_acrh17:
   stage: acrh17
@@ -97,7 +97,7 @@ job_acrh17:
       - /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin
   # disable artifact passing
   dependencies: []
-  #allow_failure: true
+  allow_failure: true
 
 job_r7800:
   stage: r7800
@@ -127,7 +127,7 @@ job_r7800:
       - /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin
   # disable artifact passing
   dependencies: []
-  #allow_failure: true
+  allow_failure: true
 
 job_k3:
   stage: k3
@@ -156,7 +156,7 @@ job_k3:
       - /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin
   # disable artifact passing
   dependencies: []
-  #allow_failure: true
+  allow_failure: true
 
 job_test:
   stage: test
