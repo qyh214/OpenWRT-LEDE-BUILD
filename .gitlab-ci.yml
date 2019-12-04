@@ -39,8 +39,7 @@ job_ac58u:
   stage: ac58u
   tags: 
   - shell
-  script:
-    |
+  script: |
     rm -f ./.config*
     touch ./.config
     #
