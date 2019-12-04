@@ -115,6 +115,8 @@ job_ac58u:
     # 
     # ========================固件定制部分结束========================
     # 
+  script:
+    - cd /home/gitlab-runner/lede
     - sed -i 's/^[ \t]*//g' ./.config
     - make defconfig
     #- export FORCE_UNSAFE_CONFIGURE=1 && make -j4 V=s
