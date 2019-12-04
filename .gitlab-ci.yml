@@ -40,7 +40,8 @@ job_ac58u:
   tags: 
   - shell
   script: |
-    rm -f ./.config*
+    cd /home/gitlab-runner/lede
+    rm ./.config
     touch ./.config
     #
     # ========================固件定制部分========================
