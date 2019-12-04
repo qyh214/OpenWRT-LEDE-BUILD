@@ -41,8 +41,8 @@ job_ac58u:
   - shell
   script:
     - |
-    rm -f ./.config*
-    touch ./.config
+    - rm -f ./.config*
+    - touch ./.config
     #
     # ========================固件定制部分========================
     # 
