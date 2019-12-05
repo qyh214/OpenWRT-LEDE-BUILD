@@ -79,21 +79,20 @@ job_ac58u:
     # CONFIG_PACKAGE_luci-app-shadowsocks-libev is not set
     # CONFIG_PACKAGE_luci-app-v2ray-server is not set
     EOF
-  script:
-    - cd /home/gitlab-runner/lede
-    - sed -i 's/^[ \t]*//g' ./.config
-    - make defconfig
+    cd /home/gitlab-runner/lede
+    sed -i 's/^[ \t]*//g' ./.config
+    make defconfig
     #- export FORCE_UNSAFE_CONFIGURE=1 && make -j4 V=s
-    - make -j1 V=s
+    make -j1
     # build pass and save
     ## config
-    - cp /home/gitlab-runner/lede/.config /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin/.config
+    cp /home/gitlab-runner/lede/.config /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin/.config
     ## asus_rt-ac58u
-    - cp /home/gitlab-runner/lede/bin/targets/ipq40xx/generic/openwrt-ipq40xx-asus_rt-ac58u-initramfs-factory.trx /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin/`date   +%Y%m%d`-$CI_JOB_ID-openwrt-ipq40xx-asus_rt-ac58u-initramfs-factory.trx
-    - cp /home/gitlab-runner/lede/bin/targets/ipq40xx/generic/openwrt-ipq40xx-asus_rt-ac58u-squashfs-sysupgrade.bin /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin/`date   +%Y%m%d`-$CI_JOB_ID-openwrt-ipq40xx-asus_rt-ac58u-squashfs-sysupgrade.bin
+    cp /home/gitlab-runner/lede/bin/targets/ipq40xx/generic/openwrt-ipq40xx-asus_rt-ac58u-initramfs-factory.trx /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin/`date   +%Y%m%d`-$CI_JOB_ID-openwrt-ipq40xx-asus_rt-ac58u-initramfs-factory.trx
+    cp /home/gitlab-runner/lede/bin/targets/ipq40xx/generic/openwrt-ipq40xx-asus_rt-ac58u-squashfs-sysupgrade.bin /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin/`date   +%Y%m%d`-$CI_JOB_ID-openwrt-ipq40xx-asus_rt-ac58u-squashfs-sysupgrade.bin
     ## remove git file
-    - cd /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin
-    - rm .gitignore
+    cd /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin
+    rm .gitignore
   artifacts:
     name: "`date   +%Y%m%d`-$CI_JOB_ID-openwrt-router-ac58u"
     #expire_in: 2 weeks
