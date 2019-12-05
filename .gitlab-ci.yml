@@ -82,6 +82,8 @@ job_ac58u:
     CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks=y
     CONFIG_PACKAGE_luci-app-guest-wifi=y
     CONFIG_PACKAGE_luci-i18n-guest-wifi-zh-cn=y
+    # fix mac80211 build error
+    CONFIG_PACKAGE_pptpd=y
     EOF
     # LuCI主题:
     cat >> .config <<EOF
@@ -95,6 +97,7 @@ job_ac58u:
     # CONFIG_PACKAGE_luci-app-accesscontrol is not set
     # CONFIG_PACKAGE_luci-app-ddns is not set
     # CONFIG_PACKAGE_luci-app-ipsec-vpnd is not set
+    # CONFIG_PACKAGE_luci-app-pptp-server is not set
     # CONFIG_PACKAGE_luci-app-qbittorrent is not set
     # CONFIG_PACKAGE_luci-app-unblockmusic is not set
     # CONFIG_PACKAGE_luci-app-vlmcsd is not set
