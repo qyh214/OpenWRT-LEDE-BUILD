@@ -15,6 +15,10 @@
 stages:
   - base
   - ac58u
+  - acrh17
+  - r7800
+  - k3
+  - test
 
 job_base:
   stage: base
@@ -134,5 +138,341 @@ job_ac58u:
     #expire_in: 2 weeks
     paths:
       - /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin
+  # disable artifact passing
+  dependencies: []
+  
+job_acrh17:
+  stage: acrh17
+  tags: 
+  - shell
+  script:|
+    cd /home/gitlab-runner/lede
+    rm -f ./.config*
+    touch ./.config
+    
+    echo 'Custom configure file'
+    #
+    # ========================固件定制部分========================
+    # 
+    # 
+    # 如果不对本区块做出任何编辑, 则生成默认配置固件. 
+    # 
+    # 以下为定制化固件选项和说明:
+    #
+    #
+    # 有些插件/选项是默认开启的, 如果想要关闭, 请参照以下示例进行编写:
+    # 
+    #          =========================================
+    #         |  # 取消编译VMware镜像:                   |
+    #         |  cat >> .config <<EOF                   |
+    #         |  # CONFIG_VMDK_IMAGES is not set        |
+    #         |  EOF                                    |
+    #          =========================================
+    #
+    # 
+    # 以下是一些提前准备好的一些插件选项.
+    # 直接取消注释相应代码块即可应用. 不要取消注释代码块上的汉字说明.
+    # 如果不需要代码块里的某一项配置, 只需要删除相应行.
+    #
+    # 如果需要其他插件, 请按照示例自行添加.
+    # 注意, 只需添加依赖链顶端的包. 如果你需要插件 A, 同时 A 依赖 B, 即只需要添加 A.
+    # 
+    # 无论你想要对固件进行怎样的定制, 都需要且只需要修改 EOF 回环内的内容.
+    # 
+    # 编译acrh17固件:
+    cat >> .config <<EOF
+    CONFIG_TARGET_ipq40xx=y
+    CONFIG_TARGET_ipq40xx_DEVICE_asus_rt-acrh17=y
+    EOF
+    # 常用LuCI插件选择:
+    cat >> .config <<EOF
+    CONFIG_PACKAGE_luci-app-ssr-plus=y
+    CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks=y
+    CONFIG_PACKAGE_luci-app-guest-wifi=y
+    CONFIG_PACKAGE_luci-i18n-guest-wifi-zh-cn=y
+    CONFIG_PACKAGE_pptpd=y
+    EOF
+    # LuCI主题:
+    cat >> .config <<EOF
+    CONFIG_PACKAGE_luci-theme-argon=y
+    CONFIG_PACKAGE_luci-theme-bootstrap=y
+    CONFIG_PACKAGE_luci-theme-material=y
+    EOF
+    # 取消编译(不要删除被缩进的注释符号):
+    cat >> .config <<EOF
+    # CONFIG_PACKAGE_luci-app-accesscontrol is not set
+    # CONFIG_PACKAGE_luci-app-ddns is not set
+    # CONFIG_PACKAGE_luci-app-ipsec-vpnd is not set
+    # CONFIG_PACKAGE_luci-app-pptp-server is not set
+    # CONFIG_PACKAGE_luci-app-qbittorrent is not set
+    # CONFIG_PACKAGE_luci-app-unblockmusic is not set
+    # CONFIG_PACKAGE_luci-app-vlmcsd is not set
+    # CONFIG_PACKAGE_luci-app-wol is not set
+    # CONFIG_PACKAGE_luci-app-xlnetacc is not set
+    # CONFIG_PACKAGE_luci-app-zerotier is not set
+    # CONFIG_PACKAGE_luci-app-shadowsocks-libev is not set
+    # CONFIG_PACKAGE_luci-app-v2ray-server is not set
+    EOF
+    # 
+    # ========================固件定制部分结束========================
+    # 
+    
+    echo 'Compile firmware'
+    # 对比配置文件：
+    cd /home/gitlab-runner/lede
+    sed -i 's/^[ \t]*//g' ./.config
+    make defconfig
+    #- export FORCE_UNSAFE_CONFIGURE=1 && make -j4 V=s
+    make -j1
+    
+    echo 'Assemble artifact'
+    # build pass and save
+    ## config
+    - cp /home/gitlab-runner/lede/.config /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin/.config
+    ## asus_rt-acrh17
+    - cp /home/gitlab-runner/lede/bin/targets/ipq40xx/generic/openwrt-ipq40xx-asus_rt-acrh17-initramfs-factory.trx /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin/`date   +%Y%m%d`-$CI_JOB_ID-openwrt-ipq40xx-asus_rt-acrh17-initramfs-factory.trx
+    - cp /home/gitlab-runner/lede/bin/targets/ipq40xx/generic/openwrt-ipq40xx-asus_rt-acrh17-squashfs-sysupgrade.bin /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin/`date   +%Y%m%d`-$CI_JOB_ID-openwrt-ipq40xx-asus_rt-acrh17-squashfs-sysupgrade.bin
+    ## remove git file
+    - cd /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin
+    - rm .gitignore
+  artifacts:
+    name: "`date   +%Y%m%d`-$CI_JOB_ID-openwrt-router-acrh17"
+    #expire_in: 2 weeks
+    paths:
+      - /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin
+  # disable artifact passing
+  dependencies: []
+
+job_r7800:
+  stage: r7800
+  tags: 
+  - shell
+  script:|
+    cd /home/gitlab-runner/lede
+    rm -f ./.config*
+    touch ./.config
+    
+    echo 'Custom configure file'
+    #
+    # ========================固件定制部分========================
+    # 
+    # 
+    # 如果不对本区块做出任何编辑, 则生成默认配置固件. 
+    # 
+    # 以下为定制化固件选项和说明:
+    #
+    #
+    # 有些插件/选项是默认开启的, 如果想要关闭, 请参照以下示例进行编写:
+    # 
+    #          =========================================
+    #         |  # 取消编译VMware镜像:                   |
+    #         |  cat >> .config <<EOF                   |
+    #         |  # CONFIG_VMDK_IMAGES is not set        |
+    #         |  EOF                                    |
+    #          =========================================
+    #
+    # 
+    # 以下是一些提前准备好的一些插件选项.
+    # 直接取消注释相应代码块即可应用. 不要取消注释代码块上的汉字说明.
+    # 如果不需要代码块里的某一项配置, 只需要删除相应行.
+    #
+    # 如果需要其他插件, 请按照示例自行添加.
+    # 注意, 只需添加依赖链顶端的包. 如果你需要插件 A, 同时 A 依赖 B, 即只需要添加 A.
+    # 
+    # 无论你想要对固件进行怎样的定制, 都需要且只需要修改 EOF 回环内的内容.
+    # 
+    # 编译r7800固件:
+    cat >> .config <<EOF
+    CONFIG_TARGET_ipq806x=y
+    CONFIG_TARGET_ipq806x_DEVICE_netgear_r7800=y
+    EOF
+    # 常用LuCI插件选择:
+    cat >> .config <<EOF
+    CONFIG_PACKAGE_luci-app-ssr-plus=y
+    CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks=y
+    CONFIG_PACKAGE_luci-app-guest-wifi=y
+    CONFIG_PACKAGE_luci-i18n-guest-wifi-zh-cn=y
+    EOF
+    # LuCI主题:
+    cat >> .config <<EOF
+    CONFIG_PACKAGE_luci-theme-argon=y
+    CONFIG_PACKAGE_luci-theme-bootstrap=y
+    CONFIG_PACKAGE_luci-theme-material=y
+    EOF
+    # 取消编译(不要删除被缩进的注释符号):
+    cat >> .config <<EOF
+    # CONFIG_PACKAGE_luci-app-accesscontrol is not set
+    # CONFIG_PACKAGE_luci-app-ddns is not set
+    # CONFIG_PACKAGE_luci-app-ipsec-vpnd is not set
+    # CONFIG_PACKAGE_luci-app-pptp-server is not set
+    # CONFIG_PACKAGE_luci-app-qbittorrent is not set
+    # CONFIG_PACKAGE_luci-app-unblockmusic is not set
+    # CONFIG_PACKAGE_luci-app-vlmcsd is not set
+    # CONFIG_PACKAGE_luci-app-wol is not set
+    # CONFIG_PACKAGE_luci-app-xlnetacc is not set
+    # CONFIG_PACKAGE_luci-app-zerotier is not set
+    # CONFIG_PACKAGE_luci-app-shadowsocks-libev is not set
+    # CONFIG_PACKAGE_luci-app-v2ray-server is not set
+    EOF
+    # 
+    # ========================固件定制部分结束========================
+    # 
+    
+    echo 'Compile firmware'
+    # 对比配置文件：
+    cd /home/gitlab-runner/lede
+    sed -i 's/^[ \t]*//g' ./.config
+    make defconfig
+    #- export FORCE_UNSAFE_CONFIGURE=1 && make -j4 V=s
+    make -j1
+    
+    echo 'Assemble artifact'
+    # build pass and save
+    ## config
+    - cp /home/gitlab-runner/lede/.config /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin/.config
+    ## netgear_r7800
+    - cp /home/gitlab-runner/lede/bin/targets/ipq806x/generic/openwrt-ipq806x-netgear_r7800-squashfs-factory.img /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin/`date   +%Y%m%d`-$CI_JOB_ID-openwrt-ipq806x-netgear_r7800-squashfs-factory.img
+    - cp /home/gitlab-runner/lede/bin/targets/ipq806x/generic/openwrt-ipq806x-netgear_r7800-squashfs-sysupgrade.bin /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin/`date   +%Y%m%d`-$CI_JOB_ID-openwrt-ipq806x-netgear_r7800-squashfs-sysupgrade.bin
+    ## remove git file
+    - cd /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin
+    - rm .gitignore
+  artifacts:
+    name: "`date   +%Y%m%d`-$CI_JOB_ID-openwrt-router-r7800"
+    #expire_in: 2 weeks
+    paths:
+      - /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin
+  # disable artifact passing
+  dependencies: []
+  allow_failure: true
+
+job_k3:
+  stage: k3
+  tags: 
+  - shell
+  script:|
+    cd /home/gitlab-runner/lede
+    rm -f ./.config*
+    touch ./.config
+    
+    echo 'Custom configure file'
+    #
+    # ========================固件定制部分========================
+    # 
+    # 
+    # 如果不对本区块做出任何编辑, 则生成默认配置固件. 
+    # 
+    # 以下为定制化固件选项和说明:
+    #
+    #
+    # 有些插件/选项是默认开启的, 如果想要关闭, 请参照以下示例进行编写:
+    # 
+    #          =========================================
+    #         |  # 取消编译VMware镜像:                   |
+    #         |  cat >> .config <<EOF                   |
+    #         |  # CONFIG_VMDK_IMAGES is not set        |
+    #         |  EOF                                    |
+    #          =========================================
+    #
+    # 
+    # 以下是一些提前准备好的一些插件选项.
+    # 直接取消注释相应代码块即可应用. 不要取消注释代码块上的汉字说明.
+    # 如果不需要代码块里的某一项配置, 只需要删除相应行.
+    #
+    # 如果需要其他插件, 请按照示例自行添加.
+    # 注意, 只需添加依赖链顶端的包. 如果你需要插件 A, 同时 A 依赖 B, 即只需要添加 A.
+    # 
+    # 无论你想要对固件进行怎样的定制, 都需要且只需要修改 EOF 回环内的内容.
+    # 
+    # 编译k3固件:
+    cat >> .config <<EOF
+    CONFIG_TARGET_bcm53xx=y
+    CONFIG_TARGET_bcm53xx_DEVICE_phicomm-k3=y
+    EOF
+    # 常用LuCI插件选择:
+    cat >> .config <<EOF
+    CONFIG_PACKAGE_luci-app-ssr-plus=y
+    CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks=y
+    CONFIG_PACKAGE_luci-app-guest-wifi=y
+    CONFIG_PACKAGE_luci-i18n-guest-wifi-zh-cn=y
+    EOF
+    # LuCI主题:
+    cat >> .config <<EOF
+    CONFIG_PACKAGE_luci-theme-argon=y
+    CONFIG_PACKAGE_luci-theme-bootstrap=y
+    CONFIG_PACKAGE_luci-theme-material=y
+    EOF
+    # k3 Extra packages：
+    cat >> .config <<EOF
+    CONFIG_PACKAGE_automount=y
+    CONFIG_PACKAGE_autosamba=y
+    EOF
+    # 取消编译(不要删除被缩进的注释符号):
+    cat >> .config <<EOF
+    # CONFIG_PACKAGE_luci-app-accesscontrol is not set
+    # CONFIG_PACKAGE_luci-app-ddns is not set
+    # CONFIG_PACKAGE_luci-app-ipsec-vpnd is not set
+    # CONFIG_PACKAGE_luci-app-pptp-server is not set
+    # CONFIG_PACKAGE_luci-app-qbittorrent is not set
+    # CONFIG_PACKAGE_luci-app-unblockmusic is not set
+    # CONFIG_PACKAGE_luci-app-vlmcsd is not set
+    # CONFIG_PACKAGE_luci-app-wol is not set
+    # CONFIG_PACKAGE_luci-app-xlnetacc is not set
+    # CONFIG_PACKAGE_luci-app-zerotier is not set
+    # CONFIG_PACKAGE_luci-app-shadowsocks-libev is not set
+    # CONFIG_PACKAGE_luci-app-v2ray-server is not set
+    EOF
+    # 
+    # ========================固件定制部分结束========================
+    # 
+    
+    echo 'Compile firmware'
+    # 对比配置文件：
+    cd /home/gitlab-runner/lede
+    sed -i 's/^[ \t]*//g' ./.config
+    make defconfig
+    #- export FORCE_UNSAFE_CONFIGURE=1 && make -j4 V=s
+    make -j1
+    
+    echo 'Assemble artifact'
+    # build pass and save
+    ## config
+    - cp /home/gitlab-runner/lede/.config /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin/.config
+    ## phicomm_k3
+    - cp /home/gitlab-runner/lede/bin/targets/bcm53xx/generic/openwrt-bcm53xx-phicomm-k3-squashfs.trx /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin/`date   +%Y%m%d`-$CI_JOB_ID-openwrt-bcm53xx-phicomm-k3-squashfs.trx
+    ## remove git file
+    - cd /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin
+    - rm .gitignore
+  artifacts:
+    name: "`date   +%Y%m%d`-$CI_JOB_ID-openwrt-router-k3"
+    #expire_in: 2 weeks
+    paths:
+      - /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin
+  # disable artifact passing
+  dependencies: []
+  allow_failure: true
+
+job_test:
+  stage: test
+  tags: 
+  - shell
+  script:
+    # test file status
+    ## ipq40xx
+    - cd /home/gitlab-runner/lede/bin/targets/ipq40xx/generic
+    ### asus_rt-ac58u
+    - stat openwrt-ipq40xx-asus_rt-ac58u-initramfs-factory.trx
+    - stat openwrt-ipq40xx-asus_rt-ac58u-squashfs-sysupgrade.bin
+    ### asus_rt-acrh17
+    - stat openwrt-ipq40xx-asus_rt-acrh17-initramfs-factory.trx
+    - stat openwrt-ipq40xx-asus_rt-acrh17-squashfs-sysupgrade.bin
+    ## ipq806x
+    - cd /home/gitlab-runner/lede/bin/targets/ipq806x/generic
+    ### netgear_r7800
+    - stat openwrt-ipq806x-netgear_r7800-squashfs-factory.img
+    - stat openwrt-ipq806x-netgear_r7800-squashfs-sysupgrade.bin
+    ## bcm53xx
+    - cd /home/gitlab-runner/lede/bin/targets/bcm53xx/generic
+    ### phicomm_k3
+    - stat openwrt-bcm53xx-phicomm-k3-squashfs.trx
   # disable artifact passing
   dependencies: []
