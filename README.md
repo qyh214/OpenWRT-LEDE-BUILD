@@ -28,7 +28,7 @@
 如果你无法看到某个神秘功能，你需要使用SSH连接输入 `echo  0xDEADBEEF > /etc/config/google_fu_mode`，回车，稍等片刻后即可重新访问神秘功能，如果显示错误请清除配置信息后再试，设备无需重启。
 
 #### 温度监控（仅限网件R7800）
-网件r7800添加额外功能温度监控，需要包含Utilities-lm-sensors和lm-sensors-detect，并修改luci页面，可刷机后ftp替换。
+网件r7800添加额外功能温度监控。
 
 ### 固件下载
 #### 最新固件下载
@@ -47,7 +47,7 @@
 
 ### 已知问题
 
-#### https的强制转换
+#### https的强制转换（自shihuang/lede@87e3eb15569a8a52af806baa5fa420ed9f85fb3b起已解决）
 - 路由器内所有http被指向https这个功能可能导致使用某些服务出现异常，例如aria2的rpc通信。
 
 自shihuang/lede@87e3eb15569a8a52af806baa5fa420ed9f85fb3b起，取消了强制https转换，之前升级上来的可能依然是https访问，
@@ -56,7 +56,7 @@
 
 你也可以通过清除配置重新刷固件重置全部数据解决此问题（通常浏览器也需要清除缓存）。
 
-#### aria2速度问题和transmission使用
+#### aria2速度问题和transmission使用（自90bd7f0e33202ad74483f421087c91b45f87d7d5起，因核心移除编译，已解决）
 - 目前aria2和transmission仅在网件R7800提供进行测试，自90bd7f0e33202ad74483f421087c91b45f87d7d5暂时移除了，
 可在计算机上使用迅雷等工具下载。
 
