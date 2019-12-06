@@ -1,5 +1,6 @@
 # CI type:shell
 # https://github.com/coolsnowwolf/lede
+# CI ref:https://github.com/coolsnowwolf/lede/blob/master/.github/workflows/openwrt-ci.yml
 # base
 # ubuntu 16.04 x64 
 # sudo apt-get update 
@@ -7,7 +8,9 @@
 # bzip2 gawk gettext git libncurses5-dev libz-dev patch 
 # unzip zlib1g-dev lib32gcc1 libc6-dev-i386 subversion 
 # flex uglifyjs git-core gcc-multilib p7zip p7zip-full 
-# msmtp libssl-dev texinfo libglib2.0-dev
+# msmtp libssl-dev texinfo libglib2.0-dev xmlto qemu-utils 
+# upx libelf-dev autoconf automake libtool autopoint 
+# device-tree-compiler
 #
 # git clone url
 # /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild
@@ -32,7 +35,7 @@ job_base:
     # update code
     - cd /home/gitlab-runner/lede
     - git pull
-    # remove feeds and tmp
+    ## remove feeds and tmp
     #- cd /home/gitlab-runner/lede
     #- rm -rf ./tmp
     #- rm -rf ./feeds
@@ -51,32 +54,7 @@ job_ac58u:
     echo 'Custom configure file'
     #
     # ========================固件定制部分========================
-    # 
-    # 
-    # 如果不对本区块做出任何编辑, 则生成默认配置固件. 
-    # 
-    # 以下为定制化固件选项和说明:
     #
-    #
-    # 有些插件/选项是默认开启的, 如果想要关闭, 请参照以下示例进行编写:
-    # 
-    #          =========================================
-    #         |  # 取消编译VMware镜像:                   |
-    #         |  cat >> .config <<EOF                   |
-    #         |  # CONFIG_VMDK_IMAGES is not set        |
-    #         |  EOF                                    |
-    #          =========================================
-    #
-    # 
-    # 以下是一些提前准备好的一些插件选项.
-    # 直接取消注释相应代码块即可应用. 不要取消注释代码块上的汉字说明.
-    # 如果不需要代码块里的某一项配置, 只需要删除相应行.
-    #
-    # 如果需要其他插件, 请按照示例自行添加.
-    # 注意, 只需添加依赖链顶端的包. 如果你需要插件 A, 同时 A 依赖 B, 即只需要添加 A.
-    # 
-    # 无论你想要对固件进行怎样的定制, 都需要且只需要修改 EOF 回环内的内容.
-    # 
     # 编译ac58u固件:
     cat >> .config <<EOF
     CONFIG_TARGET_ipq40xx=y
@@ -88,7 +66,6 @@ job_ac58u:
     CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks=y
     CONFIG_PACKAGE_luci-app-guest-wifi=y
     CONFIG_PACKAGE_luci-i18n-guest-wifi-zh-cn=y
-    CONFIG_PACKAGE_pptpd=y
     EOF
     # LuCI主题:
     cat >> .config <<EOF
@@ -154,31 +131,6 @@ job_acrh17:
     #
     # ========================固件定制部分========================
     # 
-    # 
-    # 如果不对本区块做出任何编辑, 则生成默认配置固件. 
-    # 
-    # 以下为定制化固件选项和说明:
-    #
-    #
-    # 有些插件/选项是默认开启的, 如果想要关闭, 请参照以下示例进行编写:
-    # 
-    #          =========================================
-    #         |  # 取消编译VMware镜像:                   |
-    #         |  cat >> .config <<EOF                   |
-    #         |  # CONFIG_VMDK_IMAGES is not set        |
-    #         |  EOF                                    |
-    #          =========================================
-    #
-    # 
-    # 以下是一些提前准备好的一些插件选项.
-    # 直接取消注释相应代码块即可应用. 不要取消注释代码块上的汉字说明.
-    # 如果不需要代码块里的某一项配置, 只需要删除相应行.
-    #
-    # 如果需要其他插件, 请按照示例自行添加.
-    # 注意, 只需添加依赖链顶端的包. 如果你需要插件 A, 同时 A 依赖 B, 即只需要添加 A.
-    # 
-    # 无论你想要对固件进行怎样的定制, 都需要且只需要修改 EOF 回环内的内容.
-    # 
     # 编译acrh17固件:
     cat >> .config <<EOF
     CONFIG_TARGET_ipq40xx=y
@@ -190,7 +142,6 @@ job_acrh17:
     CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks=y
     CONFIG_PACKAGE_luci-app-guest-wifi=y
     CONFIG_PACKAGE_luci-i18n-guest-wifi-zh-cn=y
-    CONFIG_PACKAGE_pptpd=y
     EOF
     # LuCI主题:
     cat >> .config <<EOF
@@ -255,31 +206,6 @@ job_r7800:
     echo 'Custom configure file'
     #
     # ========================固件定制部分========================
-    # 
-    # 
-    # 如果不对本区块做出任何编辑, 则生成默认配置固件. 
-    # 
-    # 以下为定制化固件选项和说明:
-    #
-    #
-    # 有些插件/选项是默认开启的, 如果想要关闭, 请参照以下示例进行编写:
-    # 
-    #          =========================================
-    #         |  # 取消编译VMware镜像:                   |
-    #         |  cat >> .config <<EOF                   |
-    #         |  # CONFIG_VMDK_IMAGES is not set        |
-    #         |  EOF                                    |
-    #          =========================================
-    #
-    # 
-    # 以下是一些提前准备好的一些插件选项.
-    # 直接取消注释相应代码块即可应用. 不要取消注释代码块上的汉字说明.
-    # 如果不需要代码块里的某一项配置, 只需要删除相应行.
-    #
-    # 如果需要其他插件, 请按照示例自行添加.
-    # 注意, 只需添加依赖链顶端的包. 如果你需要插件 A, 同时 A 依赖 B, 即只需要添加 A.
-    # 
-    # 无论你想要对固件进行怎样的定制, 都需要且只需要修改 EOF 回环内的内容.
     # 
     # 编译r7800固件:
     cat >> .config <<EOF
@@ -356,31 +282,6 @@ job_k3:
     echo 'Custom configure file'
     #
     # ========================固件定制部分========================
-    # 
-    # 
-    # 如果不对本区块做出任何编辑, 则生成默认配置固件. 
-    # 
-    # 以下为定制化固件选项和说明:
-    #
-    #
-    # 有些插件/选项是默认开启的, 如果想要关闭, 请参照以下示例进行编写:
-    # 
-    #          =========================================
-    #         |  # 取消编译VMware镜像:                   |
-    #         |  cat >> .config <<EOF                   |
-    #         |  # CONFIG_VMDK_IMAGES is not set        |
-    #         |  EOF                                    |
-    #          =========================================
-    #
-    # 
-    # 以下是一些提前准备好的一些插件选项.
-    # 直接取消注释相应代码块即可应用. 不要取消注释代码块上的汉字说明.
-    # 如果不需要代码块里的某一项配置, 只需要删除相应行.
-    #
-    # 如果需要其他插件, 请按照示例自行添加.
-    # 注意, 只需添加依赖链顶端的包. 如果你需要插件 A, 同时 A 依赖 B, 即只需要添加 A.
-    # 
-    # 无论你想要对固件进行怎样的定制, 都需要且只需要修改 EOF 回环内的内容.
     # 
     # 编译k3固件:
     cat >> .config <<EOF
