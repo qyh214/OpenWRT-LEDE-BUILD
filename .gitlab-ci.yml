@@ -42,10 +42,10 @@ job_base:
     #- cd /home/gitlab-runner/lede
     #- rm -rf ./tmp
     #- rm -rf ./feeds
-    ### 如果卡下载应该清除一下dl目录即可
+    ### 如果卡下载应该清除一下dl目录
     ## remove dl
-    - cd /home/gitlab-runner/lede
-    - rm -rf ./dl
+    #- cd /home/gitlab-runner/lede
+    #- rm -rf ./dl
     - ./scripts/feeds update -a
     - ./scripts/feeds install -a
     
