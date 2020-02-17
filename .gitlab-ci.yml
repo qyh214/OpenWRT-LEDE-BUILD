@@ -14,6 +14,9 @@
 #
 # git clone url
 # /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild
+#
+# 本CI目前暂时仅用于本服务器上自用，如需个性化使用，建议使用github的action功能！
+#
 
 stages:
   - base
@@ -92,12 +95,16 @@ job_ac58u:
     # ========================固件定制部分结束========================
     # 
     
-    echo 'Compile firmware'
+    echo 'Compile configure file'
     # 对比配置文件：
     cd /home/gitlab-runner/lede
     sed -i 's/^[ \t]*//g' ./.config
     make defconfig
     #- export FORCE_UNSAFE_CONFIGURE=1 && make -j4 V=s
+    
+    echo 'Make download'
+    make download -j1
+    echo 'Compile firmware'
     make -j1
     
     echo 'Assemble artifact'
@@ -168,12 +175,16 @@ job_acrh17:
     # ========================固件定制部分结束========================
     # 
     
-    echo 'Compile firmware'
+    echo 'Compile configure file'
     # 对比配置文件：
     cd /home/gitlab-runner/lede
     sed -i 's/^[ \t]*//g' ./.config
     make defconfig
     #- export FORCE_UNSAFE_CONFIGURE=1 && make -j4 V=s
+    
+    echo 'Make download'
+    make download -j1
+    echo 'Compile firmware'
     make -j1
     
     echo 'Assemble artifact'
@@ -244,12 +255,16 @@ job_r7800:
     # ========================固件定制部分结束========================
     # 
     
-    echo 'Compile firmware'
+    echo 'Compile configure file'
     # 对比配置文件：
     cd /home/gitlab-runner/lede
     sed -i 's/^[ \t]*//g' ./.config
     make defconfig
     #- export FORCE_UNSAFE_CONFIGURE=1 && make -j4 V=s
+    
+    echo 'Make download'
+    make download -j1
+    echo 'Compile firmware'
     make -j1
     
     echo 'Assemble artifact'
@@ -325,12 +340,16 @@ job_k3:
     # ========================固件定制部分结束========================
     # 
     
-    echo 'Compile firmware'
+    echo 'Compile configure file'
     # 对比配置文件：
     cd /home/gitlab-runner/lede
     sed -i 's/^[ \t]*//g' ./.config
     make defconfig
     #- export FORCE_UNSAFE_CONFIGURE=1 && make -j4 V=s
+    
+    echo 'Make download'
+    make download -j1
+    echo 'Compile firmware'
     make -j1
     
     echo 'Assemble artifact'
