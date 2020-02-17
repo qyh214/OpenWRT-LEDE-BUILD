@@ -42,6 +42,9 @@ job_base:
     #- cd /home/gitlab-runner/lede
     #- rm -rf ./tmp
     #- rm -rf ./feeds
+    ## remove dl
+    - cd /home/gitlab-runner/lede
+    - rm -rf ./dl
     - ./scripts/feeds update -a
     - ./scripts/feeds install -a
     
