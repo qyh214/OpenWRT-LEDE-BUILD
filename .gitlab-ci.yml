@@ -95,7 +95,7 @@ job_ac58u:
     # ========================固件定制部分结束========================
     # 
     
-    echo 'Compile configure file'
+    echo 'Generate configuration file'
     # 对比配置文件：
     cd /home/gitlab-runner/lede
     sed -i 's/^[ \t]*//g' ./.config
@@ -175,7 +175,7 @@ job_acrh17:
     # ========================固件定制部分结束========================
     # 
     
-    echo 'Compile configure file'
+    echo 'Generate configuration file'
     # 对比配置文件：
     cd /home/gitlab-runner/lede
     sed -i 's/^[ \t]*//g' ./.config
@@ -255,7 +255,7 @@ job_r7800:
     # ========================固件定制部分结束========================
     # 
     
-    echo 'Compile configure file'
+    echo 'Generate configuration file'
     # 对比配置文件：
     cd /home/gitlab-runner/lede
     sed -i 's/^[ \t]*//g' ./.config
@@ -340,7 +340,7 @@ job_k3:
     # ========================固件定制部分结束========================
     # 
     
-    echo 'Compile configure file'
+    echo 'Generate configuration file'
     # 对比配置文件：
     cd /home/gitlab-runner/lede
     sed -i 's/^[ \t]*//g' ./.config
