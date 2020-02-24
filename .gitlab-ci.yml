@@ -39,14 +39,13 @@ job_base:
     # update code
     - cd /home/gitlab-runner/lede
     - git pull
-    ## remove feeds and tmp
-    - cd /home/gitlab-runner/lede
-    - rm -rf ./tmp
-    - rm -rf ./feeds
-    ### 如果卡下载应该清除一下dl目录
-    ## remove dl
-    - cd /home/gitlab-runner/lede
-    - rm -rf ./dl
+    ## 遇到下载卡住或前端卡住问题，可尝试仅清除tmp、feeds重新拉取
+    ## 需要设置全局酸酸乳
+    ## remove feeds dl tmp
+    #- cd /home/gitlab-runner/lede
+    #- rm -rf ./tmp
+    #- rm -rf ./feeds
+    #- rm -rf ./dl
     - ./scripts/feeds update -a
     - ./scripts/feeds install -a
     
@@ -112,7 +111,7 @@ job_ac58u:
     #make clean
     
     echo 'Make download'
-    make download -j1 V=s
+    make download -j1
     echo 'Compile firmware'
     make -j1
     
