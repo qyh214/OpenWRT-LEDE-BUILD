@@ -44,9 +44,9 @@ job_base:
     #- rm -rf ./tmp
     #- rm -rf ./feeds
     ### 如果卡下载应该清除一下dl目录
-    ## remove dl
-    #- cd /home/gitlab-runner/lede
-    #- rm -rf ./dl
+    # remove dl
+    - cd /home/gitlab-runner/lede
+    - rm -rf ./dl
     - ./scripts/feeds update -a
     - ./scripts/feeds install -a
     
@@ -112,7 +112,7 @@ job_ac58u:
     #make clean
     
     echo 'Make download'
-    make download -j1
+    make download -j1 V=s
     echo 'Compile firmware'
     make -j1
     
