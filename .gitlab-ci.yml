@@ -48,10 +48,10 @@ job_base:
     ## 遇到下载卡住或前端卡住问题，可尝试仅清除tmp、feeds重新拉取
     ## 需要服务器端设置全局酸酸乳
     # remove feeds dl tmp
-    - cd /home/gitlab-runner/lede
+    #- cd /home/gitlab-runner/lede
     #- rm -rf ./tmp
     #- rm -rf ./feeds
-    - rm -rf ./dl
+    #- rm -rf ./dl
     ## extra package&git
     # 第二次编译开始请注释掉以下内容
     #- cd /home/gitlab-runner/lede/package
@@ -66,7 +66,7 @@ job_base:
     #- cd /home/gitlab-runner/lede/package/luci-theme-rosy
     #- git pull
     ## 下游分支仓库请尽量不更改base
-    - cd /home/gitlab-runner/lede
+    #- cd /home/gitlab-runner/lede
     - ./scripts/feeds update -a
     - ./scripts/feeds install -a
     
