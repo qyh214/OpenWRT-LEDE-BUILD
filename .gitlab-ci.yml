@@ -87,7 +87,6 @@ job_base:
     - ./scripts/feeds update -a
     - ./scripts/feeds install -a
     ## Make clean
-    - echo 'Make clean'
     - make clean
     
 job_ac58u:
