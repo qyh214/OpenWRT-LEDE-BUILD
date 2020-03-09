@@ -133,8 +133,8 @@ job_ac58u:
     make defconfig
     #- export FORCE_UNSAFE_CONFIGURE=1 && make -j4 V=s
     
-    #echo 'Make clean'
-    #make clean
+    echo 'Make clean'
+    make clean
     
     echo 'Make download'
     make download -j1
@@ -221,6 +221,9 @@ job_acrh17:
     sed -i 's/^[ \t]*//g' ./.config
     make defconfig
     #- export FORCE_UNSAFE_CONFIGURE=1 && make -j4 V=s
+    
+    echo 'Make clean'
+    make clean
     
     echo 'Make download'
     make download -j1
@@ -310,6 +313,9 @@ job_r7800:
     sed -i 's/^[ \t]*//g' ./.config
     make defconfig
     #- export FORCE_UNSAFE_CONFIGURE=1 && make -j4 V=s
+    
+    echo 'Make clean'
+    make clean
     
     echo 'Make download'
     make download -j1
@@ -401,6 +407,9 @@ job_k3:
     sed -i 's/^[ \t]*//g' ./.config
     make defconfig
     #- export FORCE_UNSAFE_CONFIGURE=1 && make -j4 V=s
+    
+    echo 'Make clean'
+    make clean
     
     echo 'Make download'
     make download -j1
