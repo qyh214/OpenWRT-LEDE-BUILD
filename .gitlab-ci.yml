@@ -15,11 +15,26 @@
 # git clone url
 # /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild
 #
-# 所有调用本程序CI将对相同的仓库进行操作或改动，请勿随意注释/删除原已有文件夹，
-# 例如tmp、dl或整个仓库lede，如出现编译出错、下载困难，请提交issue
+# 贡献者、本仓库使用者注意：
+# 原则上，本程序仅用于自行使用，如你fork本项目并在本网站上通过CI编译，将会共享原
+# lede仓库，并非纯净的docker模式，建议使用github的action功能，实施纯净编译。
 #
-# 个人自定义化额外操作可参考：
-# wendy03/routerbuild
+# 如果你要借助在gitlab本地进行编译，请遵守以下约定：
+# 请勿修改job_base内容，即不要随意启用任何的mkdir、rm操作
+# 需要额外请求github操作应当发issue、pr给本上游仓库
+# 你只能个性化job_机型里的固件定制部分至固件定制部分结束的内容
+# 
+# 所有的/home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin/需要改为
+# /home/gitlab-runner/builds/b5d89257/0/你的用户名/routerbuild/bin/
+#
+# 禁止在任何阶段对lede仓库做rm、mkdir等操作，如有需要请pr、issue
+#
+# 并且我们鼓励使用比较纯净的github action功能，具体应用范例可见：
+# https://github.com/ClayMoreBoy/lede/actions
+# 有关文档https://github.com/coolsnowwolf/lede/pull/2198
+# lede仓库已包含对github action的支持以及示例代码
+#
+# 使用本地仓库的可参考：wendy03/routerbuild
 #
 
 stages:
