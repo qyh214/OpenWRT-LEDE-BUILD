@@ -25,8 +25,8 @@
 # 需要额外请求github操作应当发issue、pr给本上游仓库；
 # 你只能个性化job_机型里的“固件定制部分至固件定制部分结束”的内容；
 # 
-# 所有的/home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin/改为
-# /home/gitlab-runner/builds/b5d89257/0/你的用户名/routerbuild/bin/
+# 所有的/home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin/中的shihuang
+# 改为你的用户名，例如/home/gitlab-runner/builds/b5d89257/0/zhangsan/routerbuild/bin/
 #
 # 再次重申：
 # 禁止在任何阶段对lede仓库做rm、mkdir等操作，如有需要请pr、issue
@@ -49,14 +49,13 @@ stages:
   - acrh17
   - r7800
   - k3
-  - test
 
 job_base:
   stage: base
   tags: 
   - shell
   script:
-    ## 下游分支仓库不得修改base，如有需要发起pr、issue
+    ## 下游分支仓库不得修改base，如有需要请发起pr、issue
     ## clean build
     #- cd /home/gitlab-runner/
     #- rm -R lede
@@ -443,31 +442,5 @@ job_k3:
     #expire_in: 2 weeks
     paths:
       - /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin
-  # disable artifact passing
-  dependencies: []
-
-job_test:
-  stage: test
-  tags: 
-  - shell
-  script:
-    # test file status
-    ## ipq40xx
-    - cd /home/gitlab-runner/lede/bin/targets/ipq40xx/generic
-    ### asus_rt-ac58u
-    - stat openwrt-ipq40xx-asus_rt-ac58u-initramfs-factory.trx
-    - stat openwrt-ipq40xx-asus_rt-ac58u-squashfs-sysupgrade.bin
-    ### asus_rt-acrh17
-    - stat openwrt-ipq40xx-asus_rt-acrh17-initramfs-factory.trx
-    - stat openwrt-ipq40xx-asus_rt-acrh17-squashfs-sysupgrade.bin
-    ## ipq806x
-    - cd /home/gitlab-runner/lede/bin/targets/ipq806x/generic
-    ### netgear_r7800
-    - stat openwrt-ipq806x-netgear_r7800-squashfs-factory.img
-    - stat openwrt-ipq806x-netgear_r7800-squashfs-sysupgrade.bin
-    ## bcm53xx
-    - cd /home/gitlab-runner/lede/bin/targets/bcm53xx/generic
-    ### phicomm_k3
-    - stat openwrt-bcm53xx-phicomm-k3-squashfs.trx
   # disable artifact passing
   dependencies: []
