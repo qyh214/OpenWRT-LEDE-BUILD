@@ -86,7 +86,7 @@ job_base:
     #- cd /home/gitlab-runner/lede
     - ./scripts/feeds update -a
     - ./scripts/feeds install -a
-    ## Make clean
+    # Make clean
     - make clean
     
 job_ac58u:
@@ -150,6 +150,9 @@ job_ac58u:
     cd /home/gitlab-runner/lede
     sed -i 's/^[ \t]*//g' ./.config
     make defconfig
+    
+    echo 'Make Clean'
+    make clean
     
     echo 'Make download'
     make download -j1
@@ -236,6 +239,9 @@ job_acrh17:
     cd /home/gitlab-runner/lede
     sed -i 's/^[ \t]*//g' ./.config
     make defconfig
+    
+    echo 'Make Clean'
+    make clean
 
     echo 'Make download'
     make download -j1
@@ -321,6 +327,9 @@ job_r7800:
     cd /home/gitlab-runner/lede
     sed -i 's/^[ \t]*//g' ./.config
     make defconfig
+    
+    echo 'Make Clean'
+    make clean
     
     echo 'Make download'
     make download -j1
@@ -411,6 +420,9 @@ job_k3:
     cd /home/gitlab-runner/lede
     sed -i 's/^[ \t]*//g' ./.config
     make defconfig
+    
+    echo 'Make Clean'
+    make clean
     
     echo 'Make download'
     make download -j1
