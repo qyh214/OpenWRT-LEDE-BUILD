@@ -75,11 +75,9 @@ job_base:
     #- rm -rf ./openwrt-packages
     # 主题git
     #- git clone https://github.com/openwrt-develop/luci-theme-atmaterial.git
-    # 请求更新
     #- cd /home/gitlab-runner/lede/package/luci-theme-atmaterial
     #- git pull
     #- git clone https://github.com/rosywrt/luci-theme-rosy.git
-    # 请求更新
     #- cd /home/gitlab-runner/lede/package/luci-theme-rosy
     #- git pull
     #- cd /home/gitlab-runner/lede
