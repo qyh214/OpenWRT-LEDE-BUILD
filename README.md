@@ -12,9 +12,9 @@
 ### 编译状态
 [![pipeline status](http://dev.qyh.name:800/shihuang/routerbuild/badges/master/pipeline.svg)](http://dev.qyh.name:800/shihuang/routerbuild/commits/master)
 
-仅编译网件r7800、华硕rt-ac58u、rt-acrh17、斐讯k3的路由器固件，原则上不接受个性化定制。
+仅编译网件r7800、华硕rt-ac58u、rt-acrh17、斐讯k3的路由器固件，原则上不接受个性化定制，下游仓库若需使用共享的CI定制化必须遵守相关约定，否则请使用独立的CI。
 
-编译的固件永久保存以供挑选使用。
+编译的固件最多保存6个月，如有需要请自行备份历次固件。
 
 ### 更新建议
 重大版本或重大改动时，建议不保留配置全新更新。
@@ -70,6 +70,8 @@ aria2的bt速度问题可通过添加trackerslist解决，具体可查看[这里
 ### 固件特殊命令
 #### R7800
 修改cpu调节器（仅限openwrt18.x，自shihuang/lede@96ff77261f98b861374011ff149df02a46abd046固件已包含此更新，无需再次操作）：
+
+现在包含cpu调节器，你可以任意超频等操作。
 
 https://forum.openwrt.org/t/r7800-performance/15780/ 
 

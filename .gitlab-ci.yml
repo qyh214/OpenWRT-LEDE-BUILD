@@ -169,7 +169,7 @@ job_ac58u:
     rm .gitignore
   artifacts:
     name: "`date   +%Y%m%d`-$CI_JOB_ID-openwrt-router-ac58u"
-    #expire_in: 2 weeks
+    expire_in: 6 months
     paths:
       - /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin
   # disable artifact passing
@@ -257,7 +257,7 @@ job_acrh17:
     rm .gitignore
   artifacts:
     name: "`date   +%Y%m%d`-$CI_JOB_ID-openwrt-router-acrh17"
-    #expire_in: 2 weeks
+    expire_in: 6 months
     paths:
       - /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin
   # disable artifact passing
@@ -345,7 +345,7 @@ job_r7800:
     rm .gitignore
   artifacts:
     name: "`date   +%Y%m%d`-$CI_JOB_ID-openwrt-router-r7800"
-    #expire_in: 2 weeks
+    expire_in: 6 months
     paths:
       - /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin
   # disable artifact passing
@@ -437,7 +437,7 @@ job_k3:
     rm .gitignore
   artifacts:
     name: "`date   +%Y%m%d`-$CI_JOB_ID-openwrt-router-k3"
-    #expire_in: 2 weeks
+    expire_in: 6 months
     paths:
       - /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin
   # disable artifact passing
