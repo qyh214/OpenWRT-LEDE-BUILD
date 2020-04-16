@@ -81,6 +81,7 @@ job_base:
     #- cd /home/gitlab-runner/lede/package/luci-theme-rosy
     #- git pull
     #- cd /home/gitlab-runner/lede
+    - sed -i 's/\"#src-git\"/\"src-git\"/g' ./feeds.conf.default
     - ./scripts/feeds update -a
     - ./scripts/feeds install -a
     # Make clean
