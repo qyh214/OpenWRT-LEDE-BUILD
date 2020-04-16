@@ -63,6 +63,7 @@ job_base:
     # update code
     - cd /home/gitlab-runner/lede
     - git pull
+    - rm -rf ./tmp
     # remove feeds dl tmp
     #- cd /home/gitlab-runner/lede
     #- rm -rf ./tmp
@@ -82,6 +83,7 @@ job_base:
     #- git pull
     #- cd /home/gitlab-runner/lede
     - sed -i 's/\"#src-git\"/\"src-git\"/g' ./feeds.conf.default
+    - ./scripts/feeds clean
     - ./scripts/feeds update -a
     - ./scripts/feeds install -a
     # Make clean
