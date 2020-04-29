@@ -68,7 +68,7 @@ job_base:
     #- cd /home/gitlab-runner/lede
     - rm -rf ./tmp
     - rm -rf ./feeds
-    #- rm -rf ./dl
+    - rm -rf ./dl
     ## extra package&git
     # 第二次编译开始请注释掉以下内容
     #- cd /home/gitlab-runner/lede/package
