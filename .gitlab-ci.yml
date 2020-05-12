@@ -178,10 +178,9 @@ job_r7800:
     ## remove git file
     cd /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin
     rm .gitignore
-    rm -f cowtransfer.log
-    rm -f transfer
     # 上传到奶牛快传
     echo 'Upload Firmware To CowTransfer'
+    cd /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/transfer
     curl -fsSL git.io/file-transfer | sh
     ./transfer cow --block 2621440 -s -p 99 -t 3 --hash --no-progress /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin 2>&1 | tee cowtransfer.log
     #- echo "::warning file=cowtransfer.com::$(cat cowtransfer.log | grep https)"
@@ -189,10 +188,6 @@ job_r7800:
     #- echo $COWTRANSFER_URL
     export COWTRANSFER_URL=$(cat cowtransfer.log | grep https | cut -f3 -d" ")
     echo $COWTRANSFER_URL
-    # remove log
-    echo 'Remove Log and transfer'
-    rm cowtransfer.log
-    rm transfer
     # 发布release
     echo 'Release R7800'
     curl --header 'Content-Type: application/json' --header "PRIVATE-TOKEN: $user_token" --data '{ "name": "'"`date   +%Y%m%d`"'-R7800-'"$CI_JOB_ID"'-snapshot", "tag_name": "CI-'"$CI_JOB_ID"'", "ref": "'"$CI_COMMIT_BRANCH"'", "description": "[路由器固件外链下载：Cowtransfer奶牛快传]('"$COWTRANSFER_URL"')"}' --request POST http://dev.qyh.name:800/api/v4/projects/41/releases
@@ -293,10 +288,9 @@ job_ac58u:
     ## remove git file
     cd /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin
     rm .gitignore
-    rm -f cowtransfer.log
-    rm -f transfer
     # 上传到奶牛快传
     echo 'Upload Firmware To CowTransfer'
+    cd /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/transfer
     curl -fsSL git.io/file-transfer | sh
     ./transfer cow --block 2621440 -s -p 99 -t 3 --hash --no-progress /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin 2>&1 | tee cowtransfer.log
     #- echo "::warning file=cowtransfer.com::$(cat cowtransfer.log | grep https)"
@@ -304,10 +298,6 @@ job_ac58u:
     #- echo $COWTRANSFER_URL
     export COWTRANSFER_URL=$(cat cowtransfer.log | grep https | cut -f3 -d" ")
     echo $COWTRANSFER_URL
-    # remove log
-    echo 'Remove Log and transfer'
-    rm cowtransfer.log
-    rm transfer
     # 发布release
     echo 'Release AC58U'
     curl --header 'Content-Type: application/json' --header "PRIVATE-TOKEN: $user_token" --data '{ "name": "'"`date   +%Y%m%d`"'-AC58U-'"$CI_JOB_ID"'-snapshot", "tag_name": "CI-'"$CI_JOB_ID"'", "ref": "'"$CI_COMMIT_BRANCH"'", "description": "[路由器固件外链下载：Cowtransfer奶牛快传]('"$COWTRANSFER_URL"')"}' --request POST http://dev.qyh.name:800/api/v4/projects/41/releases
@@ -404,10 +394,9 @@ job_acrh17:
     ## remove git file
     cd /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin
     rm .gitignore
-    rm -f cowtransfer.log
-    rm -f transfer
     # 上传到奶牛快传
     echo 'Upload Firmware To CowTransfer'
+    cd /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/transfer
     curl -fsSL git.io/file-transfer | sh
     ./transfer cow --block 2621440 -s -p 99 -t 3 --hash --no-progress /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin 2>&1 | tee cowtransfer.log
     #- echo "::warning file=cowtransfer.com::$(cat cowtransfer.log | grep https)"
@@ -415,10 +404,6 @@ job_acrh17:
     #- echo $COWTRANSFER_URL
     export COWTRANSFER_URL=$(cat cowtransfer.log | grep https | cut -f3 -d" ")
     echo $COWTRANSFER_URL
-    # remove log
-    echo 'Remove Log and transfer'
-    rm cowtransfer.log
-    rm transfer
     # 发布release
     echo 'Release ACRH17'
     curl --header 'Content-Type: application/json' --header "PRIVATE-TOKEN: $user_token" --data '{ "name": "'"`date   +%Y%m%d`"'-ACRH17-'"$CI_JOB_ID"'-snapshot", "tag_name": "CI-'"$CI_JOB_ID"'", "ref": "'"$CI_COMMIT_BRANCH"'", "description": "[路由器固件外链下载：Cowtransfer奶牛快传]('"$COWTRANSFER_URL"')"}' --request POST http://dev.qyh.name:800/api/v4/projects/41/releases
@@ -519,10 +504,9 @@ job_k3:
     ## remove git file
     cd /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin
     rm .gitignore
-    rm -f cowtransfer.log
-    rm -f transfer
     # 上传到奶牛快传
     echo 'Upload Firmware To CowTransfer'
+    cd /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/transfer
     curl -fsSL git.io/file-transfer | sh
     ./transfer cow --block 2621440 -s -p 99 -t 3 --hash --no-progress /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin 2>&1 | tee cowtransfer.log
     #- echo "::warning file=cowtransfer.com::$(cat cowtransfer.log | grep https)"
@@ -530,10 +514,6 @@ job_k3:
     #- echo $COWTRANSFER_URL
     export COWTRANSFER_URL=$(cat cowtransfer.log | grep https | cut -f3 -d" ")
     echo $COWTRANSFER_URL
-    # remove log
-    echo 'Remove Log and transfer'
-    rm cowtransfer.log
-    rm transfer
     # 发布release
     echo 'Release K3'
     curl --header 'Content-Type: application/json' --header "PRIVATE-TOKEN: $user_token" --data '{ "name": "'"`date   +%Y%m%d`"'-K3-'"$CI_JOB_ID"'-snapshot", "tag_name": "CI-'"$CI_JOB_ID"'", "ref": "'"$CI_COMMIT_BRANCH"'", "description": "[路由器固件外链下载：Cowtransfer奶牛快传]('"$COWTRANSFER_URL"')"}' --request POST http://dev.qyh.name:800/api/v4/projects/41/releases
