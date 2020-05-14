@@ -182,7 +182,7 @@ job_r7800:
     echo 'Upload Firmware To CowTransfer'
     cd /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/transfer
     curl -fsSL git.io/file-transfer | sh
-    ./transfer cow --block 2621440 -s -p 99 -t 3 --hash --no-progress /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin 2>&1 | tee cowtransfer.log
+    ./transfer cow --block 2621440 -s -p 99 -t 15 --hash --no-progress /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin 2>&1 | tee cowtransfer.log
     #- echo "::warning file=cowtransfer.com::$(cat cowtransfer.log | grep https)"
     #- echo "::set-env name=COWTRANSFER_URL::$(cat cowtransfer.log | grep https | cut -f3 -d" ")"
     #- echo $COWTRANSFER_URL
@@ -292,7 +292,7 @@ job_ac58u:
     echo 'Upload Firmware To CowTransfer'
     cd /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/transfer
     curl -fsSL git.io/file-transfer | sh
-    ./transfer cow --block 2621440 -s -p 99 -t 3 --hash --no-progress /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin 2>&1 | tee cowtransfer.log
+    ./transfer cow --block 2621440 -s -p 99 -t 15 --hash --no-progress /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin 2>&1 | tee cowtransfer.log
     #- echo "::warning file=cowtransfer.com::$(cat cowtransfer.log | grep https)"
     #- echo "::set-env name=COWTRANSFER_URL::$(cat cowtransfer.log | grep https | cut -f3 -d" ")"
     #- echo $COWTRANSFER_URL
@@ -398,7 +398,7 @@ job_acrh17:
     echo 'Upload Firmware To CowTransfer'
     cd /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/transfer
     curl -fsSL git.io/file-transfer | sh
-    ./transfer cow --block 2621440 -s -p 99 -t 3 --hash --no-progress /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin 2>&1 | tee cowtransfer.log
+    ./transfer cow --block 2621440 -s -p 99 -t 15 --hash --no-progress /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin 2>&1 | tee cowtransfer.log
     #- echo "::warning file=cowtransfer.com::$(cat cowtransfer.log | grep https)"
     #- echo "::set-env name=COWTRANSFER_URL::$(cat cowtransfer.log | grep https | cut -f3 -d" ")"
     #- echo $COWTRANSFER_URL
@@ -508,7 +508,7 @@ job_k3:
     echo 'Upload Firmware To CowTransfer'
     cd /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/transfer
     curl -fsSL git.io/file-transfer | sh
-    ./transfer cow --block 2621440 -s -p 99 -t 3 --hash --no-progress /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin 2>&1 | tee cowtransfer.log
+    ./transfer cow --block 2621440 -s -p 99 -t 15 --hash --no-progress /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin 2>&1 | tee cowtransfer.log
     #- echo "::warning file=cowtransfer.com::$(cat cowtransfer.log | grep https)"
     #- echo "::set-env name=COWTRANSFER_URL::$(cat cowtransfer.log | grep https | cut -f3 -d" ")"
     #- echo $COWTRANSFER_URL
