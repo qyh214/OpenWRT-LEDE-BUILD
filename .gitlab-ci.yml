@@ -114,12 +114,15 @@ job_r7800:
     CONFIG_TARGET_ipq806x=y
     CONFIG_TARGET_ipq806x_DEVICE_netgear_r7800=y
     EOF
-    # 常用LuCI插件选择:
+    # 常用LuCI插件和额外包选择:
     cat >> .config <<EOF
+    CONFIG_PACKAGE_automount=y
+    CONFIG_PACKAGE_autosamba=y
     CONFIG_PACKAGE_luci-app-ssr-plus=y
     CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks=y
-    CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_V2ray_plugin=y
     CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_V2ray=y
+    CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_ShadowsocksR_Server=y
+    CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_ShadowsocksR_Socks=y
     CONFIG_PACKAGE_luci-app-guest-wifi=y
     CONFIG_PACKAGE_luci-i18n-guest-wifi-zh-cn=y
     EOF
@@ -133,21 +136,8 @@ job_r7800:
     cat >> .config <<EOF
     # CONFIG_PACKAGE_luci-app-accesscontrol is not set
     # CONFIG_PACKAGE_luci-app-ddns is not set
-    # CONFIG_PACKAGE_luci-app-ipsec-vpnd is not set
-    # CONFIG_PACKAGE_luci-app-pptp-server is not set
-    # CONFIG_PACKAGE_luci-app-qbittorrent is not set
-    # CONFIG_PACKAGE_luci-app-unblockmusic is not set
-    # CONFIG_PACKAGE_luci-app-unblockneteasemusic-mini is not set
     # CONFIG_PACKAGE_luci-app-vlmcsd is not set
     # CONFIG_PACKAGE_luci-app-wol is not set
-    # CONFIG_PACKAGE_luci-app-xlnetacc is not set
-    # CONFIG_PACKAGE_luci-app-zerotier is not set
-    # CONFIG_PACKAGE_luci-app-shadowsocks-libev is not set
-    # CONFIG_PACKAGE_luci-app-v2ray-server is not set
-    # CONFIG_UnblockNeteaseMusic_Go is not set
-    # CONFIG_UnblockNeteaseMusic_NodeJS is not set
-    # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Trojan is not set
-    # CONFIG_PACKAGE_luci-app-music-remote-center is not set
     EOF
     # 
     # ========================固件定制部分结束========================
