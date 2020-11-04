@@ -114,6 +114,17 @@ job_r7800:
     CONFIG_TARGET_ipq806x=y
     CONFIG_TARGET_ipq806x_generic_DEVICE_netgear_r7800=y
     EOF
+    # 依赖安装：
+    # 用于测试openclash：https://github.com/vernesong/OpenClash/releases
+    # arm-v7
+    cat >> .config <<EOF
+    CONFIG_PACKAGE_kmod-tun=y
+    CONFIG_PACKAGE_coreutils-nohup=y
+    CONFIG_PACKAGE_bash=y
+    CONFIG_PACKAGE_curl=y
+    CONFIG_PACKAGE_iptables-mod-extra=y
+    CONFIG_PACKAGE_libcap=y
+    EOF
     # 常用LuCI插件和额外包选择:
     cat >> .config <<EOF
     CONFIG_PACKAGE_automount=y
@@ -130,7 +141,6 @@ job_r7800:
     cat >> .config <<EOF
     CONFIG_PACKAGE_luci-theme-argon=y
     CONFIG_PACKAGE_luci-theme-bootstrap=y
-    CONFIG_PACKAGE_luci-theme-material=y
     EOF
     # 取消编译(不要删除被缩进的注释符号):
     cat >> .config <<EOF
