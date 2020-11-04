@@ -114,13 +114,6 @@ job_r7800:
     CONFIG_TARGET_ipq806x=y
     CONFIG_TARGET_ipq806x_generic_DEVICE_netgear_r7800=y
     EOF
-    # 依赖安装：
-    # 用于测试启用openclash：https://github.com/vernesong/OpenClash/releases
-    # arm-v7
-    # libcap libcap-bin coreutils-nohup bash curl iptables-mod-extra手动安装，因为不是最新核心
-    cat >> .config <<EOF
-    CONFIG_PACKAGE_kmod-tun=y
-    EOF
     # 常用LuCI插件和额外包选择:
     cat >> .config <<EOF
     CONFIG_PACKAGE_automount=y
