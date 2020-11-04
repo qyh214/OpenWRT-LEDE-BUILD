@@ -117,14 +117,9 @@ job_r7800:
     # 依赖安装：
     # 用于测试启用openclash：https://github.com/vernesong/OpenClash/releases
     # arm-v7
+    # libcap libcap-bin coreutils-nohup bash curl iptables-mod-extra手动安装，因为不是最新核心
     cat >> .config <<EOF
     CONFIG_PACKAGE_kmod-tun=y
-    CONFIG_PACKAGE_coreutils-nohup=y
-    CONFIG_PACKAGE_bash=y
-    CONFIG_PACKAGE_curl=y
-    CONFIG_PACKAGE_iptables-mod-extra=y
-    CONFIG_PACKAGE_libcap=y
-    CONFIG_PACKAGE_libcap-bin=y
     EOF
     # 常用LuCI插件和额外包选择:
     cat >> .config <<EOF
@@ -142,6 +137,7 @@ job_r7800:
     cat >> .config <<EOF
     CONFIG_PACKAGE_luci-theme-argon=y
     CONFIG_PACKAGE_luci-theme-bootstrap=y
+    CONFIG_PACKAGE_luci-theme-material=y
     EOF
     # 取消编译(不要删除被缩进的注释符号):
     cat >> .config <<EOF
