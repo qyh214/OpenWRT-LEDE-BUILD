@@ -88,7 +88,7 @@ job_base:
     #- cd /home/gitlab-runner/lede
     #- rm -rf ./tmp
     #- sed -i '11s/#src-git/src-git/g' ./feeds.conf.default
-    - sed -i '$a\src-git openclash https://github.com/vernesong/OpenClash' ./feeds.conf.default
+    #- sed -i '$a\src-git openclash https://github.com/vernesong/OpenClash' ./feeds.conf.default
     #- ./scripts/feeds clean
     - ./scripts/feeds update -a
     - ./scripts/feeds install -a
