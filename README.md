@@ -22,13 +22,13 @@
 ### 特别功能
 
 #### 不服来跑个分？cpu跑分
-使用SSH连接路由器终端，输入`/etc/coremark.sh` ，回车，稍等片刻后，访问路由器主页，概况里将显示分数，例如网件R7800的主页主机型号末尾将会显示路由器跑分` Netgear Nighthawk X4S R7800 (CpuMark : 12654.587288 Scores) ` 。
+目前大多数机型路由器已整合跑分，自动完成跑分并显示在首页。
 
 #### 隐藏功能
 如果你无法看到某个神秘功能，你需要使用SSH连接输入 `echo  0xDEADBEEF > /etc/config/google_fu_mode`，回车，稍等片刻后即可重新访问神秘功能，如果显示错误请清除配置信息后再试，设备无需重启。
 
-#### 温度监控（仅限网件R7800）
-网件r7800添加额外功能温度监控。
+#### 温度监控
+目前大多数机型路由器已整合温度监控，自动显示在首页。
 
 ### 固件下载
 #### 最新固件下载
@@ -45,7 +45,7 @@
 
 [百度网盘下载](https://pan.baidu.com/s/1J7tX4Qsu2hF_cmXrhqsogQ)(提取码：r6ds)(请注意型号，可能更新不及时)
 
-[release页面下载](http://dev.qyh.name:800/shihuang/routerbuild/-/releases)（请注意型号，链接有效期为7天）
+[release页面下载](http://dev.qyh.name:800/shihuang/routerbuild/-/releases)（请注意型号，链接有效期为1天，有下载次数限制）
 
 #### 历次固件本地下载（建议内网用户使用，外网用户可以查看百度网盘）
 [点此访问](http://dev.qyh.name:800/shihuang/routerbuild/pipelines)
