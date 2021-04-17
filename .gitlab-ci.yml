@@ -61,9 +61,9 @@ job_base:
   script:
     ## 下游分支仓库不得修改base，如有需要请发起pr、issue
     ## clean build
-    - cd /home/gitlab-runner/
-    - rm -R lede
-    - git clone https://github.com/coolsnowwolf/lede.git
+    #- cd /home/gitlab-runner/
+    #- rm -R lede
+    #- git clone https://github.com/coolsnowwolf/lede.git
     # update code
     - cd /home/gitlab-runner/lede
     - git pull
@@ -87,7 +87,7 @@ job_base:
     #- git pull
     #- cd /home/gitlab-runner/lede
     #- rm -rf ./tmp
-    - sed -i '10s/#src-git/src-git/g' ./feeds.conf.default
+    #- sed -i '10s/#src-git/src-git/g' ./feeds.conf.default
     # 添加其他源
     # openclash
     #- sed -i '$a\src-git openclash https://github.com/vernesong/OpenClash' ./feeds.conf.default
@@ -123,6 +123,9 @@ job_r7800:
     CONFIG_PACKAGE_autosamba=y
     CONFIG_PACKAGE_luci-app-guest-wifi=y
     CONFIG_PACKAGE_luci-i18n-guest-wifi-zh-cn=y
+    CONFIG_PACKAGE_luci-app-jd-dailybonus=y
+    CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_V2ray_plugin=y
+    CONFIG_PACKAGE_luci-app-uugamebooster=y
     EOF
     # LuCI主题:
     cat >> .config <<EOF
@@ -136,9 +139,6 @@ job_r7800:
     # CONFIG_PACKAGE_luci-app-ddns is not set
     # CONFIG_PACKAGE_luci-app-vlmcsd is not set
     # CONFIG_PACKAGE_luci-app-wol is not set
-    # CONFIG_PACKAGE_luci-app-unblockmusic is not set
-    # CONFIG_UnblockNeteaseMusic_Go is not set
-    # CONFIG_UnblockNeteaseMusic_NodeJS is not set
     EOF
     # 
     # ========================固件定制部分结束========================
