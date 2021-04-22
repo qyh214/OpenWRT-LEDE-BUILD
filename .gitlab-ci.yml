@@ -440,10 +440,10 @@ job_k3:
     CONFIG_PACKAGE_luci-theme-material=y
     EOF
     # k3 Extra packages：
-    cat >> .config <<EOF
-    CONFIG_PACKAGE_automount=y
-    CONFIG_PACKAGE_autosamba=y
-    EOF
+    #cat >> .config <<EOF
+    #CONFIG_PACKAGE_automount=y
+    #CONFIG_PACKAGE_autosamba=y
+    #EOF
     # 取消编译(不要删除被缩进的注释符号):
     cat >> .config <<EOF
     # CONFIG_PACKAGE_luci-app-accesscontrol is not set
