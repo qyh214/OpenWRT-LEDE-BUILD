@@ -159,7 +159,7 @@ job_r7800:
     make download -j1
     echo 'Compile firmware'
     echo -e "$(nproc) thread compile"
-    make -j$(nproc) V=s || make -j1 V=s
+    make -j$(nproc) || make -j1
     
     echo 'Assemble artifact'
     # build pass and save
