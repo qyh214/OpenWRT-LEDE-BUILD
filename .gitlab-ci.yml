@@ -210,18 +210,13 @@ job_ac58u:
     EOF
     # 常用LuCI插件选择:
     cat >> .config <<EOF
-    CONFIG_PACKAGE_automount=y
-    CONFIG_PACKAGE_autosamba=y
     CONFIG_PACKAGE_luci-app-guest-wifi=y
     CONFIG_PACKAGE_luci-i18n-guest-wifi-zh-cn=y
     CONFIG_PACKAGE_luci-app-jd-dailybonus=y
-    CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_V2ray_plugin=y
     EOF
     # LuCI主题:
     cat >> .config <<EOF
     CONFIG_PACKAGE_luci-theme-argon=y
-    CONFIG_PACKAGE_luci-theme-bootstrap=y
-    CONFIG_PACKAGE_luci-theme-material=y
     EOF
     # 取消编译(不要删除被缩进的注释符号):
     cat >> .config <<EOF
@@ -317,18 +312,13 @@ job_acrh17:
     EOF
     # 常用LuCI插件选择:
     cat >> .config <<EOF
-    CONFIG_PACKAGE_automount=y
-    CONFIG_PACKAGE_autosamba=y
     CONFIG_PACKAGE_luci-app-guest-wifi=y
     CONFIG_PACKAGE_luci-i18n-guest-wifi-zh-cn=y
     CONFIG_PACKAGE_luci-app-jd-dailybonus=y
-    CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_V2ray_plugin=y
     EOF
     # LuCI主题:
     cat >> .config <<EOF
     CONFIG_PACKAGE_luci-theme-argon=y
-    CONFIG_PACKAGE_luci-theme-bootstrap=y
-    CONFIG_PACKAGE_luci-theme-material=y
     EOF
     # 取消编译(不要删除被缩进的注释符号):
     cat >> .config <<EOF
@@ -423,18 +413,13 @@ job_k3:
     EOF
     # 常用LuCI插件选择:
     cat >> .config <<EOF
-    CONFIG_PACKAGE_automount=y
-    CONFIG_PACKAGE_autosamba=y
     CONFIG_PACKAGE_luci-app-guest-wifi=y
     CONFIG_PACKAGE_luci-i18n-guest-wifi-zh-cn=y
     CONFIG_PACKAGE_luci-app-jd-dailybonus=y
-    CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_V2ray_plugin=y
     EOF
     # LuCI主题:
     cat >> .config <<EOF
     CONFIG_PACKAGE_luci-theme-argon=y
-    CONFIG_PACKAGE_luci-theme-bootstrap=y
-    CONFIG_PACKAGE_luci-theme-material=y
     EOF
     # k3 Extra packages：
     #cat >> .config <<EOF
