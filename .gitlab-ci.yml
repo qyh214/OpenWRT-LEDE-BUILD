@@ -2,7 +2,7 @@
 # https://github.com/coolsnowwolf/lede
 # CI ref:https://github.com/coolsnowwolf/lede/blob/master/.github/workflows/openwrt-ci.yml
 # base
-# ubuntu 16.04 x64 
+# ubuntu 20.04 x64 
 # sudo apt-get update 
 # sudo apt-get install build-essential asciidoc binutils 
 # bzip2 gawk gettext git libncurses5-dev libz-dev patch 
@@ -48,9 +48,9 @@
 stages:
   - base
   - r7800  
-  - ac58u
-  - acrh17
-  - k3
+  #- ac58u
+  #- acrh17
+  #- k3
   
 job_base:
   stage: base
