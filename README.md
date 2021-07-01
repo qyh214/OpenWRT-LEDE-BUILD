@@ -10,9 +10,9 @@
 --------------
 
 ### 编译状态
-[![pipeline status](http://dev.qyh.name:800/shihuang/routerbuild/badges/master/pipeline.svg)](http://dev.qyh.name:800/shihuang/routerbuild/commits/master)
+[![pipeline status](http://git.qyh.name/shihuang/routerbuild/badges/master/pipeline.svg)](http://git.qyh.name/shihuang/routerbuild/commits/master)
 
-仅编译网件r7800、华硕rt-ac58u、rt-acrh17、斐讯k3的路由器固件，原则上不接受个性化定制，下游仓库若需使用共享的CI定制化必须遵守相关约定，否则请使用独立的CI或者建议使用github的action功能。
+仅编译网件r7800的路由器固件，原则上不接受个性化定制，下游仓库若需使用共享的CI定制化必须遵守相关约定，否则请使用独立的CI或者建议使用github的action功能。
 
 编译的固件最多保存6个月，如有需要请自行备份历次固件。
 
@@ -33,13 +33,7 @@
 ### 固件下载
 #### 最新固件下载
 ##### 建议内网用户使用
-华硕rt-ac58u：[点此下载](http://dev.qyh.name:800/shihuang/routerbuild/-/jobs/artifacts/master/download?job=job_ac58u)
-
-华硕rt-acrh17：[点此下载](http://dev.qyh.name:800/shihuang/routerbuild/-/jobs/artifacts/master/download?job=job_acrh17)
-
-网件r7800：[点此下载](http://dev.qyh.name:800/shihuang/routerbuild/-/jobs/artifacts/master/download?job=job_r7800)
-
-斐讯k3：[点此下载](http://dev.qyh.name:800/shihuang/routerbuild/-/jobs/artifacts/master/download?job=job_k3)
+网件r7800：[点此下载](http://git.qyh.name/shihuang/routerbuild/-/jobs/artifacts/master/download?job=job_r7800)
 
 ##### 建议外网用户使用
 
@@ -48,7 +42,7 @@
 [release页面下载](http://dev.qyh.name:800/shihuang/routerbuild/-/releases)（请注意型号，链接有效期为1天，有下载次数限制）
 
 #### 历次固件本地下载（建议内网用户使用，外网用户可以查看百度网盘）
-[点此访问](http://dev.qyh.name:800/shihuang/routerbuild/pipelines)
+[点此访问](http://git.qyh.name/shihuang/routerbuild/pipelines)
 
 - 请注意：你需要点击右侧的`download`按钮进行下载，或者点击`passed`状态按钮，然后在右侧点击`browse`按钮选择你需要的文件进行下载。
 
@@ -70,8 +64,6 @@
 aria2的bt速度问题可通过添加trackerslist解决，具体可查看[这里](https://github.com/ngosang/trackerslist)。
 
 ### 固件首次安装方式/刷机/救砖介绍
-- 斐讯K3：https://post.smzdm.com/p/607853/
-- 华硕acrh17：官方固件-更新固件-刷入trx格式-在openwrt里-更新固件-不保留配置-刷入更新固件即可
 - 网件r7800：官方固件-更新固件-刷入img格式即可
 
 ### 固件特殊命令
