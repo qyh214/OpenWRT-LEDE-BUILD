@@ -57,10 +57,10 @@ job_base:
   - tags
   script:
     ## 下游分支仓库不得修改base，如有需要请发起pr、issue
-    ## clean build
-    #- cd /home/gitlab-runner/
-    #- rm -R lede
-    #- git clone https://github.com/coolsnowwolf/lede.git
+    # clean build
+    - cd /home/gitlab-runner/
+    - rm -R lede
+    - git clone https://github.com/coolsnowwolf/lede.git
     # update code
     - cd /home/gitlab-runner/lede
     - git pull
@@ -85,8 +85,8 @@ job_base:
     #- cd /home/gitlab-runner/lede
     #- rm -rf ./tmp
     #- sed -i '9s/#src-git/src-git/g' ./feeds.conf.default
-    ## 添加helloworld源
-    #- sed -i '$a\src-git helloworld https://github.com/fw876/helloworld' ./feeds.conf.default
+    # 添加helloworld源
+    - sed -i '$a\src-git helloworld https://github.com/fw876/helloworld' ./feeds.conf.default
     # 添加其他源
     # openclash
     #- sed -i '$a\src-git openclash https://github.com/vernesong/OpenClash' ./feeds.conf.default
