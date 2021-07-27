@@ -118,6 +118,8 @@ job_r7800:
     EOF
     # 常用LuCI插件和额外包选择:
     cat >> .config <<EOF
+    CONFIG_PACKAGE_luci-app-cpufreq=y
+    CONFIG_PACKAGE_luci-i18n-cpufreq-zh-cn=y
     CONFIG_PACKAGE_luci-app-guest-wifi=y
     CONFIG_PACKAGE_luci-i18n-guest-wifi-zh-cn=y
     CONFIG_PACKAGE_luci-app-jd-dailybonus=y
