@@ -216,7 +216,7 @@ job_r4s:
     # 部分配置修改：
     cat >> .config <<EOF
     CONFIG_TARGET_ROOTFS_TARGZ=y
-    EOF    
+    EOF
     # 常用LuCI插件和额外包选择:
     cat >> .config <<EOF
     CONFIG_PACKAGE_luci-app-jd-dailybonus=y
