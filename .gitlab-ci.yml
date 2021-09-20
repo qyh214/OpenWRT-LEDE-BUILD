@@ -47,7 +47,6 @@
 
 stages:
   - base
-  - r7800
   - r4s
   
 job_base:
