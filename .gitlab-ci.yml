@@ -47,7 +47,7 @@
 
 stages:
   - base
-  - r7800  
+  - r4s
   
 job_base:
   stage: base
@@ -96,8 +96,8 @@ job_base:
     # Make clean
     #- make clean
 
-job_r7800:
-  stage: r7800
+job_r4s:
+  stage: r4s
   tags: 
   - shell
   except:
@@ -111,15 +111,18 @@ job_r7800:
     #
     # ========================固件定制部分========================
     # 
-    # 编译r7800固件:
+    # 编译r4s固件:
     cat >> .config <<EOF
-    CONFIG_TARGET_ipq806x=y
-    CONFIG_TARGET_ipq806x_generic_DEVICE_netgear_r7800=y
+    CONFIG_TARGET_rockchip=y
+    CONFIG_TARGET_rockchip_armv8=y
+    CONFIG_TARGET_rockchip_armv8_DEVICE_friendlyarm_nanopi-r4s=y
+    EOF
+    # 部分配置修改：
+    cat >> .config <<EOF
+    CONFIG_TARGET_ROOTFS_TARGZ=y
     EOF
     # 常用LuCI插件和额外包选择:
     cat >> .config <<EOF
-    CONFIG_PACKAGE_luci-app-guest-wifi=y
-    CONFIG_PACKAGE_luci-app-jd-dailybonus=y
     CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Redsocks2=y
     CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_V2ray_Plugin=y
     CONFIG_PACKAGE_luci-app-uugamebooster=y
@@ -163,9 +166,9 @@ job_r7800:
     # build pass and save
     ## config
     cp /home/gitlab-runner/lede/.config /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin/.config
-    ## netgear_r7800
-    cp /home/gitlab-runner/lede/bin/targets/ipq806x/generic/openwrt-ipq806x-generic-netgear_r7800-squashfs-factory.img /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin/`date   +%Y%m%d`-$CI_JOB_ID-openwrt-ipq806x-netgear_r7800-squashfs-factory.img
-    cp /home/gitlab-runner/lede/bin/targets/ipq806x/generic/openwrt-ipq806x-generic-netgear_r7800-squashfs-sysupgrade.bin /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin/`date   +%Y%m%d`-$CI_JOB_ID-openwrt-ipq806x-netgear_r7800-squashfs-sysupgrade.bin
+    ## netgear_r4s
+    cp /home/gitlab-runner/lede/bin/targets/rockchip/armv8/openwrt-rockchip-armv8-friendlyarm_nanopi-r4s-ext4-sysupgrade.img.gz /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin/`date   +%Y%m%d`-$CI_JOB_ID-openwrt-rockchip-armv8-friendlyarm_nanopi-r4s-ext4-sysupgrade.img.gz
+    cp /home/gitlab-runner/lede/bin/targets/rockchip/armv8/openwrt-rockchip-armv8-friendlyarm_nanopi-r4s-squashfs-sysupgrade.img.gz /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin/`date   +%Y%m%d`-$CI_JOB_ID-openwrt-rockchip-armv8-friendlyarm_nanopi-r4s-squashfs-sysupgrade.img.gz
     ## remove git file
     cd /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin
     rm .gitignore
@@ -180,11 +183,11 @@ job_r7800:
     export COWTRANSFER_URL=$(cat cowtransfer.log | grep https | cut -f3 -d" ")
     echo $COWTRANSFER_URL
     # 发布release
-    echo 'Release R7800'
-    curl --header 'Content-Type: application/json' --header "PRIVATE-TOKEN: $user_token" --data '{ "name": "'"`date   +%Y%m%d`"'-R7800-'"$CI_JOB_ID"'-snapshot", "tag_name": "CI-'"$CI_JOB_ID"'", "ref": "'"$CI_COMMIT_BRANCH"'", "description": "[路由器固件外链下载：Cowtransfer奶牛快传]('"$COWTRANSFER_URL"')"}' --request POST http://git.qyh.name/api/v4/projects/41/releases
+    echo 'Release R4S'
+    curl --header 'Content-Type: application/json' --header "PRIVATE-TOKEN: $user_token" --data '{ "name": "'"`date   +%Y%m%d`"'-R4S-'"$CI_JOB_ID"'-snapshot", "tag_name": "CI-'"$CI_JOB_ID"'", "ref": "'"$CI_COMMIT_BRANCH"'", "description": "[路由器固件外链下载：Cowtransfer奶牛快传]('"$COWTRANSFER_URL"')"}' --request POST http://git.qyh.name/api/v4/projects/41/releases
  
   artifacts:
-    name: "`date   +%Y%m%d`-$CI_JOB_ID-openwrt-router-r7800"
+    name: "`date   +%Y%m%d`-$CI_JOB_ID-openwrt-router-r4s"
     expire_in: 6 months
     paths:
       - /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin
