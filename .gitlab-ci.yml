@@ -123,7 +123,6 @@ job_r4s:
     EOF
     # 常用LuCI插件和额外包选择:
     cat >> .config <<EOF
-    CONFIG_PACKAGE_luci-app-jd-dailybonus=y
     CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Redsocks2=y
     CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_V2ray_Plugin=y
     CONFIG_PACKAGE_luci-app-uugamebooster=y
