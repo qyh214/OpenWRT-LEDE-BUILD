@@ -188,8 +188,6 @@ job_r4s:
     ### 上传到七牛云
     echo 'Upload Firmware To Qiniu'
     cd /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/qiniu
-    curl -sL https://github.com/qiniu/qshell/releases/download/v2.6.2/qshell-v2.6.2-linux-amd64.tar.gz
-    tar -zxvf qshell-v2.6.2-linux-amd64.tar.gz
     chmod +x qshell
     ./qshell account $qAK $qSK qiniu
     ./qshell fput staticdownload openwrt-rockchip-armv8-friendlyarm_nanopi-r4s-squashfs-sysupgrade.img.gz /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin/`date   +%Y%m%d`-$CI_JOB_ID-openwrt-rockchip-armv8-friendlyarm_nanopi-r4s-squashfs-sysupgrade.img.gz --overwrite
