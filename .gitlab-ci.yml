@@ -184,7 +184,7 @@ job_r4s:
     echo $COWTRANSFER_URL
     # 发布release
     echo 'Release R4S'
-    curl --header 'Content-Type: application/json' --header "PRIVATE-TOKEN: $user_token" --data '{ "name": "'"`date   +%Y%m%d`"'-R4S-'"$CI_JOB_ID"'-snapshot", "tag_name": "CI-'"$CI_JOB_ID"'", "ref": "'"$CI_COMMIT_BRANCH"'", "description": "[路由器固件外链下载：Cowtransfer奶牛快传]('"$COWTRANSFER_URL"')"}' --request POST http://git.qyh.name/api/v4/projects/41/releases
+    curl --header 'Content-Type: application/json' --header "PRIVATE-TOKEN: $user_token" --data '{ "name": "'"`date   +%Y%m%d`"'-R4S-'"$CI_JOB_ID"'-snapshot", "tag_name": "CI-'"$CI_JOB_ID"'", "ref": "'"$CI_COMMIT_BRANCH"'", "description": "固件外链下载：\r\n [Cowtransfer奶牛快传]('"$COWTRANSFER_URL"')【链接有效期：1天】"}' --request POST http://git.qyh.name/api/v4/projects/41/releases
  
   artifacts:
     name: "`date   +%Y%m%d`-$CI_JOB_ID-openwrt-router-r4s"
