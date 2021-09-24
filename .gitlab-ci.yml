@@ -174,7 +174,7 @@ job_r4s:
     rm .gitignore
     # 上传与发布
     ## 上传
-    ### 上传到CowTransfer
+    ### 上传到CowTransfer奶牛快传
     echo 'Upload Firmware To CowTransfer'
     cd /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/transfer
     curl -sL https://git.io/file-transfer | bash -s beta
@@ -185,9 +185,14 @@ job_r4s:
     export COWTRANSFER_URL=$(cat cowtransfer.log | grep https | cut -f3 -d" ")
     echo $COWTRANSFER_URL
     ### 上传到其他平台
+    ### 上传到七牛云
+    echo 'Upload Firmware To Qiniu'
+    cd /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/qiniu
+    ./qshell account $qAK $qSK qiniu
+    ./qshell fput staticdownload openwrt-rockchip-armv8-friendlyarm_nanopi-r4s-squashfs-sysupgrade.img.gz /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin/`date   +%Y%m%d`-$CI_JOB_ID-openwrt-rockchip-armv8-friendlyarm_nanopi-r4s-squashfs-sysupgrade.img.gz --overwrite
     # 发布release
     echo 'Release R4S'
-    curl --header 'Content-Type: application/json' --header "PRIVATE-TOKEN: $user_token" --data '{ "name": "'"`date   +%Y%m%d`"'-R4S-'"$CI_JOB_ID"'-snapshot", "tag_name": "CI-'"$CI_JOB_ID"'", "ref": "'"$CI_COMMIT_BRANCH"'", "description": "固件外链下载：<br /> - [Cowtransfer奶牛快传]('"$COWTRANSFER_URL"')【链接有效期：1天】<br /> 更多外链下载地址即将到来"}' --request POST http://git.qyh.name/api/v4/projects/41/releases
+    curl --header 'Content-Type: application/json' --header "PRIVATE-TOKEN: $user_token" --data '{ "name": "'"`date   +%Y%m%d`"'-R4S-'"$CI_JOB_ID"'-snapshot", "tag_name": "CI-'"$CI_JOB_ID"'", "ref": "'"$CI_COMMIT_BRANCH"'", "description": "固件外链下载：<br /> - [Cowtransfer奶牛快传]('"$COWTRANSFER_URL"')【链接有效期：1天】<br /> - [七牛云](http://down.cdn.qyh0214.com/openwrt-rockchip-armv8-friendlyarm_nanopi-r4s-squashfs-sysupgrade.img.gz)"}' --request POST http://git.qyh.name/api/v4/projects/41/releases
  
   artifacts:
     name: "`date   +%Y%m%d`-$CI_JOB_ID-openwrt-router-r4s"
