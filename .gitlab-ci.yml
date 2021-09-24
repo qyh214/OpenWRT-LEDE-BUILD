@@ -172,7 +172,9 @@ job_r4s:
     ## remove git file
     cd /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/bin
     rm .gitignore
-    # 上传到奶牛快传
+    # 上传与发布
+    ## 上传
+    ### 上传到CowTransfer
     echo 'Upload Firmware To CowTransfer'
     cd /home/gitlab-runner/builds/b5d89257/0/shihuang/routerbuild/transfer
     curl -sL https://git.io/file-transfer | bash -s beta
@@ -182,9 +184,10 @@ job_r4s:
     #- echo $COWTRANSFER_URL
     export COWTRANSFER_URL=$(cat cowtransfer.log | grep https | cut -f3 -d" ")
     echo $COWTRANSFER_URL
+    ### 上传到其他平台
     # 发布release
     echo 'Release R4S'
-    curl --header 'Content-Type: application/json' --header "PRIVATE-TOKEN: $user_token" --data '{ "name": "'"`date   +%Y%m%d`"'-R4S-'"$CI_JOB_ID"'-snapshot", "tag_name": "CI-'"$CI_JOB_ID"'", "ref": "'"$CI_COMMIT_BRANCH"'", "description": "固件外链下载：<br /> [Cowtransfer奶牛快传]('"$COWTRANSFER_URL"')【链接有效期：1天】"}' --request POST http://git.qyh.name/api/v4/projects/41/releases
+    curl --header 'Content-Type: application/json' --header "PRIVATE-TOKEN: $user_token" --data '{ "name": "'"`date   +%Y%m%d`"'-R4S-'"$CI_JOB_ID"'-snapshot", "tag_name": "CI-'"$CI_JOB_ID"'", "ref": "'"$CI_COMMIT_BRANCH"'", "description": "固件外链下载：<br /> - [Cowtransfer奶牛快传]('"$COWTRANSFER_URL"')【链接有效期：1天】<br /> 更多外链下载地址即将到来"}' --request POST http://git.qyh.name/api/v4/projects/41/releases
  
   artifacts:
     name: "`date   +%Y%m%d`-$CI_JOB_ID-openwrt-router-r4s"
