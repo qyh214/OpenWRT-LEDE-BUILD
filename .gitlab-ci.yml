@@ -90,7 +90,7 @@ job_base:
     # 添加其他源
     # openclash
     #- sed -i '$a\src-git openclash https://github.com/vernesong/OpenClash' ./feeds.conf.default
-    #- ./scripts/feeds clean
+    - ./scripts/feeds clean
     - ./scripts/feeds update -a
     - ./scripts/feeds install -a
     # Make clean
