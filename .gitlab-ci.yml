@@ -59,7 +59,7 @@ job_base:
     ## 下游分支仓库不得修改base，如有需要请发起pr、issue
     # clean build
     - cd /home/gitlab-runner/
-    # rm -R lede
+    - rm -R lede
     - git clone https://github.com/coolsnowwolf/lede.git
     # update code
     - cd /home/gitlab-runner/lede
