@@ -61,9 +61,10 @@ job_base:
     - cd /home/gitlab-runner/
     - rm -R lede
     - git clone https://github.com/coolsnowwolf/lede.git
-    # update code
     - cd /home/gitlab-runner/lede
-    - git pull
+    ## update code
+    #- cd /home/gitlab-runner/lede
+    #- git pull
     #- rm -rf ./tmp
     # remove feeds dl tmp
     #- cd /home/gitlab-runner/lede
@@ -98,6 +99,13 @@ job_base:
     - ./scripts/feeds install -a
     # Make clean
     #- make clean
+    ## extra modify
+    ## 类似：https://github.com/msylgj/R2S-R4S-OpenWrt/blob/21.02/SCRIPTS/prepare_package.sh
+    ## https://github.com/klever1988/nanopi-openwrt/blob/master/scripts/patches.sh
+    ### 修改默认wan的ip地址为192.168.2.1
+    - sed -i 's/192.168.1.1/192.168.2.1/g' package/base-files/files/bin/config_generate
+    # set default theme to argon
+    - sed -i '/uci commit luci/i\uci set luci.main.mediaurlbase="/luci-static/argon"' `find package -type f -path '*/default-settings/files/zzz-default-settings'`
 
 job_r4s:
   stage: r4s
