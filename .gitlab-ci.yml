@@ -57,10 +57,10 @@ job_base:
   - tags
   script:
     ## 下游分支仓库不得修改base，如有需要请发起pr、issue
-    ## clean build
-    #- cd /home/gitlab-runner/
-    #- rm -R lede
-    #- git clone https://github.com/coolsnowwolf/lede.git
+    # clean build
+    - cd /home/gitlab-runner/
+    # rm -R lede
+    - git clone https://github.com/coolsnowwolf/lede.git
     # update code
     - cd /home/gitlab-runner/lede
     - git pull
@@ -86,7 +86,10 @@ job_base:
     #- rm -rf ./tmp
     #- sed -i '9s/#src-git/src-git/g' ./feeds.conf.default
     ## 添加helloworld源
-    #- sed -i '$a\src-git helloworld https://github.com/fw876/helloworld' ./feeds.conf.default
+    - sed -i '$a\src-git helloworld https://github.com/fw876/helloworld' ./feeds.conf.default
+    ## extra
+    #- sed -i "/helloworld/d" "feeds.conf.default"
+    #- echo "src-git helloworld https://github.com/fw876/helloworld.git" >> "feeds.conf.default"
     # 添加其他源
     # openclash
     #- sed -i '$a\src-git openclash https://github.com/vernesong/OpenClash' ./feeds.conf.default
@@ -123,6 +126,7 @@ job_r4s:
     EOF
     # 常用LuCI插件和额外包选择:
     cat >> .config <<EOF
+    CONFIG_PACKAGE_luci-app-jd-dailybonus=y
     CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Kcptun=y
     CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_NaiveProxy=y
     CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks_Libev_Client=y
