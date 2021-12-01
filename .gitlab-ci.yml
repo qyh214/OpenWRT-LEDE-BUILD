@@ -59,7 +59,7 @@ job_base:
     ## 下游分支仓库不得修改base，如有需要请发起pr、issue
     # clean build
     - cd /home/gitlab-runner/
-    - if [ ! -d "/lede/" ];then echo "存在并删除"; rm -R lede; else echo "不存在"; git clone https://github.com/coolsnowwolf/lede.git ; fi
+    - echo 'if [ ! -d "/lede/" ];then rm -R lede; else git clone https://github.com/coolsnowwolf/lede.git ; fi'
     #- git clone https://github.com/coolsnowwolf/lede.git
     - cd /home/gitlab-runner/lede
     ## update code
