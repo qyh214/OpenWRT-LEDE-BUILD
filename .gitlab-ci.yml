@@ -60,7 +60,7 @@ job_base:
     # clean build
     - cd /home/gitlab-runner/
     - if [ ! -d "/lede/" ];then rm -R lede else git clone https://github.com/coolsnowwolf/lede.git fi
-    - git clone https://github.com/coolsnowwolf/lede.git
+    #- git clone https://github.com/coolsnowwolf/lede.git
     - cd /home/gitlab-runner/lede
     ## update code
     #- cd /home/gitlab-runner/lede
