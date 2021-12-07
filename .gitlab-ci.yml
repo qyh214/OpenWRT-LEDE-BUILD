@@ -2,6 +2,7 @@ image: ubuntu:20.04
   
 build:
   stage: build
+  retry: 3
   tags: 
   - docker
   except:
