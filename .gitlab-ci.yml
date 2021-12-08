@@ -1,8 +1,7 @@
-image: ubuntu:20.04
+image: shihuang214/openwrt_ubuntu:v1
   
 build:
   stage: build
-  retry: 2
   tags: 
   - docker
   except:
