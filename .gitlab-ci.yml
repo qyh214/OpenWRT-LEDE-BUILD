@@ -4,6 +4,7 @@ build:
   stage: build
   tags: 
   - docker
+  retry: 2
   except:
   - tags
   before_script: 
