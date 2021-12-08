@@ -81,7 +81,7 @@ build:
     
     echo 'Generate configuration file'
     # 对比配置文件：
-    cd /home/gitlab-runner/lede
+    cd /builds/shihuang/routerbuild/lede
     sed -i 's/^[ \t]*//g' ./.config
     make defconfig
     
