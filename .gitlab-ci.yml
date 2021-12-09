@@ -7,7 +7,6 @@ build:
   except:
   - tags
   before_script: 
-    - sed -i '$a\nameserver 114.114.114.114' /etc/resolv.conf
     - sed -i '$a\nameserver 8.8.8.8' /etc/resolv.conf
     - apt-get update
     - DEBIAN_FRONTEND=noninteractive apt-get install -y tzdata
