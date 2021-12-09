@@ -7,7 +7,6 @@ build:
   except:
   - tags
   before_script: 
-    - export FORCE_UNSAFE_CONFIGURE=1
     - apt-get update
     - DEBIAN_FRONTEND=noninteractive apt-get install -y tzdata
     - apt-get install -y build-essential asciidoc binutils bzip2 gawk gettext git libncurses5-dev libz-dev patch python3 python2.7 unzip zlib1g-dev lib32gcc1 libc6-dev-i386 subversion flex uglifyjs git-core gcc-multilib p7zip p7zip-full msmtp libssl-dev texinfo libglib2.0-dev xmlto qemu-utils upx libelf-dev autoconf automake libtool autopoint device-tree-compiler g++-multilib antlr3 gperf wget curl swig rsync
@@ -93,7 +92,7 @@ build:
     make download -j1
     echo 'Compile firmware'
     echo -e "$(nproc) thread compile"
-    make -j$(nproc) || make -j1 V=s
+    make FORCE_UNSAFE_CONFIGURE=1 -j$(nproc) || make -j1 V=s
     
     echo 'Assemble artifact'
     # build pass and save
