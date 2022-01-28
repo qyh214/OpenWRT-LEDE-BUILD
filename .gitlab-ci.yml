@@ -49,7 +49,6 @@ build:
     EOF
     # 常用LuCI插件和额外包选择:
     cat >> .config <<EOF
-    CONFIG_PACKAGE_luci-app-jd-dailybonus=y
     CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Kcptun=y
     CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_NaiveProxy=y
     CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks_Libev_Client=y
