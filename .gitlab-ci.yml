@@ -1,7 +1,7 @@
 image: shihuang214/openwrt_ubuntu:v1
   
-build:
-  stage: build
+build_r4s:
+  stage: build_r4s
   tags: 
   - docker
   except:
@@ -139,3 +139,141 @@ build:
     paths:
       - /builds/shihuang/routerbuild/bin
 
+build_r2s:
+  stage: build_r2s
+  tags: 
+  - docker
+  except:
+  - tags
+  before_script: 
+    - apt-get update
+    - DEBIAN_FRONTEND=noninteractive apt-get install -y tzdata
+    - apt-get install -y build-essential asciidoc binutils bzip2 gawk gettext git libncurses5-dev libz-dev patch python3 python2.7 unzip zlib1g-dev lib32gcc1 libc6-dev-i386 subversion flex uglifyjs git-core gcc-multilib p7zip p7zip-full msmtp libssl-dev texinfo libglib2.0-dev xmlto qemu-utils upx libelf-dev autoconf automake libtool autopoint device-tree-compiler g++-multilib antlr3 gperf wget curl swig rsync
+    # 获取最新lede数据
+    - cd /builds/shihuang/routerbuild
+    - git clone https://github.com/coolsnowwolf/lede.git
+    - cd /builds/shihuang/routerbuild/lede
+    # 添加helloworld源
+    - sed -i '$a\src-git helloworld https://github.com/fw876/helloworld' ./feeds.conf.default
+    - ./scripts/feeds update -a
+    - ./scripts/feeds install -a
+    # 额外改动
+    ## 参考：
+    ## - https://github.com/msylgj/R2S-R4S-OpenWrt/blob/21.02/SCRIPTS/prepare_package.sh
+    ## - https://github.com/klever1988/nanopi-openwrt/blob/master/scripts/patches.sh
+    ## 修改默认wan的ip地址为192.168.2.1
+    - sed -i 's/192.168.1.1/192.168.2.1/g' package/base-files/files/bin/config_generate
+    ## 修改默认主题为argon（必须选择这个主题安装）
+    - sed -i '/uci commit luci/i\uci set luci.main.mediaurlbase="/luci-static/argon"' `find package -type f -path '*/default-settings/files/zzz-default-settings'`
+
+  script: |
+    echo 'clean config'
+    cd /builds/shihuang/routerbuild/lede
+    rm -f ./.config*
+    touch ./.config
+    
+    echo 'Custom configure file'
+    #
+    # ========================固件定制部分========================
+    # 
+    # 编译r2s固件:
+    cat >> .config <<EOF
+    CONFIG_TARGET_rockchip=y
+    CONFIG_TARGET_rockchip_armv8=y
+    CONFIG_TARGET_rockchip_armv8_DEVICE_friendlyarm_nanopi-r2s=y
+    EOF
+    # 部分配置修改：
+    cat >> .config <<EOF
+    CONFIG_TARGET_ROOTFS_TARGZ=y
+    EOF
+    # 常用LuCI插件和额外包选择:
+    cat >> .config <<EOF
+    CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Kcptun=y
+    CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_NaiveProxy=y
+    CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks_Libev_Client=y
+    CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks_Libev_Server=y
+    CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_ShadowsocksR_Libev_Server=y
+    CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Redsocks2=y
+    CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Simple_Obfs=y
+    CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Trojan=y
+    CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_V2ray_Plugin=y
+    CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Xray=y
+    CONFIG_PACKAGE_luci-app-uugamebooster=y
+    EOF
+    # LuCI主题:
+    cat >> .config <<EOF
+    CONFIG_PACKAGE_luci-theme-argon=y
+    EOF
+    # 取消编译(不要删除被缩进的注释符号):
+    cat >> .config <<EOF
+    # CONFIG_PACKAGE_luci-app-accesscontrol is not set
+    # CONFIG_PACKAGE_luci-app-adbyby-plus is not set
+    # CONFIG_PACKAGE_luci-app-ddns is not set
+    # CONFIG_PACKAGE_luci-app-ipsec-vpnd is not set
+    # CONFIG_PACKAGE_luci-app-unblockmusic is not set
+    # CONFIG_UnblockNeteaseMusic_Go is not set
+    # CONFIG_PACKAGE_luci-app-vlmcsd is not set
+    # CONFIG_PACKAGE_luci-app-wol is not set
+    # CONFIG_PACKAGE_luci-app-zerotier is not set
+    EOF
+    # 
+    # ========================固件定制部分结束========================
+    # 
+    
+    echo 'Generate configuration file'
+    # 对比配置文件：
+    cd /builds/shihuang/routerbuild/lede
+    sed -i 's/^[ \t]*//g' ./.config
+    make defconfig
+    
+    echo 'Make Clean'
+    make clean
+    
+    echo 'Make download'
+    make download -j1
+    echo 'Compile firmware'
+    echo -e "$(nproc) thread compile"
+    # 设置为非root用户编译FORCE_UNSAFE_CONFIGURE=1
+    make FORCE_UNSAFE_CONFIGURE=1 -j$(nproc) || make -j1
+    # 保存编译后固件（编译后文件放置在bin目录下）
+    echo 'Assemble artifact'
+    ## config
+    cp /builds/shihuang/routerbuild/lede/.config /builds/shihuang/routerbuild/bin/.config
+    ## friendlyarm_nanopi_r2s
+    #cp /builds/shihuang/routerbuild/lede/bin/targets/rockchip/armv8/openwrt-rockchip-armv8-friendlyarm_nanopi-r2s-ext4-sysupgrade.img.gz /builds/shihuang/routerbuild/bin/`date   +%Y%m%d`-$CI_JOB_ID-openwrt-rockchip-armv8-friendlyarm_nanopi-r2s-ext4-sysupgrade.img.gz
+    cp /builds/shihuang/routerbuild/lede/bin/targets/rockchip/armv8/openwrt-rockchip-armv8-friendlyarm_nanopi-r2s-squashfs-sysupgrade.img.gz /builds/shihuang/routerbuild/bin/`date   +%Y%m%d`-$CI_JOB_ID-openwrt-rockchip-armv8-friendlyarm_nanopi-r2s-squashfs-sysupgrade.img.gz
+    ## remove git file
+    cd /builds/shihuang/routerbuild/bin
+    rm .gitignore
+    # 上传与发布
+    ## 上传
+    ### 上传到CowTransfer奶牛快传
+    echo 'Upload Firmware To CowTransfer'
+    cd /builds/shihuang/routerbuild/transfer
+    curl -sL https://git.io/file-transfer | bash -s beta
+    ./transfer cow --block 2621440 -s -p 99 -t 15 --hash --no-progress /builds/shihuang/routerbuild/bin 2>&1 | tee cowtransfer.log
+    #- echo "::warning file=cowtransfer.com::$(cat cowtransfer.log | grep https)"
+    #- echo "::set-env name=COWTRANSFER_URL::$(cat cowtransfer.log | grep https | cut -f3 -d" ")"
+    #- echo $COWTRANSFER_URL
+    export COWTRANSFER_URL=$(cat cowtransfer.log | grep https | cut -f3 -d" ")
+    echo $COWTRANSFER_URL
+    ### 上传到其他平台
+    ### 上传到七牛云
+    echo 'Upload Firmware To Qiniu'
+    cd /builds/shihuang/routerbuild/qiniu
+    #### https://devtools.qiniu.com/qshell-v2.6.2-linux-amd64.tar.gz
+    chmod +x qshell
+    ./qshell account $qAK $qSK qiniu --overwrite
+    ##### squashfs-sysupgrade.img.gz
+    ./qshell fput staticdownload openwrt-rockchip-armv8-friendlyarm_nanopi-r2s-squashfs-sysupgrade.img.gz /builds/shihuang/routerbuild/bin/`date   +%Y%m%d`-$CI_JOB_ID-openwrt-rockchip-armv8-friendlyarm_nanopi-r2s-squashfs-sysupgrade.img.gz --overwrite
+    ##### .config
+    ./qshell fput staticdownload r2s.config /builds/shihuang/routerbuild/bin/.config --overwrite
+    # 发布release
+    echo 'Release R2S'
+    curl --header 'Content-Type: application/json' --header "PRIVATE-TOKEN: $user_token" --data '{ "name": "'"`date   +%Y%m%d`"'-R2S-'"$CI_JOB_ID"'-snapshot", "tag_name": "CI-'"$CI_JOB_ID"'", "ref": "'"$CI_COMMIT_BRANCH"'", "description": "说明：<br />固件介绍页面：[https://www.qyh.name/807/](https://www.qyh.name/807/)<br />默认管理地址：192.168.2.1<br />默认账号：root<br />默认密码：password<br />默认主题：argon<br /><br />img.gz格式文件直接使用，无需解压。如果下载的扩展名是zip需要解压，里面img.gz是固件。<br />将固件img.gz使用烧录工具烧录或者在路由器网页管理后台直接上传升级使用<br />管理后台升级仅限于之前曾经使用在本处编译的固件并且并非大版本之间更新，大版本更新可能会清除所有配置信息或者请直接烧录重置全部数据。<br /><br />烧录工具下载：<br />[balenaEtcher](https://www.balena.io/etcher/)<br /><br />固件下载地址：<br />🔗[本地下载（内网用户）](http://192.168.2.100:800/shihuang/routerbuild/-/jobs/'"$CI_JOB_ID"'/artifacts/download)<br />【说明】链接有效期为编译成功后6个月，仅限内网用户使用，外网用户建议使用下面的其他外链地址下载。<br /><br />🔗[本地下载（外网用户）](http://git.qyh.name/shihuang/routerbuild/-/jobs/'"$CI_JOB_ID"'/artifacts/download)<br />【说明】链接有效期为编译成功后6个月，下载限速，可能下载缓慢或出现中断，不推荐外网用户使用，外网用户建议使用下面的其他外链地址下载。<br /><br /><br />🔗[Cowtransfer奶牛快传]('"$COWTRANSFER_URL"')<br />【说明】链接有效期为编译成功后1天内，有下载次数限制。<br />🔗[七牛云(固件)](http://down.cdn.qyh0214.com/openwrt-rockchip-armv8-friendlyarm_nanopi-r2s-squashfs-sysupgrade.img.gz)<br />【说明】链接有效期为长期，在每次编译成功后即覆盖为新版本。<br />🔗[七牛云(固件CI配置文件config)](http://down.cdn.qyh0214.com/r2s.config)<br />【说明】链接有效期为长期，在每次编译成功后即覆盖为新版本。此文件主要用于开发者使用，一般无需下载。<br />"}' --request POST http://git.qyh.name/api/v4/projects/41/releases
+ 
+  artifacts:
+    name: "`date   +%Y%m%d`-$CI_JOB_ID-openwrt-router-r2s"
+    expire_in: 6 months
+    paths:
+      - /builds/shihuang/routerbuild/bin
