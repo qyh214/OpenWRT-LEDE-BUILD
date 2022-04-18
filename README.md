@@ -11,7 +11,7 @@
 ### 编译状态
 [![pipeline status](http://git.qyh.name/shihuang/routerbuild/badges/master/pipeline.svg)](http://git.qyh.name/shihuang/routerbuild/commits/master)
 
-仅编译友善R4S的软路由固件，原则上不接受个性化定制，下游仓库若需使用共享的CI定制化必须遵守相关约定，否则请使用独立的CI（自行配置CI）或者建议使用github的action功能。
+仅编译友善R4S、R2S的软路由固件，原则上不接受个性化定制，下游仓库若需使用共享的CI定制化必须遵守相关约定，否则请使用独立的CI（自行配置CI）或者建议使用github的action功能。
 
 编译的固件最多保存6个月，如有需要请自行备份历次固件。
 
@@ -23,16 +23,14 @@
 #### cpu跑分
 自动完成跑分并显示在首页。
 
-#### 隐藏功能
-如果你无法看到某个神秘功能，你需要使用SSH连接输入 `echo  0xDEADBEEF > /etc/config/google_fu_mode`，回车，稍等片刻后即可重新访问神秘功能，如果显示错误请清除配置信息后再试，设备无需重启。
-
 #### 温度监控
 已整合温度监控，自动显示在首页。
 
 ### 固件下载
 #### 最新固件下载
 ##### 建议内网用户使用
-R4S：[点此下载](http://git.qyh.name/shihuang/routerbuild/-/jobs/artifacts/master/download?job=job_r4s)
+- R4S：[点此下载](http://git.qyh.name/shihuang/routerbuild/-/jobs/artifacts/master/download?job=job_r4s)
+- R2S：[点此下载](http://git.qyh.name/shihuang/routerbuild/-/jobs/artifacts/master/download?job=job_r2s)
 
 ##### 建议外网用户使用
 
