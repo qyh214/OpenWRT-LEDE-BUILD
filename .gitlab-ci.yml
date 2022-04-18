@@ -1,7 +1,11 @@
 image: shihuang214/openwrt_ubuntu:v1
+
+stages:
+  - build_r4s
+  - build_r2s
   
 build_r4s:
-  stage: build
+  stage: build_r4s
   tags: 
   - docker
   except:
@@ -140,7 +144,7 @@ build_r4s:
       - /builds/shihuang/routerbuild/bin
 
 build_r2s:
-  stage: build
+  stage: build_r2s
   tags: 
   - docker
   except:
