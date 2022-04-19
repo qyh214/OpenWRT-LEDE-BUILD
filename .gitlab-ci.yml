@@ -195,7 +195,32 @@ build_r2s:
     EOF
     # 无线驱动：
     cat >> .config <<EOF
+    # kmod
+    # https://github.com/SuLingGG/OpenWrt-Rpi/blob/main/config/rockchip/armv8.config
+    CONFIG_PACKAGE_kmod-drm-rockchip=y
+    CONFIG_PACKAGE_kmod-gpu-lima=y
+    CONFIG_PACKAGE_kmod-rtl8187=y
+    CONFIG_PACKAGE_kmod-rtl8188eu=y
+    CONFIG_PACKAGE_kmod-rtl8192c-common=y
+    CONFIG_PACKAGE_kmod-rtl8192cu=y
+    CONFIG_PACKAGE_kmod-rtl8192du=y
+    CONFIG_PACKAGE_kmod-rtl8812au-ac=y
     CONFIG_PACKAGE_kmod-rtl8821cu=y
+    CONFIG_PACKAGE_kmod-rtl88x2bu=y
+    CONFIG_PACKAGE_kmod-rtlwifi=y
+    CONFIG_PACKAGE_kmod-rtlwifi-usb=y
+    CONFIG_PACKAGE_kmod-usb-net-rtl8150=y
+    CONFIG_PACKAGE_kmod-usb-net-rtl8152=y
+    CONFIG_PACKAGE_kmod-r8168=n
+    CONFIG_PACKAGE_kmod-r8125=n
+
+    # Wireless Support
+    CONFIG_PACKAGE_iw=y
+    CONFIG_PACKAGE_iwinfo=y
+    CONFIG_PACKAGE_wpad-wolfssl=y
+    CONFIG_DRIVER_11AC_SUPPORT=y
+    CONFIG_DRIVER_11N_SUPPORT=y
+    CONFIG_DRIVER_11W_SUPPORT=y
     EOF
     # 常用LuCI插件和额外包选择:
     cat >> .config <<EOF
