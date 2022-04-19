@@ -142,6 +142,9 @@ build_r4s:
     expire_in: 6 months
     paths:
       - /builds/shihuang/routerbuild/bin
+  # disable artifact passing
+  dependencies: []
+
 
 build_r2s:
   stage: build_r2s
@@ -189,6 +192,10 @@ build_r2s:
     # 部分配置修改：
     cat >> .config <<EOF
     CONFIG_TARGET_ROOTFS_TARGZ=y
+    EOF
+    # 无线驱动：
+    cat >> .config <<EOF
+    CONFIG_PACKAGE_kmod-rtl8821cu=y
     EOF
     # 常用LuCI插件和额外包选择:
     cat >> .config <<EOF
@@ -281,3 +288,5 @@ build_r2s:
     expire_in: 6 months
     paths:
       - /builds/shihuang/routerbuild/bin
+  # disable artifact passing
+  dependencies: []
