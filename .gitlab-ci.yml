@@ -193,23 +193,23 @@ build_r2s:
     cat >> .config <<EOF
     CONFIG_TARGET_ROOTFS_TARGZ=y
     EOF
-    # 无线驱动：
-    cat >> .config <<EOF
-    # https://github.com/klever1988/nanopi-openwrt/blob/master/r2s.config.seed
-    CONFIG_PACKAGE_kmod-gpu-lima=y
-    CONFIG_PACKAGE_kmod-ath9k-htc=y
-    CONFIG_PACKAGE_kmod-mt76x0u=y
-    CONFIG_PACKAGE_kmod-mt76x2u=y
-    CONFIG_PACKAGE_kmod-r8125=y
-    CONFIG_PACKAGE_kmod-rtl8821cu=y
-    CONFIG_PACKAGE_kmod-rtl8812au-ac=y
-    CONFIG_PACKAGE_iw=y
-    CONFIG_PACKAGE_iwinfo=y
-    CONFIG_PACKAGE_wpad-wolfssl=y
-    CONFIG_DRIVER_11AC_SUPPORT=y
-    CONFIG_DRIVER_11N_SUPPORT=y
-    CONFIG_DRIVER_11W_SUPPORT=y
-    EOF
+    ## 无线驱动：
+    #cat >> .config <<EOF
+    ## https://github.com/klever1988/nanopi-openwrt/blob/master/r2s.config.seed
+    #CONFIG_PACKAGE_kmod-gpu-lima=y
+    #CONFIG_PACKAGE_kmod-ath9k-htc=y
+    #CONFIG_PACKAGE_kmod-mt76x0u=y
+    #CONFIG_PACKAGE_kmod-mt76x2u=y
+    #CONFIG_PACKAGE_kmod-r8125=y
+    #CONFIG_PACKAGE_kmod-rtl8821cu=y
+    #CONFIG_PACKAGE_kmod-rtl8812au-ac=y
+    #CONFIG_PACKAGE_iw=y
+    #CONFIG_PACKAGE_iwinfo=y
+    #CONFIG_PACKAGE_wpad-wolfssl=y
+    #CONFIG_DRIVER_11AC_SUPPORT=y
+    #CONFIG_DRIVER_11N_SUPPORT=y
+    #CONFIG_DRIVER_11W_SUPPORT=y
+    #EOF
     # 常用LuCI插件和额外包选择:
     cat >> .config <<EOF
     CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Kcptun=y
