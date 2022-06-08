@@ -29,6 +29,9 @@ build_r4s:
     - sed -i 's/192.168.1.1/192.168.2.1/g' package/base-files/files/bin/config_generate
     ## 修改默认主题为argon（必须选择这个主题安装）
     - sed -i '/uci commit luci/i\uci set luci.main.mediaurlbase="/luci-static/argon"' `find package -type f -path '*/default-settings/files/zzz-default-settings'`
+    ## 切换为5.15核心，a056909dc204871468cd2ac150e7232c927aa2f0
+    - sed -i 's/KERNEL_PATCHVER=5.10/KERNEL_PATCHVER=5.15/g' ./target/linux/rockchip/Makefile
+    - sed -i 's/KERNEL_TESTING_PATCHVER=5.15/KERNEL_TESTING_PATCHVER=5.10/g' ./target/linux/rockchip/Makefile
 
   script: |
     echo 'clean config'
