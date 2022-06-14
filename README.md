@@ -11,7 +11,7 @@
 ### 编译状态
 [![pipeline status](http://git.qyh.name/shihuang/routerbuild/badges/master/pipeline.svg)](http://git.qyh.name/shihuang/routerbuild/commits/master)
 
-仅编译友善R4S、R2S的软路由固件，原则上不接受个性化定制，下游仓库若需使用共享的CI定制化必须遵守相关约定，否则请使用独立的CI（自行配置CI）或者建议使用github的action功能。
+仅编译友善R4S的软路由固件。
 
 编译的固件最多保存6个月，如有需要请自行备份历次固件。
 
@@ -30,7 +30,6 @@
 #### 最新固件下载
 ##### 建议内网用户使用
 - R4S：[点此下载](http://git.qyh.name/shihuang/routerbuild/-/jobs/artifacts/master/download?job=job_r4s)
-- R2S：[点此下载](http://git.qyh.name/shihuang/routerbuild/-/jobs/artifacts/master/download?job=job_r2s)
 
 ##### 建议外网用户使用
 
