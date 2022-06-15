@@ -53,6 +53,8 @@ build_r4s:
     # 常用LuCI插件和额外包选择:
     cat >> .config <<EOF
     CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Xray=y
+    CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_NONE_V2RAY=y
+    CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_V2ray=y
     CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Kcptun=y
     CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Hysteria=y
     CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_IPT2Socks=y
