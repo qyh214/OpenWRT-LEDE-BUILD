@@ -72,7 +72,7 @@ build_r4s:
     EOF
     # LuCI主题:
     cat >> .config <<EOF
-    CONFIG_PACKAGE_luci-theme-argon=y
+    CONFIG_PACKAGE_luci-theme-argon-mod=y
     EOF
     # 取消编译(不要删除被缩进的注释符号):
     cat >> .config <<EOF
