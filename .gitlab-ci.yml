@@ -52,6 +52,7 @@ build_r4s:
     EOF
     # 常用LuCI插件和额外包选择:
     cat >> .config <<EOF
+    CONFIG_PACKAGE_ipv6helper=y
     CONFIG_PACKAGE_luci-app-turboacc_INCLUDE_OFFLOADING=y
     CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Xray=y
     CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Kcptun=y
