@@ -65,7 +65,6 @@ build_r4s:
     EOF
     # 取消编译(不要删除被缩进的注释符号):
     cat >> .config <<EOF
-    # CONFIG_PACKAGE_luci-app-turboacc_INCLUDE_PDNSD is not set
     # CONFIG_PACKAGE_luci-app-cpufreq is not set
     # CONFIG_PACKAGE_luci-app-diskman is not set
     # CONFIG_PACKAGE_luci-app-hd-idle is not set
