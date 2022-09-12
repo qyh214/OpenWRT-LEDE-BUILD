@@ -54,7 +54,6 @@ build_r4s:
     cat >> .config <<EOF
     CONFIG_PACKAGE_ipv6helper=y
     CONFIG_PACKAGE_dnsmasq_full_dhcpv6=y
-    CONFIG_PACKAGE_luci-app-turboacc_INCLUDE_OFFLOADING=y
     CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Xray=y
     CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Trojan=y
     CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_V2ray_Plugin=y
@@ -66,6 +65,7 @@ build_r4s:
     EOF
     # 取消编译(不要删除被缩进的注释符号):
     cat >> .config <<EOF
+    # CONFIG_PACKAGE_luci-app-turboacc_INCLUDE_PDNSD is not set
     # CONFIG_PACKAGE_luci-app-cpufreq is not set
     # CONFIG_PACKAGE_luci-app-diskman is not set
     # CONFIG_PACKAGE_luci-app-hd-idle is not set
@@ -79,7 +79,6 @@ build_r4s:
     # CONFIG_PACKAGE_luci-app-usb-printer is not set
     # CONFIG_PACKAGE_luci-app-wireguard is not set
     # CONFIG_PACKAGE_autosamba is not set
-    # CONFIG_PACKAGE_luci-app-turboacc_INCLUDE_SHORTCUT_FE is not set
     # CONFIG_PACKAGE_luci-app-accesscontrol is not set
     # CONFIG_PACKAGE_luci-app-adbyby-plus is not set
     # CONFIG_PACKAGE_luci-app-ddns is not set
