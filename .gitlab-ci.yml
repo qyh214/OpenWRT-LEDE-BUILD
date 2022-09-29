@@ -129,16 +129,16 @@ build_r4s:
     ####- echo $COWTRANSFER_URL
     ###export COWTRANSFER_URL=$(cat cowtransfer.log | grep https | cut -f3 -d" ")
     ###echo $COWTRANSFER_URL
-    ### 上传到七牛云
-    echo 'Upload Firmware To Qiniu'
-    cd /builds/shihuang/routerbuild/qiniu
-    #### https://devtools.qiniu.com/qshell-v2.6.2-linux-amd64.tar.gz
-    chmod +x qshell
-    ./qshell account $qAK $qSK qiniu --overwrite
-    ##### squashfs-sysupgrade.img.gz
-    ./qshell fput staticdownload openwrt-rockchip-armv8-friendlyarm_nanopi-r4s-squashfs-sysupgrade.img.gz /builds/shihuang/routerbuild/bin/`date   +%Y%m%d`-$CI_JOB_ID-openwrt-rockchip-armv8-friendlyarm_nanopi-r4s-squashfs-sysupgrade.img.gz --overwrite
-    ##### .config
-    ./qshell fput staticdownload r4s.config /builds/shihuang/routerbuild/bin/.config --overwrite
+    #### 上传到七牛云
+    #echo 'Upload Firmware To Qiniu'
+    #cd /builds/shihuang/routerbuild/qiniu
+    ##### https://devtools.qiniu.com/qshell-v2.6.2-linux-amd64.tar.gz
+    #chmod +x qshell
+    #./qshell account $qAK $qSK qiniu --overwrite
+    ###### squashfs-sysupgrade.img.gz
+    #./qshell fput staticdownload openwrt-rockchip-armv8-friendlyarm_nanopi-r4s-squashfs-sysupgrade.img.gz /builds/shihuang/routerbuild/bin/`date   +%Y%m%d`-$CI_JOB_ID-openwrt-rockchip-armv8-friendlyarm_nanopi-r4s-squashfs-sysupgrade.img.gz --overwrite
+    ###### .config
+    #./qshell fput staticdownload r4s.config /builds/shihuang/routerbuild/bin/.config --overwrite
     # 发布release
     echo 'Release R4S'
     curl --header 'Content-Type: application/json' --header "PRIVATE-TOKEN: $user_token" --data '{ "name": "'"`date   +%Y%m%d`"'-R4S-'"$CI_JOB_ID"'-snapshot", "tag_name": "CI-'"$CI_JOB_ID"'", "ref": "'"$CI_COMMIT_BRANCH"'", "description": "说明：<br />固件介绍页面：[https://www.qyh.name/807/](https://www.qyh.name/807/)<br />默认管理地址：192.168.2.1<br />默认账号：root<br />默认密码：password<br />默认主题：argon<br /><br />img.gz格式文件直接使用，无需解压。如果下载的扩展名是zip需要解压，里面img.gz是固件。<br />将固件img.gz使用烧录工具烧录或者在路由器网页管理后台直接上传升级使用<br />管理后台升级仅限于之前曾经使用在本处编译的固件并且并非大版本之间更新，大版本更新可能会清除所有配置信息或者请直接烧录重置全部数据。<br /><br />烧录工具下载：<br />[balenaEtcher](https://www.balena.io/etcher/)<br /><br />固件下载地址：<br />🔗[本地下载（内网用户）](http://192.168.2.100:800/shihuang/routerbuild/-/jobs/'"$CI_JOB_ID"'/artifacts/download)<br />【说明】链接有效期为编译成功后6个月，仅限内网用户使用，外网用户建议使用下面的其他外链地址下载。<br /><br />🔗[本地下载（外网用户）](http://git.qyh.name/shihuang/routerbuild/-/jobs/'"$CI_JOB_ID"'/artifacts/download)<br />【说明】链接有效期为编译成功后6个月，下载限速，可能下载缓慢或出现中断，不推荐外网用户使用，外网用户建议使用下面的其他外链地址下载。<br /><br /><br />🔗[七牛云(固件)](http://down.cdn.qyh0214.com/openwrt-rockchip-armv8-friendlyarm_nanopi-r4s-squashfs-sysupgrade.img.gz)<br />【说明】链接有效期为长期，在每次编译成功后即覆盖为新版本。<br />🔗[七牛云(固件CI配置文件config)](http://down.cdn.qyh0214.com/r4s.config)<br />【说明】链接有效期为长期，在每次编译成功后即覆盖为新版本。此文件主要用于开发者使用，一般无需下载。<br />"}' --request POST http://git.qyh.name/api/v4/projects/41/releases
