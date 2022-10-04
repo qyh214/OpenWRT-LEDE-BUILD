@@ -18,7 +18,7 @@ build_r4s:
     - git clone https://github.com/coolsnowwolf/lede.git
     - cd /builds/shihuang/routerbuild/lede
     # 添加helloworld源
-    - sed -i '$a\src-git helloworld https://github.com/fw876/helloworld' ./feeds.conf.default
+    - sed -i '$a\src-git passwall https://github.com/xiaorouji/openwrt-passwall' ./feeds.conf.default
     - ./scripts/feeds update -a
     - ./scripts/feeds install -a
     # 额外改动
@@ -54,10 +54,8 @@ build_r4s:
     cat >> .config <<EOF
     CONFIG_PACKAGE_ipv6helper=y
     CONFIG_PACKAGE_dnsmasq_full_dhcpv6=y
-    CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Xray=y
-    CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Trojan=y
-    CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_V2ray_Plugin=y
     CONFIG_PACKAGE_luci-app-uugamebooster=y
+    CONFIG_PACKAGE_luci-app-passwall=y
     EOF
     # LuCI主题:
     cat >> .config <<EOF
