@@ -155,7 +155,7 @@ build_r4s:
  
   artifacts:
     #`date   +%Y%m%d`-$CI_JOB_ID-openwrt-router-r4s
-    name: "'"date   +%Y%m%d"'-$CI_JOB_ID-openwrt-router-r4s"
+    name: "$CI_JOB_ID-openwrt-router-r4s"
     expire_in: 6 months
     paths:
       - /builds/shihuang/routerbuild/bin
