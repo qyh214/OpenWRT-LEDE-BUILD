@@ -23,7 +23,7 @@ build_r4s:
     - mkdir openclash
     - cd /builds/shihuang/routerbuild/lede/openclash
     - wget https://github.com/vernesong/OpenClash/archive/refs/heads/master.zip
-    - tar -xzvf master.zip
+    - unzip master.zip
     - ls
     - cd /builds/shihuang/routerbuild/lede/package
     - mkdir luci-app-openclash
