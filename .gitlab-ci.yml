@@ -94,6 +94,7 @@ build_r4s:
     # CONFIG_PACKAGE_luci-app-vlmcsd is not set
     # CONFIG_PACKAGE_luci-app-wol is not set
     # CONFIG_PACKAGE_luci-app-zerotier is not set
+    # CONFIG_PACKAGE_luci-app-ssr-plus is not set
     EOF
     # 
     # ========================固件定制部分结束========================
