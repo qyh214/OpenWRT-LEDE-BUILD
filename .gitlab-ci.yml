@@ -17,8 +17,8 @@ build_r4s:
     - cd /builds/shihuang/routerbuild
     - git clone https://github.com/coolsnowwolf/lede.git
     - cd /builds/shihuang/routerbuild/lede
-    # 添加helloworld源
-    - sed -i '$a\src-git helloworld https://github.com/fw876/helloworld' ./feeds.conf.default
+    ## 添加helloworld源
+    #- sed -i '$a\src-git helloworld https://github.com/fw876/helloworld' ./feeds.conf.default
     # 添加openclash
     - mkdir openclash
     - cd /builds/shihuang/routerbuild/lede/openclash
