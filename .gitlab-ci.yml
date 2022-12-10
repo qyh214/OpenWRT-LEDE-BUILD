@@ -16,10 +16,11 @@ build_r4s:
     # 获取最新lede数据
     - cd /builds/shihuang/routerbuild
     - git clone https://github.com/coolsnowwolf/lede.git
-    - cd /builds/shihuang/routerbuild/lede
     ## 添加helloworld源
+    #- cd /builds/shihuang/routerbuild/lede
     #- sed -i '$a\src-git helloworld https://github.com/fw876/helloworld' ./feeds.conf.default
     # 添加openclash
+    - cd /builds/shihuang/routerbuild/lede
     - mkdir openclash
     - cd /builds/shihuang/routerbuild/lede/openclash
     - wget https://github.com/vernesong/OpenClash/archive/refs/heads/master.zip
