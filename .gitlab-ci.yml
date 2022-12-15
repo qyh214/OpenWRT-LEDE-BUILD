@@ -71,6 +71,9 @@ build_r4s:
     CONFIG_PACKAGE_ipv6helper=y
     CONFIG_PACKAGE_dnsmasq_full_dhcpv6=y
     CONFIG_PACKAGE_luci-app-openclash=y
+    CONFIG_PACKAGE_ip6tables-extra=y
+    CONFIG_PACKAGE_ip6tables-mod=y
+    CONFIG_PACKAGE_kmod-nft-tproxy=y
     CONFIG_PACKAGE_luci-app-uugamebooster=y
     CONFIG_PACKAGE_luci-app-wrtbwmon=y
     EOF
