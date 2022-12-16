@@ -73,6 +73,9 @@ build_r4s:
     CONFIG_PACKAGE_luci-app-openclash=y
     CONFIG_PACKAGE_luci-app-uugamebooster=y
     CONFIG_PACKAGE_luci-app-wrtbwmon=y
+    CONFIG_PACKAGE_ip6tables-extra=y
+    CONFIG_PACKAGE_ip6tables-mod-nat=y
+    CONFIG_PACKAGE_kmod-nft-tproxy=y
     EOF
     # LuCI主题:
     cat >> .config <<EOF
