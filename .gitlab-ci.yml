@@ -35,8 +35,8 @@ build_r4s:
     #- mv /builds/shihuang/routerbuild/lede/adguard/luci-app-adguardhome-master /builds/shihuang/routerbuild/lede/package/luci-app-adguardhome
     # 合并代码
     - cd /builds/shihuang/routerbuild/lede
-    - ./scripts/feeds update -a
-    - ./scripts/feeds install -a
+    # fix https://github.com/coolsnowwolf/lede/issues/10547
+    - ./scripts/feeds update -a && ./scripts/feeds install -a
     # 额外改动
     ## 参考：
     ## - https://github.com/msylgj/R2S-R4S-OpenWrt/blob/21.02/SCRIPTS/prepare_package.sh
