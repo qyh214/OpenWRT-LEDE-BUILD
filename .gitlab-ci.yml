@@ -19,11 +19,11 @@ build_r4s:
     ## 添加helloworld源
     #- cd /builds/shihuang/routerbuild/lede
     #- sed -i '$a\src-git helloworld https://github.com/fw876/helloworld' ./feeds.conf.default
-    # revert for build temp fix
-    - cd /builds/shihuang/routerbuild/lede
-    - git config --global user.email "CI@ci.com"
-    - git config --global user.name "ci"
-    - git revert 7df2cabf9acdab6b54626af095670b1f0b6f7ddf
+    ## revert for build temp fix
+    #- cd /builds/shihuang/routerbuild/lede
+    #- git config --global user.email "CI@ci.com"
+    #- git config --global user.name "ci"
+    #- git revert 7df2cabf9acdab6b54626af095670b1f0b6f7ddf
     # 添加openclash
     - cd /builds/shihuang/routerbuild/lede
     - mkdir openclash
