@@ -74,6 +74,7 @@ build_r4s:
     # 常用LuCI插件和额外包选择:
     cat >> .config <<EOF
     CONFIG_PACKAGE_ipv6helper=y
+    CONFIG_PACKAGE_autosamba=y
     CONFIG_PACKAGE_dnsmasq_full_dhcpv6=y
     CONFIG_PACKAGE_luci-app-diskman=y
     CONFIG_PACKAGE_luci-app-openclash=y
@@ -90,7 +91,6 @@ build_r4s:
     # 取消编译(不要删除被缩进的注释符号):
     cat >> .config <<EOF
     # CONFIG_PACKAGE_luci-app-cpufreq is not set
-    # CONFIG_PACKAGE_luci-app-diskman is not set
     # CONFIG_PACKAGE_luci-app-hd-idle is not set
     # CONFIG_PACKAGE_luci-app-ipsec-server is not set
     # CONFIG_PACKAGE_luci-app-openvpn-server is not set
@@ -101,7 +101,6 @@ build_r4s:
     # CONFIG_PACKAGE_luci-app-ttyd is not set
     # CONFIG_PACKAGE_luci-app-usb-printer is not set
     # CONFIG_PACKAGE_luci-app-wireguard is not set
-    # CONFIG_PACKAGE_autosamba is not set
     # CONFIG_PACKAGE_luci-app-accesscontrol is not set
     # CONFIG_PACKAGE_luci-app-adbyby-plus is not set
     # CONFIG_PACKAGE_luci-app-ddns is not set
