@@ -1,5 +1,5 @@
-## 路由器固件[lede](https://github.com/coolsnowwolf/lede)(openwrt)自动编译
-固件来源：[github](https://github.com/coolsnowwolf/lede)
+## 路由器固件[lede](https://github.com/coolsnowwolf/lede)(openwrt)自动编译（Gitlab CI自用版）
+固件源码：[github](https://github.com/coolsnowwolf/lede)
 
 --------------
 * [编译状态](#编译状态)
