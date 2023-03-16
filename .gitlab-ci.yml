@@ -19,22 +19,13 @@ build_r4s:
     # 获取最新lede数据
     - cd /builds/shihuang/routerbuild
     # depth1丢弃历史更新以加快拉取速度，这将导致无法回退到特定hash
-    # - git clone https://github.com/coolsnowwolf/lede.git
     - git clone --depth 1 https://github.com/coolsnowwolf/lede.git
-    ## 添加helloworld源
-    #- cd /builds/shihuang/routerbuild/lede
-    #- sed -i '$a\src-git helloworld https://github.com/fw876/helloworld' ./feeds.conf.default
-    ## revert for build temp fix（激活这个的话上面的clone不能depth 1）
-    #- cd /builds/shihuang/routerbuild/lede
-    #- git revert 7df2cabf9acdab6b54626af095670b1f0b6f7ddf
-    # 添加openclash
+    # 添加openclash（临时仓库）
     - cd /builds/shihuang/routerbuild/lede
     - mkdir ./openclash && cd ./openclash
     #- cd /builds/shihuang/routerbuild/lede/openclash
     ## openclash使用dev分支
     - git clone --branch "dev" --single-branch --depth 1 https://github.com/vernesong/OpenClash.git
-    #- wget https://github.com/vernesong/OpenClash/archive/refs/heads/dev.zip
-    #- unzip dev.zip
     ## openclash将几个内核最新版直接注入源码
     ## 参考：https://github.com/450717565/lede/blob/master/.github/workflows/openwrt-ci.yml
     - cd /builds/shihuang/routerbuild/lede/openclash/OpenClash/luci-app-openclash/root/etc/openclash
@@ -52,13 +43,11 @@ build_r4s:
     - rm -rf ./*.gz
     ## 将openclash推入openwrt package
     - mv /builds/shihuang/routerbuild/lede/openclash/OpenClash/luci-app-openclash /builds/shihuang/routerbuild/lede/package
-    ## 添加adguardhome
-    #- cd /builds/shihuang/routerbuild/lede
-    #- mkdir adguard
-    #- cd /builds/shihuang/routerbuild/lede/adguard
-    #- wget https://github.com/kongfl888/luci-app-adguardhome/archive/refs/heads/master.zip
-    #- unzip master.zip
-    #- mv /builds/shihuang/routerbuild/lede/adguard/luci-app-adguardhome-master /builds/shihuang/routerbuild/lede/package/luci-app-adguardhome
+    # 添加主题 Design到package下
+    - cd /builds/shihuang/routerbuild/lede
+    - git clone --depth=1 https://github.com/gngpp/luci-theme-design.git package/luci-theme-design
+    # 添加主题 Design Config到package下
+    - git clone --depth=1 https://github.com/gngpp/luci-app-design-config.git package/luci-app-design-config
     # 合并代码
     - cd /builds/shihuang/routerbuild/lede
     - ./scripts/feeds update -a
@@ -70,7 +59,7 @@ build_r4s:
     ## 修改默认wan的ip地址为192.168.2.1
     - sed -i 's/192.168.1.1/192.168.2.1/g' package/base-files/files/bin/config_generate
     ## 修改默认主题为argon（必须选择这个主题安装）
-    - sed -i '/uci commit luci/i\uci set luci.main.mediaurlbase="/luci-static/argon"' `find package -type f -path '*/default-settings/files/zzz-default-settings'`
+    - sed -i 's/luci-theme-bootstrap/luci-theme-design/' feeds/luci/collections/luci/Makefile
 
   script: |
     echo 'clean config'
@@ -95,6 +84,8 @@ build_r4s:
     # 常用LuCI插件和额外包选择:
     cat >> .config <<EOF
     CONFIG_PACKAGE_ipv6helper=y
+    CONFIG_PACKAGE_ip6tables-extra=y
+    CONFIG_PACKAGE_ip6tables-mod-nat=y
     CONFIG_PACKAGE_autosamba=y
     CONFIG_PACKAGE_dnsmasq_full_dhcpv6=y
     CONFIG_PACKAGE_luci-app-diskman=y
@@ -104,7 +95,8 @@ build_r4s:
     EOF
     # LuCI主题:
     cat >> .config <<EOF
-    CONFIG_PACKAGE_luci-theme-argon-mod=y
+    CONFIG_PACKAGE_luci-theme-design=y
+    CONFIG_PACKAGE_luci-app-design-config=y
     EOF
     # 取消编译(不要删除被缩进的注释符号):
     cat >> .config <<EOF
