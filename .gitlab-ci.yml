@@ -26,14 +26,14 @@ build_r4s:
     #- git revert 7df2cabf9acdab6b54626af095670b1f0b6f7ddf
     # 添加openclash
     - cd /builds/shihuang/routerbuild/lede
-    - mkdir openclash
-    - cd /builds/shihuang/routerbuild/lede/openclash
+    - mkdir ./openclash && cd ./openclash
+    #- cd /builds/shihuang/routerbuild/lede/openclash
     - git config --global user.email "CI@ci.com"
     - git config --global user.name "ci"
     - git clone --branch "dev" --single-branch https://github.com/vernesong/OpenClash.git
     #- wget https://github.com/vernesong/OpenClash/archive/refs/heads/dev.zip
     #- unzip dev.zip
-    - cd /builds/shihuang/routerbuild/lede/openclash/OpenClash-dev/luci-app-openclash/root/etc/openclash
+    - cd /builds/shihuang/routerbuild/lede/openclash/OpenClash/luci-app-openclash/root/etc/openclash
     - mkdir ./core && cd ./core
     - TUN_VER=$(curl -s https://raw.githubusercontent.com/vernesong/OpenClash/core/dev/core_version | sed -n '2p')
     - curl -SsL -o ./tun.gz https://github.com/vernesong/OpenClash/raw/core/dev/premium/clash-linux-arm64-$TUN_VER.gz
@@ -46,7 +46,7 @@ build_r4s:
     - tar -zxf ./dev.tar.gz
     - chmod +x ./clash*
     - rm -rf ./*.gz
-    - mv /builds/shihuang/routerbuild/lede/openclash/OpenClash-dev/luci-app-openclash /builds/shihuang/routerbuild/lede/package
+    - mv /builds/shihuang/routerbuild/lede/openclash/OpenClash/luci-app-openclash /builds/shihuang/routerbuild/lede/package
     ## 添加adguardhome
     #- cd /builds/shihuang/routerbuild/lede
     #- mkdir adguard
