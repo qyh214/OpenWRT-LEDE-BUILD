@@ -30,7 +30,8 @@ build_r4s:
     ## 参考：https://github.com/450717565/lede/blob/master/.github/workflows/openwrt-ci.yml
     - cd /builds/shihuang/routerbuild/lede/openclash/OpenClash/luci-app-openclash/root/etc/openclash
     - mkdir ./core && cd ./core
-    - TUN_VER=$(curl -s https://raw.githubusercontent.com/vernesong/OpenClash/core/dev/core_version | sed -n '2p')
+    - export TUN_VER=$(curl -s https://raw.githubusercontent.com/vernesong/OpenClash/core/dev/core_version | sed -n '2p')
+    - echo $TUN_VER
     - curl -SsL -o ./tun.gz https://github.com/vernesong/OpenClash/raw/core/dev/premium/clash-linux-arm64-$TUN_VER.gz
     - gzip -d ./tun.gz
     - mv ./tun ./clash_tun
