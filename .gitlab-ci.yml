@@ -67,6 +67,7 @@ build_r4s:
     #
     # ========================固件定制部分========================
     # 参考：https://github.com/DHDAXCW/NanoPi-R4S-R4SE/blob/main/configs/lean/lean.config
+    # https://doc.openwrt.cc/1-General/4-Firmware-Format/
     # 
     # 编译r4s固件:
     cat >> .config <<EOF
@@ -91,6 +92,7 @@ build_r4s:
     CONFIG_PACKAGE_luci-app-openclash=y
     CONFIG_PACKAGE_luci-app-uugamebooster=y
     CONFIG_PACKAGE_luci-app-wrtbwmon=y
+    CONFIG_PACKAGE_luci-app-ttyd=y
     EOF
     # LuCI主题:
     cat >> .config <<EOF
