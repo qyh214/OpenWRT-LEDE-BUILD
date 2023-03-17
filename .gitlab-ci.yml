@@ -135,6 +135,7 @@ build_r4s:
     make clean
     
     echo 'Make download'
+    echo -e "$(nproc) thread download"
     make download -j$(nproc) || make download -j1
     echo 'Compile firmware'
     echo -e "$(nproc) thread compile"
