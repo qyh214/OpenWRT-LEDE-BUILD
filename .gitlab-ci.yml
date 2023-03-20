@@ -18,14 +18,13 @@ build_r4s:
     - git config --global user.name "ci"
     # 获取最新lede数据
     - cd /builds/shihuang/routerbuild
-    # depth1丢弃历史更新以加快拉取速度，这将导致无法回退到特定hash
-    - git clone --depth 1 https://github.com/coolsnowwolf/lede.git
-    # 添加openclash
+    # 只拉取最近一次提交的master分支的源码
+    - git clone --branch "master" --single-branch --depth 1 https://github.com/coolsnowwolf/lede.git
+    # 进入lede并添加openclash
     - cd /builds/shihuang/routerbuild/lede
     ## openclash使用dev分支到package下
     - git clone --branch "dev" --single-branch --depth 1 https://github.com/vernesong/OpenClash.git package/openclash
-    ## openclash将几个内核最新版直接注入源码
-    ## 参考：https://github.com/450717565/lede/blob/master/.github/workflows/openwrt-ci.yml
+    ## openclash将几个内核最新版直接注入源码中，使用dev分支
     - cd /builds/shihuang/routerbuild/lede/package/openclash/luci-app-openclash/root/etc/openclash
     - mkdir ./core && cd ./core
     - export TUN_VER=$(curl -s https://raw.githubusercontent.com/vernesong/OpenClash/core/dev/core_version | sed -n '2p')
@@ -40,11 +39,11 @@ build_r4s:
     - tar -zxf ./dev.tar.gz
     - chmod +x ./clash*
     - rm -rf ./*.gz
-    # 添加主题 Design到package下
+    # 添加主题 Design到package下（main分支是lua，适用于lede，openwrt21采用js，需要用js分支）
     - cd /builds/shihuang/routerbuild/lede
-    - git clone --depth=1 https://github.com/gngpp/luci-theme-design.git package/luci-theme-design
+    - git clone --branch "main" --single-branch --depth 1 https://github.com/gngpp/luci-theme-design.git package/luci-theme-design
     # 添加主题 Design Config到package下
-    - git clone --depth=1 https://github.com/gngpp/luci-app-design-config.git package/luci-app-design-config
+    - git clone --branch "master" --single-branch --depth 1 https://github.com/gngpp/luci-app-design-config.git package/luci-app-design-config
     # 合并代码
     - cd /builds/shihuang/routerbuild/lede
     - ./scripts/feeds update -a
