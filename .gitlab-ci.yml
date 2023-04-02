@@ -123,12 +123,14 @@ build_r4s:
     make clean
     
     echo 'Make download'
-    echo -e "$(nproc) thread download"
-    make download -j$(nproc) || make download -j1
+    #echo -e "$(nproc) thread download"
+    #make download -j$(nproc) || make download -j1
+    make download -j1
     echo 'Compile firmware'
     echo -e "$(nproc) thread compile"
     # 设置为非root用户编译FORCE_UNSAFE_CONFIGURE=1
-    make FORCE_UNSAFE_CONFIGURE=1 -j$(nproc) || make -j1
+    #make FORCE_UNSAFE_CONFIGURE=1 -j$(nproc) || make -j1
+    make FORCE_UNSAFE_CONFIGURE=1 -j1
     # 保存编译后固件（编译后文件放置在bin目录下）
     echo 'Assemble artifact'
     # 设置时间标号
