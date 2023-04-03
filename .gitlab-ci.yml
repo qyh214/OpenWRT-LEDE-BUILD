@@ -129,7 +129,7 @@ build_r4s:
     #echo -e "$(nproc) thread compile"
     # 设置为非root用户编译FORCE_UNSAFE_CONFIGURE=1
     #make FORCE_UNSAFE_CONFIGURE=1 -j$(nproc) || make -j1
-    make FORCE_UNSAFE_CONFIGURE=1 -j1 V=s
+    make FORCE_UNSAFE_CONFIGURE=1 -j1
     # 保存编译后固件（编译后文件放置在bin目录下）
     echo 'Assemble artifact'
     # 设置时间标号
