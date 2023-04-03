@@ -86,8 +86,8 @@ build_r4s:
     # 常用LuCI插件和额外包选择:
     cat >> .config <<EOF
     CONFIG_PACKAGE_ipv6helper=y
-    CONFIG_PACKAGE_ip6tables-extra=y
-    CONFIG_PACKAGE_ip6tables-mod-nat=y
+    ##CONFIG_PACKAGE_ip6tables-extra=y
+    ##CONFIG_PACKAGE_ip6tables-mod-nat=y
     CONFIG_PACKAGE_luci-app-diskman=y
     CONFIG_PACKAGE_luci-app-openclash=y
     CONFIG_PACKAGE_luci-app-uugamebooster=y
@@ -124,12 +124,12 @@ build_r4s:
     echo 'Make download'
     #echo -e "$(nproc) thread download"
     #make download -j$(nproc) || make download -j1
-    make download -j1
+    make download -j4
     echo 'Compile firmware'
     #echo -e "$(nproc) thread compile"
     # 设置为非root用户编译FORCE_UNSAFE_CONFIGURE=1
     #make FORCE_UNSAFE_CONFIGURE=1 -j$(nproc) || make -j1
-    make FORCE_UNSAFE_CONFIGURE=1 -j1
+    make FORCE_UNSAFE_CONFIGURE=1 -j4
     # 保存编译后固件（编译后文件放置在bin目录下）
     echo 'Assemble artifact'
     # 设置时间标号
