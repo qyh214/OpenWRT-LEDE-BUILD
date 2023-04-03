@@ -23,7 +23,7 @@ build_r4s:
     # 进入lede并添加openclash
     - cd /builds/shihuang/routerbuild/lede
     ## openclash使用dev分支到package下
-    - git clone --branch "dev" --single-branch --depth 1 https://github.com/vernesong/OpenClash.git package/openclash
+    - git clone --branch "dev" --single-branch --depth 3 https://github.com/vernesong/OpenClash.git package/openclash
     ## openclash将几个内核最新版直接注入源码中，使用dev分支
     - cd /builds/shihuang/routerbuild/lede/package/openclash/luci-app-openclash/root/etc/openclash
     - mkdir ./core && cd ./core
@@ -41,9 +41,9 @@ build_r4s:
     - rm -rf ./*.gz
     # 添加主题 Design到package下（main分支是lua，适用于lede，openwrt21采用js，需要用js分支）
     - cd /builds/shihuang/routerbuild/lede
-    - git clone --branch "main" --single-branch --depth 1 https://github.com/gngpp/luci-theme-design.git package/luci-theme-design
+    - git clone --branch "main" --single-branch --depth 3 https://github.com/gngpp/luci-theme-design.git package/luci-theme-design
     # 添加主题 Design Config到package下
-    - git clone --branch "master" --single-branch --depth 1 https://github.com/gngpp/luci-app-design-config.git package/luci-app-design-config
+    - git clone --branch "master" --single-branch --depth 3 https://github.com/gngpp/luci-app-design-config.git package/luci-app-design-config
     # 合并代码
     - cd /builds/shihuang/routerbuild/lede
     - ./scripts/feeds update -a
@@ -86,8 +86,6 @@ build_r4s:
     # 常用LuCI插件和额外包选择:
     cat >> .config <<EOF
     CONFIG_PACKAGE_ipv6helper=y
-    ##CONFIG_PACKAGE_ip6tables-extra=y
-    ##CONFIG_PACKAGE_ip6tables-mod-nat=y
     CONFIG_PACKAGE_luci-app-diskman=y
     CONFIG_PACKAGE_luci-app-openclash=y
     CONFIG_PACKAGE_luci-app-uugamebooster=y
