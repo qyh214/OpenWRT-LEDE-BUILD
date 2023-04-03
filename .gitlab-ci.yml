@@ -12,7 +12,6 @@ build_r4s:
   before_script: 
     - apt-get update
     - DEBIAN_FRONTEND=noninteractive apt-get install -y tzdata
-    - docker rmi `docker images -q`
     - echo "Deleting files, please wait ..."
     - rm -rf /usr/share/dotnet /etc/mysql /etc/php
     - apt update
