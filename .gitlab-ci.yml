@@ -12,18 +12,30 @@ build_r4s:
   before_script: 
     - apt-get update
     - DEBIAN_FRONTEND=noninteractive apt-get install -y tzdata
+    - docker rmi `docker images -q`
+    - echo "Deleting files, please wait ..."
+    - rm -rf /usr/share/dotnet /etc/mysql /etc/php
+    - apt update
+    - apt -y purge azure-cli* docker* ghc* zulu* llvm* firefox google* dotnet* powershell* openjdk* mysql* php* mongodb* dotnet* moby* snap*
+    - apt -y full-upgrade
     - apt-get install -y ack antlr3 aria2 asciidoc autoconf automake autopoint binutils bison build-essential bzip2 ccache cmake cpio curl device-tree-compiler fastjar flex gawk gettext gcc-multilib g++-multilib git gperf haveged help2man intltool libc6-dev-i386 libelf-dev libglib2.0-dev libgmp3-dev libltdl-dev libmpc-dev libmpfr-dev libncurses5-dev libncursesw5-dev libreadline-dev libssl-dev libtool lrzsz mkisofs msmtp nano ninja-build p7zip p7zip-full patch pkgconf python2.7 python3 python3-pip libpython3-dev qemu-utils rsync scons squashfs-tools subversion swig texinfo uglifyjs upx-ucl unzip vim wget xmlto xxd zlib1g-dev
+    - apt -y autoremove --purge
+    - apt clean
     # git预设置-CI专用
     - git config --global user.email "CI@ci.com"
     - git config --global user.name "ci"
     # 获取最新lede数据
     - cd /builds/shihuang/routerbuild
     # 只拉取最近一次提交的master分支的源码
-    - git clone --branch "master" --single-branch --depth 1 https://github.com/coolsnowwolf/lede.git
+    - git clone --branch "master" --single-branch https://github.com/coolsnowwolf/lede.git
+    # 合并代码
+    - cd /builds/shihuang/routerbuild/lede
+    - ./scripts/feeds update -a
+    - ./scripts/feeds install -a
     # 进入lede并添加openclash
     - cd /builds/shihuang/routerbuild/lede
     ## openclash使用dev分支到package下
-    - git clone --branch "dev" --single-branch --depth 3 https://github.com/vernesong/OpenClash.git package/openclash
+    - git clone --branch "dev" --single-branch --depth 1 https://github.com/vernesong/OpenClash.git package/openclash
     ## openclash将几个内核最新版直接注入源码中，使用dev分支
     - cd /builds/shihuang/routerbuild/lede/package/openclash/luci-app-openclash/root/etc/openclash
     - mkdir ./core && cd ./core
@@ -44,10 +56,7 @@ build_r4s:
     - git clone --branch "main" --single-branch --depth 3 https://github.com/gngpp/luci-theme-design.git package/luci-theme-design
     # 添加主题 Design Config到package下
     - git clone --branch "master" --single-branch --depth 3 https://github.com/gngpp/luci-app-design-config.git package/luci-app-design-config
-    # 合并代码
-    - cd /builds/shihuang/routerbuild/lede
-    - ./scripts/feeds update -a
-    - ./scripts/feeds install -a
+
     # 额外改动
     ## 参考：
     ## - https://github.com/msylgj/R2S-R4S-OpenWrt/blob/21.02/SCRIPTS/prepare_package.sh
