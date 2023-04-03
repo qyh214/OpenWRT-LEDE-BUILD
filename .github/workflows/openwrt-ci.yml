@@ -65,7 +65,7 @@ jobs:
           git clone --branch "master" --single-branch https://github.com/gngpp/luci-app-design-config.git package/luci-app-design-config
           
           git clone --branch "dev" --single-branch https://github.com/vernesong/OpenClash.git package/openclash
-          cd ./lede/package/openclash/luci-app-openclash/root/etc/openclash
+          cd ./package/openclash/luci-app-openclash/root/etc/openclash
           mkdir ./core && cd ./core
           export TUN_VER=$(curl -s https://raw.githubusercontent.com/vernesong/OpenClash/core/dev/core_version | sed -n '2p')
           echo $TUN_VER
