@@ -20,6 +20,8 @@ permissions:
 jobs:
 
   build_openwrt:
+    permissions:
+      contents: write # for release creation
 
     name: Build OpenWrt Firmware
 
@@ -55,7 +57,7 @@ jobs:
           ./scripts/feeds update -a
           ./scripts/feeds install -a
       
-      - name: Custom
+      - name: Custom Settings
         run: |
           cd ./lede
           sed -i 's/192.168.1.1/192.168.2.1/g' package/base-files/files/bin/config_generate
@@ -80,7 +82,7 @@ jobs:
           chmod +x ./clash*
           rm -rf ./*.gz
 
-      - name: Custom configure file
+      - name: Custom configure file And Generate configuration file
         run: |
           cd ./lede
           rm -f ./.config*
@@ -224,6 +226,7 @@ jobs:
           CONFIG_TARGET_ROOTFS_TARGZ=y
           CONFIG_TARGET_ROOTFS_SQUASHFS=y
           CONFIG_TARGET_IMAGES_GZIP=y
+          CONFIG_TARGET_ROOTFS_EXT4FS=y
           EOF
           # 常用LuCI插件和额外包选择:
           cat >> .config <<EOF
@@ -248,6 +251,11 @@ jobs:
           # CONFIG_PACKAGE_luci-app-ssr-plus is not set
           # CONFIG_PACKAGE_luci-app-vlmcsd is not set
           # CONFIG_PACKAGE_luci-app-wol is not set
+          # CONFIG_PACKAGE_luci-app-xlnetacc is not set
+          # CONFIG_PACKAGE_luci-app-zerotier is not set
+          # CONFIG_PACKAGE_luci-app-wireguard is not set
+          # CONFIG_PACKAGE_luci-app-ipsec-vpnd is not set
+          # CONFIG_PACKAGE_luci-app-adbyby-plus is not set
           EOF
 
           # 
@@ -273,6 +281,8 @@ jobs:
           du -h --max-depth=1 ./ --exclude=build_dir --exclude=bin
           du -h --max-depth=1 ./build_dir
           du -h --max-depth=1 ./bin
+          export BuildDate="`date   +%Y%m%d`"
+          echo $BuildDate
 
       - name: Assemble artifact
         run: |
@@ -280,9 +290,21 @@ jobs:
           rm -rf ./artifact/
           mkdir -p ./artifact/
           find ./bin/targets/ -name "*sysupgrade*img*" | xargs -i mv -f {} ./artifact/
+          cp .config ./artifact/.config
 
       - name: Upload artifact
         uses: actions/upload-artifact@master
         with:
-          name: OpenWrt firmware
+          name: R4S_build_${{env.BuildDate}}
           path: ./lede/artifact/
+
+      - name: Release Firmware
+        uses: softprops/action-gh-release@master
+        with:
+          tag_name: R4S_build_${{env.BuildDate}}
+          files: ./lede/artifact/*.*
+          body: |
+            地址：192.168.2.1
+            密码：password
+
+      
