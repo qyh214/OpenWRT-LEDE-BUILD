@@ -1,4 +1,4 @@
-## 路由器固件[lede](https://github.com/coolsnowwolf/lede)(openwrt)自动编译（Gitlab CI自用版）
+## 路由器固件[lede](https://github.com/coolsnowwolf/lede)(openwrt)自动编译（小秦自用版）
 固件源码：[github](https://github.com/coolsnowwolf/lede)
 
 --------------
@@ -9,11 +9,13 @@
 --------------
 
 ### 编译状态
-[![pipeline status](http://git.qyh.name/shihuang/routerbuild/badges/master/pipeline.svg)](http://git.qyh.name/shihuang/routerbuild/commits/master)
+[![github pipeline status](https://github.com/qyh214/OpenWRT-LEDE-BUILD/actions/workflows/openwrt-ci.yml/badge.svg)](https://github.com/qyh214/OpenWRT-LEDE-BUILD/actions/workflows/openwrt-ci.yml)
 
-仅编译友善R4S的软路由固件。
+[![gitlab pipeline status](http://git.qyh.name/shihuang/routerbuild/badges/master/pipeline.svg)](http://git.qyh.name/shihuang/routerbuild/commits/master)
 
-编译的固件最多保存6个月，如有需要请自行备份历次固件。
+仅编译友善R4S的软路由固件，请注意执行的路由器固件分区大小，不同分区请勿混合使用。
+
+Gitlab：编译的固件最多保存6个月，如有需要请自行备份历次固件。
 
 ### 更新建议
 重大版本或重大改动时，建议不保留配置全新更新。
@@ -35,7 +37,9 @@
 
 [百度网盘下载](https://pan.baidu.com/s/1J7tX4Qsu2hF_cmXrhqsogQ)(提取码：r6ds)(请注意型号，可能更新不及时)
 
-[release页面下载](http://git.qyh.name/shihuang/routerbuild/-/releases)（请注意型号以及外链说明）
+[gitlab release页面下载](http://git.qyh.name/shihuang/routerbuild/-/releases)（请注意型号以及外链说明）
+
+[github release页面下载](https://github.com/qyh214/OpenWRT-LEDE-BUILD/releases)（请注意型号以及外链说明）
 
 #### 历次固件本地下载（建议内网用户使用，外网用户可以查看百度网盘）
 [点此访问](http://git.qyh.name/shihuang/routerbuild/pipelines)
