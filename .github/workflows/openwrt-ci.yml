@@ -281,7 +281,7 @@ jobs:
           du -h --max-depth=1 ./build_dir
           du -h --max-depth=1 ./bin
           export BuildDate="`date   +%Y%m%d`"
-          echo $BuildDate >> $GITHUB_ENV
+          echo "BuildDate=$BuildDate" >> $GITHUB_ENV
 
       - name: Assemble artifact
         run: |
