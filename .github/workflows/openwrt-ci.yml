@@ -290,7 +290,16 @@ jobs:
           mkdir -p ./artifact/
           find ./bin/targets/ -name "*sysupgrade*img*" | xargs -i mv -f {} ./artifact/
           cp ./.config ./artifact/r4s_config.txt
-
+      
+      - name: Upload to Qinu
+        run: |
+          cd ./qiniu
+          chmod +x qshell
+          ./qshell account ${{vars.qAK}} ${{vars.qSK}} qiniu --overwrite
+          ./qshell fput staticdownload openwrt-rockchip-armv8-friendlyarm_nanopi-r4s-squashfs-sysupgrade.img.gz ./lede/artifact/openwrt-rockchip-armv8-friendlyarm_nanopi-r4s-squashfs-sysupgrade.img.gz --overwrite
+          ./qshell fput staticdownload openwrt-rockchip-armv8-friendlyarm_nanopi-r4s-ext4-sysupgrade.img.gz ./lede/artifact/openwrt-rockchip-armv8-friendlyarm_nanopi-r4s-ext4-sysupgrade.img.gz --overwrite
+          ./qshell fput staticdownload r4s.config ./lede/artifact/r4s_config.txt --overwrite
+    
       - name: Upload artifact
         uses: actions/upload-artifact@master
         with:
@@ -303,7 +312,12 @@ jobs:
           tag_name: R4S_build_${{env.BuildDate}}
           files: ./lede/artifact/*.*
           body: |
-            地址：192.168.2.1
-            密码：password
+            固件介绍页面：[https://www.qyh.name/807/](https://www.qyh.name/807/)
+            默认管理地址：192.168.2.1
+            默认账号：root
+            默认密码：password
+            默认主题：design
+            当前内核分区：32MB
+            当前系统分区：160MB
 
       
