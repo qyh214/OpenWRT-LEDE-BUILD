@@ -302,9 +302,9 @@ jobs:
           cd ./qiniu
           chmod +x qshell
           ./qshell account ${{secrets.QAK}} ${{secrets.QSK}} qiniu --overwrite
-          ./qshell fput staticdownload openwrt-rockchip-armv8-friendlyarm_nanopi-r4s-squashfs-sysupgrade.img.gz ./lede/artifact/openwrt-rockchip-armv8-friendlyarm_nanopi-r4s-squashfs-sysupgrade.img.gz --overwrite
-          ./qshell fput staticdownload openwrt-rockchip-armv8-friendlyarm_nanopi-r4s-ext4-sysupgrade.img.gz ./lede/artifact/openwrt-rockchip-armv8-friendlyarm_nanopi-r4s-ext4-sysupgrade.img.gz --overwrite
-          ./qshell fput staticdownload r4s.config ./lede/artifact/r4s_config.txt --overwrite
+          ./qshell fput staticdownload openwrt-rockchip-armv8-friendlyarm_nanopi-r4s-squashfs-sysupgrade.img.gz ././lede/artifact/openwrt-rockchip-armv8-friendlyarm_nanopi-r4s-squashfs-sysupgrade.img.gz --overwrite
+          ./qshell fput staticdownload openwrt-rockchip-armv8-friendlyarm_nanopi-r4s-ext4-sysupgrade.img.gz ././lede/artifact/openwrt-rockchip-armv8-friendlyarm_nanopi-r4s-ext4-sysupgrade.img.gz --overwrite
+          ./qshell fput staticdownload r4s.config ././lede/artifact/r4s_config.txt --overwrite
     
       - name: Upload artifact
         uses: actions/upload-artifact@master
