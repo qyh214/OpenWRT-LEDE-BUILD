@@ -46,12 +46,18 @@ jobs:
           sudo -E apt clean
           sudo -E timedatectl set-timezone "Asia/Shanghai"
       
+      - name: Clone my project
+        uses: actions/checkout@v3
+        
       - name: Clone LEDE Code
         run: |
           git clone --branch "master" --single-branch https://github.com/coolsnowwolf/lede.git
       
       - name: Update feeds
         run: |
+          echo "check info-test"
+          ls -lh
+          
           cd ./lede
 
           ./scripts/feeds update -a
