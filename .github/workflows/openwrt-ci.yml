@@ -11,7 +11,7 @@ name: OpenWrt-CI
 
 on:
   schedule:
-    - cron: 0 6 * * * #每天早上6点？但是时区是？
+    - cron: 0 21 * * * #北京时间早上5点自动编译，UTC时间
   workflow_dispatch: # 允许手动触发
 
 permissions:
@@ -282,7 +282,7 @@ jobs:
           du -h --max-depth=1 ./build_dir
           du -h --max-depth=1 ./bin
           export BuildDate="`date   +%Y%m%d`"
-          echo $BuildDate
+          echo $BuildDate >> $GITHUB_ENV
 
       - name: Assemble artifact
         run: |
@@ -290,7 +290,7 @@ jobs:
           rm -rf ./artifact/
           mkdir -p ./artifact/
           find ./bin/targets/ -name "*sysupgrade*img*" | xargs -i mv -f {} ./artifact/
-          cp .config ./artifact/.config
+          cp ./.config ./artifact/r4s_config.txt
 
       - name: Upload artifact
         uses: actions/upload-artifact@master
