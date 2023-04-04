@@ -212,9 +212,8 @@ jobs:
           # # CONFIG_VMDK_IMAGES is not set
           # EOF
 
-          # TODO：需要重建固件，todo-可能改为ext4版本
-          ## CONFIG_TARGET_KERNEL_PARTSIZE=256 - 内核区不需要改
-          # CONFIG_TARGET_ROOTFS_PARTSIZE=1024
+          # 以下开始是个性化定制化的内容
+          # CONFIG_TARGET_ROOTFS_PARTSIZE=1024 - 计划调整
           # 编译r4s固件:
           cat >> .config <<EOF
           CONFIG_TARGET_rockchip=y
