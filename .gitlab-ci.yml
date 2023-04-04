@@ -11,7 +11,10 @@ build_r4s:
   - tags
   script: |
     echo "Space cleanup and Initialization environment"
-    docker rmi `docker images -q`
+    echo DEBIAN_FRONTEND=noninteractive
+    DEBIAN_FRONTEND=noninteractive
+    
+    ## docker rmi `docker images -q`
     echo "Deleting files, please wait ..."
     sudo rm -rf \
     /usr/share/dotnet \
