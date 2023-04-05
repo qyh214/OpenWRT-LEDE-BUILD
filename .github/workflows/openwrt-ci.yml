@@ -325,5 +325,11 @@ jobs:
             默认主题：design
             当前内核分区：32MB
             当前系统分区：160MB
+            
+            分流下载
+            请注意，分流地址下载的只能是最新版本，无法下载到历史版本
+            [ext4版本固件](https://down.cdn.qyh0214.com/openwrt-rockchip-armv8-friendlyarm_nanopi-r4s-ext4-sysupgrade.img.gz)
+            [squashfs版本固件](https://down.cdn.qyh0214.com/openwrt-rockchip-armv8-friendlyarm_nanopi-r4s-squashfs-sysupgrade.img.gz)
+            [配置文件](https://down.cdn.qyh0214.com/r4s.config)
 
       
