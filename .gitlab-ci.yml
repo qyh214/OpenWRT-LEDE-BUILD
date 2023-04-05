@@ -13,8 +13,6 @@ build_r4s:
     echo "Space cleanup and Initialization environment"
     echo DEBIAN_FRONTEND=noninteractive
     DEBIAN_FRONTEND=noninteractive
-    
-    ## docker rmi `docker images -q`
     echo "Deleting files, please wait ..."
     apt update
     apt -y full-upgrade
@@ -166,7 +164,7 @@ build_r4s:
   artifacts:
     #`date   +%Y%m%d`-$CI_JOB_ID-openwrt-router-r4s
     name: "$CI_JOB_ID-openwrt-router-r4s"
-    expire_in: 6 months
+    expire_in: 2 weeks
     paths:
       - /builds/shihuang/routerbuild/bin
   # disable artifact passing
