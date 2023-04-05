@@ -1,4 +1,4 @@
-image: shihuang214/openwrt_ubuntu:v1
+image: ubuntu:latest
 
 stages:
   - build_r4s
@@ -9,63 +9,51 @@ build_r4s:
   - docker
   except:
   - tags
-  before_script: 
-    - apt-get update
-    - DEBIAN_FRONTEND=noninteractive apt-get install -y tzdata
-    - echo "Deleting files, please wait ..."
-    - apt update
-    - apt -y full-upgrade
-    - apt-get install -y ack antlr3 aria2 asciidoc autoconf automake autopoint binutils bison build-essential bzip2 ccache cmake cpio curl device-tree-compiler fastjar flex gawk gettext gcc-multilib g++-multilib git gperf haveged help2man intltool libc6-dev-i386 libelf-dev libglib2.0-dev libgmp3-dev libltdl-dev libmpc-dev libmpfr-dev libncurses5-dev libncursesw5-dev libreadline-dev libssl-dev libtool lrzsz mkisofs msmtp nano ninja-build p7zip p7zip-full patch pkgconf python2.7 python3 python3-pip libpython3-dev qemu-utils rsync scons squashfs-tools subversion swig texinfo uglifyjs upx-ucl unzip vim wget xmlto xxd zlib1g-dev
-    - apt -y autoremove --purge
-    - apt clean
-    # git预设置-CI专用
-    - git config --global user.email "CI@ci.com"
-    - git config --global user.name "ci"
-    # 获取最新lede数据
-    - cd /builds/shihuang/routerbuild
-    # 只拉取最近一次提交的master分支的源码
-    - git clone --branch "master" --single-branch --depth 1 https://github.com/coolsnowwolf/lede.git
-    # 合并代码
-    - cd /builds/shihuang/routerbuild/lede
-    - ./scripts/feeds update -a
-    - ./scripts/feeds install -a
-    # 进入lede并添加openclash
-    - cd /builds/shihuang/routerbuild/lede
-    ## openclash使用dev分支到package下
-    - git clone --branch "dev" --single-branch --depth 1 https://github.com/vernesong/OpenClash.git package/openclash
-    ## openclash将几个内核最新版直接注入源码中，使用dev分支
-    - cd /builds/shihuang/routerbuild/lede/package/openclash/luci-app-openclash/root/etc/openclash
-    - mkdir ./core && cd ./core
-    - export TUN_VER=$(curl -s https://raw.githubusercontent.com/vernesong/OpenClash/core/dev/core_version | sed -n '2p')
-    - echo $TUN_VER
-    - curl -SsL -o ./tun.gz https://github.com/vernesong/OpenClash/raw/core/dev/premium/clash-linux-arm64-$TUN_VER.gz
-    - gzip -d ./tun.gz
-    - mv ./tun ./clash_tun
-    - curl -SsL -o ./meta.tar.gz https://github.com/vernesong/OpenClash/raw/core/dev/meta/clash-linux-arm64.tar.gz
-    - tar -zxf ./meta.tar.gz
-    - mv ./clash ./clash_meta
-    - curl -SsL -o ./dev.tar.gz https://github.com/vernesong/OpenClash/raw/core/dev/dev/clash-linux-arm64.tar.gz
-    - tar -zxf ./dev.tar.gz
-    - chmod +x ./clash*
-    - rm -rf ./*.gz
-    # 添加主题 Design到package下（main分支是lua，适用于lede，openwrt21采用js，需要用js分支）
-    - cd /builds/shihuang/routerbuild/lede
-    - git clone --branch "main" --single-branch --depth 1 https://github.com/gngpp/luci-theme-design.git package/luci-theme-design
-    # 添加主题 Design Config到package下
-    - git clone --branch "master" --single-branch --depth 1 https://github.com/gngpp/luci-app-design-config.git package/luci-app-design-config
-
-    # 额外改动
-    ## 参考：
-    ## - https://github.com/msylgj/R2S-R4S-OpenWrt/blob/21.02/SCRIPTS/prepare_package.sh
-    ## - https://github.com/klever1988/nanopi-openwrt/blob/master/scripts/patches.sh
-    ## 修改默认wan的ip地址为192.168.2.1
-    - sed -i 's/192.168.1.1/192.168.2.1/g' package/base-files/files/bin/config_generate
-    ## 修改默认主题为design（必须选择这个主题安装）
-    - sed -i 's/luci-theme-bootstrap/luci-theme-design/' feeds/luci/collections/luci/Makefile
-
   script: |
+    echo "Space cleanup and Initialization environment"
+    echo DEBIAN_FRONTEND=noninteractive
+    DEBIAN_FRONTEND=noninteractive
+    
+    ## docker rmi `docker images -q`
+    echo "Deleting files, please wait ..."
+    apt update
+    apt -y full-upgrade
+    apt -y install ack antlr3 aria2 asciidoc autoconf automake autopoint binutils bison build-essential bzip2 ccache cmake cpio curl device-tree-compiler fastjar flex gawk gettext gcc-multilib g++-multilib git gperf haveged help2man intltool libc6-dev-i386 libelf-dev libglib2.0-dev libgmp3-dev libltdl-dev libmpc-dev libmpfr-dev libncurses5-dev libncursesw5-dev libreadline-dev libssl-dev libtool lrzsz mkisofs msmtp nano ninja-build p7zip p7zip-full patch pkgconf python2.7 python3 python3-pip libpython3-dev qemu-utils rsync scons squashfs-tools subversion swig texinfo uglifyjs upx-ucl unzip vim wget xmlto xxd zlib1g-dev
+    apt -y autoremove --purge
+    apt clean
+    timedatectl set-timezone "Asia/Shanghai"
+
+    echo "Clone LEDE Code"
+    git clone --branch "master" --single-branch --depth 1 https://github.com/coolsnowwolf/lede.git
+
+    echo "Update feeds"
+    cd ./lede
+    ./scripts/feeds update -a
+    ./scripts/feeds install -a
+
+    echo "Custom Settings"
+    sed -i 's/192.168.1.1/192.168.2.1/g' package/base-files/files/bin/config_generate
+    sed -i 's/luci-theme-bootstrap/luci-theme-design/' feeds/luci/collections/luci/Makefile
+    git clone --branch "main" --single-branch --depth 1 https://github.com/gngpp/luci-theme-design.git package/luci-theme-design
+    git clone --branch "master" --single-branch --depth 1 https://github.com/gngpp/luci-app-design-config.git package/luci-app-design-config
+    
+    git clone --branch "dev" --single-branch --depth 1 https://github.com/vernesong/OpenClash.git package/openclash
+    cd ./package/openclash/luci-app-openclash/root/etc/openclash
+    mkdir ./core && cd ./core
+    export TUN_VER=$(curl -s https://raw.githubusercontent.com/vernesong/OpenClash/core/dev/core_version | sed -n '2p')
+    echo $TUN_VER
+    curl -SsL -o ./tun.gz https://github.com/vernesong/OpenClash/raw/core/dev/premium/clash-linux-arm64-$TUN_VER.gz
+    gzip -d ./tun.gz
+    mv ./tun ./clash_tun
+    curl -SsL -o ./meta.tar.gz https://github.com/vernesong/OpenClash/raw/core/dev/meta/clash-linux-arm64.tar.gz
+    tar -zxf ./meta.tar.gz
+    mv ./clash ./clash_meta
+    curl -SsL -o ./dev.tar.gz https://github.com/vernesong/OpenClash/raw/core/dev/dev/clash-linux-arm64.tar.gz
+    tar -zxf ./dev.tar.gz
+    chmod +x ./clash*
+    rm -rf ./*.gz
     echo 'clean config'
-    cd /builds/shihuang/routerbuild/lede
+    cd ./lede
     rm -f ./.config*
     touch ./.config
     
@@ -118,7 +106,7 @@ build_r4s:
     
     echo 'Generate configuration file'
     # 对比配置文件：
-    cd /builds/shihuang/routerbuild/lede
+    #cd /builds/shihuang/routerbuild/lede
     sed -i 's/^[ \t]*//g' ./.config
     make defconfig
     
