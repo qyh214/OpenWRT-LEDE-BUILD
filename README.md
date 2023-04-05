@@ -1,4 +1,5 @@
 ## 路由器固件[lede](https://github.com/coolsnowwolf/lede)(openwrt)自动编译（小秦自用版）
+
 固件源码：[github](https://github.com/coolsnowwolf/lede)
 
 --------------
@@ -9,16 +10,21 @@
 --------------
 
 ### 编译状态
-[![github pipeline status](https://github.com/qyh214/OpenWRT-LEDE-BUILD/actions/workflows/openwrt-ci.yml/badge.svg)](https://github.com/qyh214/OpenWRT-LEDE-BUILD/actions/workflows/openwrt-ci.yml)
+| Github Action | Gitlab CI/CD |
+| ----- | ----- |
+| [![github pipeline status](https://github.com/qyh214/OpenWRT-LEDE-BUILD/actions/workflows/openwrt-ci.yml/badge.svg)](https://github.com/qyh214/OpenWRT-LEDE-BUILD/actions/workflows/openwrt-ci.yml) | [![gitlab pipeline status](http://git.qyh.name/shihuang/routerbuild/badges/master/pipeline.svg)](http://git.qyh.name/shihuang/routerbuild/commits/master) |
 
-[![gitlab pipeline status](http://git.qyh.name/shihuang/routerbuild/badges/master/pipeline.svg)](http://git.qyh.name/shihuang/routerbuild/commits/master)
+目前仅编译自用友善R4S的软路由固件，请注意路由器固件分区大小，不同分区大小请勿混合使用或混合升级。
 
-仅编译友善R4S的软路由固件，请注意执行的路由器固件分区大小，不同分区请勿混合使用。
+- 当前内核分区：32MB
+- 当前系统分区：160MB
 
-Gitlab：编译的固件最多保存6个月，如有需要请自行备份历次固件。
+Gitlab：编译的固件最多保存2周，如有需要请自行备份历次固件。
+
+Github：等待确认。
 
 ### 更新建议
-重大版本或重大改动时，建议不保留配置全新更新。
+重大版本或重大改动时，建议不保留配置全新更新。如有需要建议使用烧录工具重新制作。
 
 ### 特别功能
 
@@ -29,19 +35,8 @@ Gitlab：编译的固件最多保存6个月，如有需要请自行备份历次�
 已整合温度监控，自动显示在首页。
 
 ### 固件下载
-#### 最新固件下载
-##### 建议内网用户使用
-- R4S：[点此下载](http://git.qyh.name/shihuang/routerbuild/-/jobs/artifacts/master/download?job=job_r4s)
-
-##### 建议外网用户使用
-
 [百度网盘下载](https://pan.baidu.com/s/1J7tX4Qsu2hF_cmXrhqsogQ)(提取码：r6ds)(请注意型号，可能更新不及时)
 
 [gitlab release页面下载](http://git.qyh.name/shihuang/routerbuild/-/releases)（请注意型号以及外链说明）
 
 [github release页面下载](https://github.com/qyh214/OpenWRT-LEDE-BUILD/releases)（请注意型号以及外链说明）
-
-#### 历次固件本地下载（建议内网用户使用，外网用户可以查看百度网盘）
-[点此访问](http://git.qyh.name/shihuang/routerbuild/pipelines)
-
-- 请注意：你需要点击右侧的`download`按钮进行下载，或者点击`passed`状态按钮，然后在右侧点击`browse`按钮选择你需要的文件进行下载。
