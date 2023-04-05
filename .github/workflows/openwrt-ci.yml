@@ -46,7 +46,7 @@ jobs:
           sudo -E apt clean
           sudo -E timedatectl set-timezone "Asia/Shanghai"
       
-      - name: Clone my project
+      - name: Clone My Project
         uses: actions/checkout@v3
         
       - name: Clone LEDE Code
@@ -55,11 +55,7 @@ jobs:
       
       - name: Update feeds
         run: |
-          echo "check info-test"
-          ls -lh
-          
           cd ./lede
-
           ./scripts/feeds update -a
           ./scripts/feeds install -a
       
@@ -218,7 +214,7 @@ jobs:
           # # CONFIG_VMDK_IMAGES is not set
           # EOF
 
-          # 以下开始是个性化定制化的内容
+          # 以下开始是个性化定制内容
           # CONFIG_TARGET_ROOTFS_PARTSIZE=1024 - 计划调整
           # 编译r4s固件:
           cat >> .config <<EOF
@@ -237,6 +233,7 @@ jobs:
           cat >> .config <<EOF
           CONFIG_PACKAGE_ipv6helper=y
           CONFIG_PACKAGE_dnsmasq_full_dhcpv6=y
+          CONFIG_PACKAGE_autosamba=y
           CONFIG_PACKAGE_luci-app-diskman=y
           CONFIG_PACKAGE_luci-app-openclash=y
           CONFIG_PACKAGE_luci-app-uugamebooster=y
