@@ -55,8 +55,8 @@ build_r4s:
     chmod +x ./clash*
     rm -rf ./*.gz
     echo 'clean config'
-    rm -f ./.config*
-    touch ./.config
+    rm -f .config*
+    touch .config
     
     echo 'Custom configure file'
     #
@@ -108,7 +108,7 @@ build_r4s:
     echo 'Generate configuration file'
     # 对比配置文件：
     #cd /builds/shihuang/routerbuild/lede
-    sed -i 's/^[ \t]*//g' ./.config
+    sed -i 's/^[ \t]*//g' .config
     make defconfig
     
     echo 'Make Clean'
