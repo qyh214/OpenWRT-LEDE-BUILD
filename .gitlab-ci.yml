@@ -55,7 +55,6 @@ build_r4s:
     chmod +x ./clash*
     rm -rf ./*.gz
     echo 'clean config'
-    cd ./lede
     rm -f ./.config*
     touch ./.config
     
