@@ -78,10 +78,14 @@ build_r4s:
     cat >> .config <<EOF
     CONFIG_TARGET_ROOTFS_TARGZ=y
     CONFIG_TARGET_ROOTFS_SQUASHFS=y
+    CONFIG_TARGET_IMAGES_GZIP=y
+    CONFIG_TARGET_ROOTFS_EXT4FS=y
     EOF
     # 常用LuCI插件和额外包选择:
     cat >> .config <<EOF
     CONFIG_PACKAGE_ipv6helper=y
+    CONFIG_PACKAGE_dnsmasq_full_dhcpv6=y
+    CONFIG_PACKAGE_autosamba=y
     CONFIG_PACKAGE_luci-app-diskman=y
     CONFIG_PACKAGE_luci-app-openclash=y
     CONFIG_PACKAGE_luci-app-uugamebooster=y
@@ -101,6 +105,11 @@ build_r4s:
     # CONFIG_PACKAGE_luci-app-ssr-plus is not set
     # CONFIG_PACKAGE_luci-app-vlmcsd is not set
     # CONFIG_PACKAGE_luci-app-wol is not set
+    # CONFIG_PACKAGE_luci-app-xlnetacc is not set
+    # CONFIG_PACKAGE_luci-app-zerotier is not set
+    # CONFIG_PACKAGE_luci-app-wireguard is not set
+    # CONFIG_PACKAGE_luci-app-ipsec-vpnd is not set
+    # CONFIG_PACKAGE_luci-app-adbyby-plus is not set
     EOF
     # 
     # ========================固件定制部分结束========================
