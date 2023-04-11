@@ -71,18 +71,20 @@ jobs:
           git clone --branch "dev" --single-branch https://github.com/vernesong/OpenClash.git package/openclash
           cd ./package/openclash/luci-app-openclash/root/etc/openclash
           mkdir ./core && cd ./core
-          export TUN_VER=$(curl -s https://raw.githubusercontent.com/vernesong/OpenClash/core/dev/core_version | sed -n '2p')
+          export TUN_VER=$(curl -sfL https://raw.githubusercontent.com/vernesong/OpenClash/core/dev/core_version | sed -n "2{s/\r$//;p;q}")
           echo $TUN_VER
-          curl -SsL -o ./tun.gz https://github.com/vernesong/OpenClash/raw/core/dev/premium/clash-linux-arm64-$TUN_VER.gz
+          curl -sfL -o ./tun.gz https://github.com/vernesong/OpenClash/raw/core/dev/premium/clash-linux-arm64-$TUN_VER.gz
           gzip -d ./tun.gz
           mv ./tun ./clash_tun
-          curl -SsL -o ./meta.tar.gz https://github.com/vernesong/OpenClash/raw/core/dev/meta/clash-linux-arm64.tar.gz
+          curl -sfL -o ./meta.tar.gz https://github.com/vernesong/OpenClash/raw/core/dev/meta/clash-linux-arm64.tar.gz
           tar -zxf ./meta.tar.gz
           mv ./clash ./clash_meta
-          curl -SsL -o ./dev.tar.gz https://github.com/vernesong/OpenClash/raw/core/dev/dev/clash-linux-arm64.tar.gz
+          curl -sfL -o ./dev.tar.gz https://github.com/vernesong/OpenClash/raw/core/dev/dev/clash-linux-arm64.tar.gz
           tar -zxf ./dev.tar.gz
           chmod +x ./clash*
           rm -rf ./*.gz
+          echo 'show info'
+          ls -lh
 
       - name: Custom configure file And Generate configuration file
         run: |
@@ -215,7 +217,6 @@ jobs:
           # EOF
 
           # 以下开始是个性化定制内容
-          # CONFIG_TARGET_ROOTFS_PARTSIZE=1024 - 计划调整
           # 编译r4s固件:
           cat >> .config <<EOF
           CONFIG_TARGET_rockchip=y
@@ -228,11 +229,14 @@ jobs:
           CONFIG_TARGET_ROOTFS_SQUASHFS=y
           CONFIG_TARGET_IMAGES_GZIP=y
           CONFIG_TARGET_ROOTFS_EXT4FS=y
+          CONFIG_TARGET_ROOTFS_PARTSIZE=1024
           EOF
           # 常用LuCI插件和额外包选择:
           cat >> .config <<EOF
           CONFIG_PACKAGE_ipv6helper=y
           CONFIG_PACKAGE_dnsmasq_full_dhcpv6=y
+          CONFIG_PACKAGE_ip6tables-extra=y
+          CONFIG_PACKAGE_ip6tables-mod-nat=y
           CONFIG_PACKAGE_autosamba=y
           CONFIG_PACKAGE_luci-app-diskman=y
           CONFIG_PACKAGE_luci-app-openclash=y
@@ -321,7 +325,7 @@ jobs:
             默认密码：password
             默认主题：design
             当前内核分区：32MB
-            当前系统分区：160MB
+            当前系统分区：1024MB
             
             分流下载
             请注意，分流地址下载的只能是最新版本，无法下载到历史版本

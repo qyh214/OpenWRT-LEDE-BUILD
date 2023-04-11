@@ -42,18 +42,20 @@ build_r4s:
     git clone --branch "dev" --single-branch --depth 1 https://github.com/vernesong/OpenClash.git package/openclash
     cd ./package/openclash/luci-app-openclash/root/etc/openclash
     mkdir ./core && cd ./core
-    export TUN_VER=$(curl -s https://raw.githubusercontent.com/vernesong/OpenClash/core/dev/core_version | sed -n '2p')
+    export TUN_VER=$(curl -sfL https://raw.githubusercontent.com/vernesong/OpenClash/core/dev/core_version | sed -n "2{s/\r$//;p;q}")
     echo $TUN_VER
-    curl -SsL -o ./tun.gz https://github.com/vernesong/OpenClash/raw/core/dev/premium/clash-linux-arm64-$TUN_VER.gz
+    curl -sfL -o ./tun.gz https://github.com/vernesong/OpenClash/raw/core/dev/premium/clash-linux-arm64-$TUN_VER.gz
     gzip -d ./tun.gz
     mv ./tun ./clash_tun
-    curl -SsL -o ./meta.tar.gz https://github.com/vernesong/OpenClash/raw/core/dev/meta/clash-linux-arm64.tar.gz
+    curl -sfL -o ./meta.tar.gz https://github.com/vernesong/OpenClash/raw/core/dev/meta/clash-linux-arm64.tar.gz
     tar -zxf ./meta.tar.gz
     mv ./clash ./clash_meta
-    curl -SsL -o ./dev.tar.gz https://github.com/vernesong/OpenClash/raw/core/dev/dev/clash-linux-arm64.tar.gz
+    curl -sfL -o ./dev.tar.gz https://github.com/vernesong/OpenClash/raw/core/dev/dev/clash-linux-arm64.tar.gz
     tar -zxf ./dev.tar.gz
     chmod +x ./clash*
     rm -rf ./*.gz
+    echo 'show info'
+    ls -lh
     echo 'clean config'
     cd /builds/shihuang/routerbuild/lede
     rm -f ./.config*
@@ -65,9 +67,6 @@ build_r4s:
     # 参考：https://github.com/DHDAXCW/NanoPi-R4S-R4SE/blob/main/configs/lean/lean.config
     # https://doc.openwrt.cc/1-General/4-Firmware-Format/
     # 
-    # TODO：需要重建固件，todo-可能改为ext4版本
-    ## CONFIG_TARGET_KERNEL_PARTSIZE=256 - 内核区不需要改
-    # CONFIG_TARGET_ROOTFS_PARTSIZE=1024
     # 编译r4s固件:
     cat >> .config <<EOF
     CONFIG_TARGET_rockchip=y
@@ -80,11 +79,14 @@ build_r4s:
     CONFIG_TARGET_ROOTFS_SQUASHFS=y
     CONFIG_TARGET_IMAGES_GZIP=y
     CONFIG_TARGET_ROOTFS_EXT4FS=y
+    CONFIG_TARGET_ROOTFS_PARTSIZE=1024
     EOF
     # 常用LuCI插件和额外包选择:
     cat >> .config <<EOF
     CONFIG_PACKAGE_ipv6helper=y
     CONFIG_PACKAGE_dnsmasq_full_dhcpv6=y
+    CONFIG_PACKAGE_ip6tables-extra=y
+    CONFIG_PACKAGE_ip6tables-mod-nat=y
     CONFIG_PACKAGE_autosamba=y
     CONFIG_PACKAGE_luci-app-diskman=y
     CONFIG_PACKAGE_luci-app-openclash=y
@@ -172,7 +174,7 @@ build_r4s:
     ./qshell fput staticdownload r4s.config /builds/shihuang/routerbuild/bin/.config --overwrite
     # 发布release
     echo 'Release R4S'
-    curl --header 'Content-Type: application/json' --header "PRIVATE-TOKEN: $user_token" --data '{ "name": "'"$BuildDate"'-R4S-'"$CI_JOB_ID"'-snapshot", "tag_name": "CI-'"$CI_JOB_ID"'", "ref": "'"$CI_COMMIT_BRANCH"'", "description": "说明：<br />固件介绍页面：[https://www.qyh.name/807/](https://www.qyh.name/807/)<br />默认管理地址：192.168.2.1<br />默认账号：root<br />默认密码：password<br />默认主题：design<br />当前内核分区：32MB<br />当前系统分区：160MB<br /><br />img.gz格式文件直接使用，无需解压。<br />将固件img.gz使用烧录工具烧录或者在路由器网页管理后台直接上传升级使用；<br />管理后台升级仅限于之前曾经使用在本处编译的固件并且并非大版本之间更新，大版本更新可能会清除所有配置信息或者请直接烧录重置全部数据。<br />请注意固件的格式和分区大小，若有不同请勿混合使用和更新。<br /><br />烧录工具下载：<br />[balenaEtcher](https://www.balena.io/etcher/)<br /><br />固件下载地址：<br />🔗[本地下载（仅限局域网内网用户）](http://192.168.2.100:800/shihuang/routerbuild/-/jobs/'"$CI_JOB_ID"'/artifacts/download)<br />【说明】链接有效期为编译成功后6个月。<br /><br />🔗[七牛云(外网用户，squashfs固件)](http://down.cdn.qyh0214.com/openwrt-rockchip-armv8-friendlyarm_nanopi-r4s-squashfs-sysupgrade.img.gz)<br />【说明】链接有效期为长期，在每次编译成功后即覆盖为新版本。<br />🔗[七牛云(外网用户，固件配置文件)](http://down.cdn.qyh0214.com/r4s.config)<br />【说明】链接有效期为长期，在每次编译成功后即覆盖为新版本。此文件主要用于开发者使用，一般无需下载。<br />"}' --request POST http://192.168.2.100:800/api/v4/projects/41/releases
+    curl --header 'Content-Type: application/json' --header "PRIVATE-TOKEN: $user_token" --data '{ "name": "'"$BuildDate"'-R4S-'"$CI_JOB_ID"'-snapshot", "tag_name": "CI-'"$CI_JOB_ID"'", "ref": "'"$CI_COMMIT_BRANCH"'", "description": "说明：<br />固件介绍页面：[https://www.qyh.name/807/](https://www.qyh.name/807/)<br />默认管理地址：192.168.2.1<br />默认账号：root<br />默认密码：password<br />默认主题：design<br />当前内核分区：32MB<br />当前系统分区：1024MB<br /><br />img.gz格式文件直接使用，无需解压。<br />将固件img.gz使用烧录工具烧录或者在路由器网页管理后台直接上传升级使用；<br />管理后台升级仅限于之前曾经使用在本处编译的固件并且并非大版本之间更新，大版本更新可能会清除所有配置信息或者请直接烧录重置全部数据。<br />请注意固件的格式和分区大小，若有不同请勿混合使用和更新。<br /><br />烧录工具下载：<br />[balenaEtcher](https://www.balena.io/etcher/)<br /><br />固件下载地址：<br />🔗[本地下载（仅限局域网内网用户）](http://192.168.2.100:800/shihuang/routerbuild/-/jobs/'"$CI_JOB_ID"'/artifacts/download)<br />【说明】链接有效期为编译成功后6个月。<br /><br />🔗[七牛云(外网用户，squashfs固件)](http://down.cdn.qyh0214.com/openwrt-rockchip-armv8-friendlyarm_nanopi-r4s-squashfs-sysupgrade.img.gz)<br />【说明】链接有效期为长期，在每次编译成功后即覆盖为新版本。<br />🔗[七牛云(外网用户，固件配置文件)](http://down.cdn.qyh0214.com/r4s.config)<br />【说明】链接有效期为长期，在每次编译成功后即覆盖为新版本。此文件主要用于开发者使用，一般无需下载。<br />"}' --request POST http://192.168.2.100:800/api/v4/projects/41/releases
  
   artifacts:
     #`date   +%Y%m%d`-$CI_JOB_ID-openwrt-router-r4s
