@@ -1,4 +1,5 @@
-image: ubuntu:latest
+# 改用ubuntu lts 
+image: ubuntu:22.04
 
 stages:
   - build_r4s
