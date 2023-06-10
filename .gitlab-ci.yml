@@ -1,5 +1,5 @@
 # 改用ubuntu lts 
-image: ubuntu:22.04
+image: shihuang214/openwrt_ubuntu:v1
 
 stages:
   - build_r4s
@@ -10,22 +10,16 @@ build_r4s:
   - docker
   except:
   - tags
+  before_script:
+    - apt-get update
+    - DEBIAN_FRONTEND=noninteractive apt-get install -y tzdata
+    - apt-get install -y ack antlr3 asciidoc autoconf automake autopoint binutils bison build-essential bzip2 ccache cmake cpio curl device-tree-compiler fastjar flex gawk gettext gcc-multilib g++-multilib git gperf haveged help2man intltool libc6-dev-i386 libelf-dev libglib2.0-dev libgmp3-dev libltdl-dev libmpc-dev libmpfr-dev libncurses5-dev libncursesw5-dev libreadline-dev libssl-dev libtool lrzsz mkisofs msmtp nano ninja-build p7zip p7zip-full patch pkgconf python2.7 python3 python3-pyelftools libpython3-dev qemu-utils rsync scons squashfs-tools subversion swig texinfo uglifyjs upx-ucl unzip vim wget xmlto xxd zlib1g-dev
+    # git预设置-CI专用
+    - git config --global user.email "CI@ci.com"
+    - git config --global user.name "ci"
+    # 获取最新lede数据
+    - cd /builds/shihuang/routerbuild
   script: |
-    echo "Space cleanup and Initialization environment"
-    echo "apt update"
-    apt update
-    apt -y full-upgrade
-    echo "timezone set"
-    DEBIAN_FRONTEND=noninteractive apt -y install tzdata
-    echo "apt install"
-    DEBIAN_FRONTEND=noninteractive apt -y install ack antlr3 asciidoc autoconf automake autopoint binutils bison build-essential bzip2 ccache cmake cpio curl device-tree-compiler fastjar flex gawk gettext gcc-multilib g++-multilib git gperf haveged help2man intltool libc6-dev-i386 libelf-dev libglib2.0-dev libgmp3-dev libltdl-dev libmpc-dev libmpfr-dev libncurses5-dev libncursesw5-dev libreadline-dev libssl-dev libtool lrzsz mkisofs msmtp nano ninja-build p7zip p7zip-full patch pkgconf python2.7 python3 python3-pyelftools libpython3-dev qemu-utils rsync scons squashfs-tools subversion swig texinfo uglifyjs upx-ucl unzip vim wget xmlto xxd zlib1g-dev
-    echo "apt autoremove"
-    DEBIAN_FRONTEND=noninteractive apt -y autoremove --purge
-    echo "apt clean"
-    DEBIAN_FRONTEND=noninteractive apt clean
-    
-    # timedatectl set-timezone "Asia/Shanghai"
-
     echo "Clone LEDE Code"
     git clone --branch "master" --single-branch --depth 1 https://github.com/coolsnowwolf/lede.git
 
