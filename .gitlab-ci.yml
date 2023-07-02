@@ -1,5 +1,5 @@
 # 改用ubuntu lts 
-image: shihuang214/openwrt_ubuntu:v1
+image: ubuntu:22.04
 
 stages:
   - build_r4s
