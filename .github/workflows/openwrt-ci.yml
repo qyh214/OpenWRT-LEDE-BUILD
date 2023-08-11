@@ -1,11 +1,11 @@
 #
 # This is free software, lisence use MIT.
-# 
+#
 # Copyright (C) 2019 P3TERX <https://p3terx.com>
 # Copyright (C) 2019 KFERMercer <KFER.Mercer@gmail.com>
-# 
+#
 # <https://github.com/KFERMercer/OpenWrt-CI>
-# 
+#
 
 name: OpenWrt-CI
 
@@ -18,7 +18,6 @@ permissions:
   contents: read
 
 jobs:
-
   build_openwrt:
     permissions:
       contents: write # for release creation
@@ -45,45 +44,51 @@ jobs:
           sudo -E apt -y autoremove --purge
           sudo -E apt clean
           sudo -E timedatectl set-timezone "Asia/Shanghai"
-      
+
       - name: Clone My Project
         uses: actions/checkout@v3
-        
+
       - name: Clone LEDE Code
         run: |
           git clone --branch "master" --single-branch https://github.com/coolsnowwolf/lede.git
-      
+
       - name: Update feeds
         run: |
           cd ./lede
           ./scripts/feeds update -a
           ./scripts/feeds install -a
-      
-      - name: Custom Settings
+
+      - name: Custom Settings Before Build
         run: |
           cd ./lede
+          echo "wan ip set to 192.168.2.1"
           sed -i 's/192.168.1.1/192.168.2.1/g' package/base-files/files/bin/config_generate
+          echo "default theme set to design"
           sed -i 's/luci-theme-bootstrap/luci-theme-design/' feeds/luci/collections/luci/Makefile
-
+          echo "add design and design config repo"
           git clone --branch "main" --single-branch https://github.com/gngpp/luci-theme-design.git package/luci-theme-design
           git clone --branch "master" --single-branch https://github.com/gngpp/luci-app-design-config.git package/luci-app-design-config
-          
+          echo "add openclash repo"
           git clone --branch "dev" --single-branch https://github.com/vernesong/OpenClash.git package/openclash
+          echo "openclash base settings"
           cd ./package/openclash/luci-app-openclash/root/etc/openclash
+          echo "add base openclash ip data"
+          curl -sfL -o ./Country.mmdb https://github.com/alecthw/mmdb_china_ip_list/raw/release/lite/Country.mmdb
+          curl -sfL -o ./GeoSite.dat https://github.com/Loyalsoldier/v2ray-rules-dat/raw/release/geosite.dat
+          curl -sfL -o ./GeoIP.dat https://github.com/Loyalsoldier/v2ray-rules-dat/raw/release/geoip.dat
+          echo "add latest dev openclash version"
           mkdir ./core && cd ./core
           export TUN_VER=$(curl -sfL https://raw.githubusercontent.com/vernesong/OpenClash/core/dev/core_version | sed -n "2{s/\r$//;p;q}")
           echo $TUN_VER
           curl -sfL -o ./tun.gz https://github.com/vernesong/OpenClash/raw/core/dev/premium/clash-linux-arm64-$TUN_VER.gz
-          gzip -d ./tun.gz
-          mv ./tun ./clash_tun
+          gzip -d ./tun.gz && mv ./tun ./clash_tun
           curl -sfL -o ./meta.tar.gz https://github.com/vernesong/OpenClash/raw/core/dev/meta/clash-linux-arm64.tar.gz
-          tar -zxf ./meta.tar.gz
-          mv ./clash ./clash_meta
+          tar -zxf ./meta.tar.gz && mv ./clash ./clash_meta
           curl -sfL -o ./dev.tar.gz https://github.com/vernesong/OpenClash/raw/core/dev/dev/clash-linux-arm64.tar.gz
           tar -zxf ./dev.tar.gz
           chmod +x ./clash*
           rm -rf ./*.gz
-          echo 'show info'
+          echo 'show openclash info'
           ls -lh
 
       - name: Custom configure file And Generate configuration file
@@ -297,7 +302,7 @@ jobs:
           mkdir -p ./artifact/
           find ./bin/targets/ -name "*sysupgrade*img*" | xargs -i mv -f {} ./artifact/
           cp ./.config ./artifact/r4s_config.txt
-      
+
       - name: Upload to Qinu
         run: |
           cd ./qiniu
@@ -306,7 +311,7 @@ jobs:
           ./qshell fput staticdownload openwrt-rockchip-armv8-friendlyarm_nanopi-r4s-squashfs-sysupgrade.img.gz ../lede/artifact/openwrt-rockchip-armv8-friendlyarm_nanopi-r4s-squashfs-sysupgrade.img.gz --overwrite
           ./qshell fput staticdownload openwrt-rockchip-armv8-friendlyarm_nanopi-r4s-ext4-sysupgrade.img.gz ../lede/artifact/openwrt-rockchip-armv8-friendlyarm_nanopi-r4s-ext4-sysupgrade.img.gz --overwrite
           ./qshell fput staticdownload r4s.config ../lede/artifact/r4s_config.txt --overwrite
-    
+
       - name: Upload artifact
         uses: actions/upload-artifact@master
         with:
@@ -326,7 +331,7 @@ jobs:
             默认主题：design
             当前内核分区：32MB
             当前系统分区：1024MB
-            
+
             分流下载
             请注意，分流地址下载的只能是最新版本，无法下载到历史版本
             [ext4版本固件](https://down.cdn.qyh0214.com/openwrt-rockchip-armv8-friendlyarm_nanopi-r4s-ext4-sysupgrade.img.gz)
@@ -338,6 +343,3 @@ jobs:
             [ext4版本固件](https://down.cdn.qyh0214.com/openwrt-rockchip-armv8-friendlyarm_nanopi-r4s-ext4-sysupgrade-gitlab.img.gz)
             [squashfs版本固件](https://down.cdn.qyh0214.com/openwrt-rockchip-armv8-friendlyarm_nanopi-r4s-squashfs-sysupgrade-gitlab.img.gz)
             [配置文件](https://down.cdn.qyh0214.com/r4s-gitlab.config)
-
-
-      
