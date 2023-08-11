@@ -29,28 +29,35 @@ build_r4s:
     ./scripts/feeds update -a
     ./scripts/feeds install -a
 
-    echo "Custom Settings"
+    echo "Custom Settings Before Build"
+    echo "wan ip set to 192.168.2.1"
     sed -i 's/192.168.1.1/192.168.2.1/g' package/base-files/files/bin/config_generate
+    echo "default theme set to design"
     sed -i 's/luci-theme-bootstrap/luci-theme-design/' feeds/luci/collections/luci/Makefile
+    echo "add design and design config repo"
     git clone --branch "main" --single-branch --depth 1 https://github.com/gngpp/luci-theme-design.git package/luci-theme-design
     git clone --branch "master" --single-branch --depth 1 https://github.com/gngpp/luci-app-design-config.git package/luci-app-design-config
-
+    echo "add openclash repo"
     git clone --branch "dev" --single-branch --depth 1 https://github.com/vernesong/OpenClash.git package/openclash
+    echo "openclash base settings"
     cd ./package/openclash/luci-app-openclash/root/etc/openclash
+    echo "add base openclash ip info"
+    curl -sfL -o ./Country.mmdb https://github.com/alecthw/mmdb_china_ip_list/raw/release/lite/Country.mmdb
+    curl -sfL -o ./GeoSite.dat =https://github.com/Loyalsoldier/v2ray-rules-dat/raw/release/geosite.dat
+    curl -sfL -o ./GeoIP.dat https://github.com/Loyalsoldier/v2ray-rules-dat/raw/release/geoip.dat
+    echo "add latest dev openclash version"
     mkdir ./core && cd ./core
     export TUN_VER=$(curl -sfL https://raw.githubusercontent.com/vernesong/OpenClash/core/dev/core_version | sed -n "2{s/\r$//;p;q}")
     echo $TUN_VER
     curl -sfL -o ./tun.gz https://github.com/vernesong/OpenClash/raw/core/dev/premium/clash-linux-arm64-$TUN_VER.gz
-    gzip -d ./tun.gz
-    mv ./tun ./clash_tun
+    gzip -d ./tun.gz && mv ./tun ./clash_tun
     curl -sfL -o ./meta.tar.gz https://github.com/vernesong/OpenClash/raw/core/dev/meta/clash-linux-arm64.tar.gz
-    tar -zxf ./meta.tar.gz
-    mv ./clash ./clash_meta
+    tar -zxf ./meta.tar.gz && mv ./clash ./clash_meta
     curl -sfL -o ./dev.tar.gz https://github.com/vernesong/OpenClash/raw/core/dev/dev/clash-linux-arm64.tar.gz
     tar -zxf ./dev.tar.gz
     chmod +x ./clash*
     rm -rf ./*.gz
-    echo 'show info'
+    echo 'show openclash info'
     ls -lh
     echo 'clean config'
     cd /builds/shihuang/routerbuild/lede
@@ -141,7 +148,7 @@ build_r4s:
     ## config
     cp /builds/shihuang/routerbuild/lede/.config /builds/shihuang/routerbuild/bin/.config
     ## friendlyarm_nanopi_r4s
-    #cp /builds/shihuang/routerbuild/lede/bin/targets/rockchip/armv8/openwrt-rockchip-armv8-friendlyarm_nanopi-r4s-ext4-sysupgrade.img.gz /builds/shihuang/routerbuild/bin/$BuildDate-$CI_JOB_ID-openwrt-rockchip-armv8-friendlyarm_nanopi-r4s-ext4-sysupgrade.img.gz
+    cp /builds/shihuang/routerbuild/lede/bin/targets/rockchip/armv8/openwrt-rockchip-armv8-friendlyarm_nanopi-r4s-ext4-sysupgrade.img.gz /builds/shihuang/routerbuild/bin/$BuildDate-$CI_JOB_ID-openwrt-rockchip-armv8-friendlyarm_nanopi-r4s-ext4-sysupgrade.img.gz
     cp /builds/shihuang/routerbuild/lede/bin/targets/rockchip/armv8/openwrt-rockchip-armv8-friendlyarm_nanopi-r4s-squashfs-sysupgrade.img.gz /builds/shihuang/routerbuild/bin/$BuildDate-$CI_JOB_ID-openwrt-rockchip-armv8-friendlyarm_nanopi-r4s-squashfs-sysupgrade.img.gz
     ## remove git file
     cd /builds/shihuang/routerbuild/bin
@@ -167,7 +174,7 @@ build_r4s:
     ##### squashfs-sysupgrade.img.gz
     ./qshell fput staticdownload openwrt-rockchip-armv8-friendlyarm_nanopi-r4s-squashfs-sysupgrade-gitlab.img.gz /builds/shihuang/routerbuild/bin/$BuildDate-$CI_JOB_ID-openwrt-rockchip-armv8-friendlyarm_nanopi-r4s-squashfs-sysupgrade.img.gz --overwrite
     ##### ext4-sysupgrade.img.gz
-    #./qshell fput staticdownload openwrt-rockchip-armv8-friendlyarm_nanopi-r4s-ext4-sysupgrade-gitlab.img.gz /builds/shihuang/routerbuild/bin/$BuildDate-$CI_JOB_ID-openwrt-rockchip-armv8-friendlyarm_nanopi-r4s-ext4-sysupgrade.img.gz --overwrite
+    ./qshell fput staticdownload openwrt-rockchip-armv8-friendlyarm_nanopi-r4s-ext4-sysupgrade-gitlab.img.gz /builds/shihuang/routerbuild/bin/$BuildDate-$CI_JOB_ID-openwrt-rockchip-armv8-friendlyarm_nanopi-r4s-ext4-sysupgrade.img.gz --overwrite
     ##### .config
     ./qshell fput staticdownload r4s-gitlab.config /builds/shihuang/routerbuild/bin/.config --overwrite
     # 发布release
