@@ -1,5 +1,5 @@
 # 改用ubuntu lts
-image: ubuntu:latest
+image: ubuntu:20.04
 
 stages:
   - build_r4s
