@@ -41,9 +41,9 @@ build_r4s:
     git clone --branch "dev" --single-branch --depth 1 https://github.com/vernesong/OpenClash.git package/openclash
     echo "openclash base settings"
     cd ./package/openclash/luci-app-openclash/root/etc/openclash
-    echo "add base openclash ip info"
+    echo "add base openclash ip data"
     curl -sfL -o ./Country.mmdb https://github.com/alecthw/mmdb_china_ip_list/raw/release/lite/Country.mmdb
-    curl -sfL -o ./GeoSite.dat =https://github.com/Loyalsoldier/v2ray-rules-dat/raw/release/geosite.dat
+    curl -sfL -o ./GeoSite.dat https://github.com/Loyalsoldier/v2ray-rules-dat/raw/release/geosite.dat
     curl -sfL -o ./GeoIP.dat https://github.com/Loyalsoldier/v2ray-rules-dat/raw/release/geoip.dat
     echo "add latest dev openclash version"
     mkdir ./core && cd ./core
