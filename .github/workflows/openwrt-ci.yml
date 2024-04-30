@@ -248,6 +248,7 @@ jobs:
           CONFIG_PACKAGE_luci-app-uugamebooster=y
           CONFIG_PACKAGE_luci-app-wrtbwmon=y
           CONFIG_PACKAGE_luci-app-ttyd=y
+          CONFIG_PACKAGE_luci-app-ddns=y
           EOF
           # LuCI主题:
           cat >> .config <<EOF
@@ -258,7 +259,6 @@ jobs:
           # 依据：CONFIG_DEFAULT_luci-app-xxx
           cat >> .config <<EOF
           # CONFIG_PACKAGE_luci-app-accesscontrol is not set
-          # CONFIG_PACKAGE_luci-app-ddns is not set
           # CONFIG_PACKAGE_luci-app-ssr-plus is not set
           # CONFIG_PACKAGE_luci-app-vlmcsd is not set
           # CONFIG_PACKAGE_luci-app-wol is not set
