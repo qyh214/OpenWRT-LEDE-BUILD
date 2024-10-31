@@ -63,8 +63,8 @@ jobs:
           cd ./lede
           echo "wan ip set to 192.168.2.1"
           sed -i 's/192.168.1.1/192.168.2.1/g' package/base-files/files/bin/config_generate
-          echo "default theme set to design"
-          sed -i 's/luci-theme-bootstrap/luci-theme-design/' feeds/luci/collections/luci/Makefile
+          #echo "default theme set to design"
+          #sed -i 's/luci-theme-bootstrap/luci-theme-design/' feeds/luci/collections/luci/Makefile
           #echo "add design and design config repo"
           #git clone --branch "main" --single-branch https://github.com/gngpp/luci-theme-design.git package/luci-theme-design
           #git clone --branch "master" --single-branch https://github.com/gngpp/luci-app-design-config.git package/luci-app-design-config
@@ -251,10 +251,10 @@ jobs:
           CONFIG_PACKAGE_luci-app-ddns=y
           EOF
           # LuCI主题:
-          cat >> .config <<EOF
-          CONFIG_PACKAGE_luci-theme-design=y
-          CONFIG_PACKAGE_luci-app-design-config=y
-          EOF
+          #cat >> .config <<EOF
+          #CONFIG_PACKAGE_luci-theme-design=y
+          #CONFIG_PACKAGE_luci-app-design-config=y
+          #EOF
           # 取消编译(不要删除被缩进的注释符号): 
           # 依据：CONFIG_DEFAULT_luci-app-xxx
           cat >> .config <<EOF
