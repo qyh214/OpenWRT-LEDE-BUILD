@@ -103,7 +103,7 @@ build_r4s:
     #cat >> .config <<EOF
     #CONFIG_PACKAGE_luci-theme-design=y
     #CONFIG_PACKAGE_luci-app-design-config=y
-    EOF
+    #EOF
     # 取消编译(不要删除被缩进的注释符号): 
     # 依据：CONFIG_DEFAULT_luci-app-xxx
     cat >> .config <<EOF
